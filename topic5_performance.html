@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Boiler Performance & Heat Balance</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- OPTIONAL: For proper LaTeX rendering, add MathJax scripts here -->
+    <!--
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          displayMath: [['$$','$$'], ['\\[','\\]']],
+          processEscapes: true
+        }
+      });
+    </script>
+    -->
+    <style>
+        .formula-block {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        .formula-block strong {
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+        }
+         .numerical-solution table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+        .numerical-solution th, .numerical-solution td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .numerical-solution th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="home-link">Boiler Engineering Hub</a>
+        <h1>5. Boiler Performance Analysis and Heat Balance</h1>
+    </header>
+    <nav class="topic-nav">
+        <a href="topic4_draught.html">« Prev: Draught Systems</a>
+        <a href="topic6_combustion.html">Next: Combustion Systems »</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Boiler Efficiency (η)</h2>
+            <p>Boiler efficiency is the ratio of the heat output (heat absorbed by the working fluid - water/steam) to the heat input (heat supplied by the fuel).</p>
+            <p><strong>General Formula:</strong></p>
+            <div class="formula-block">
+                η = (Heat absorbed by water/steam) / (Heat supplied by fuel) × 100%
+            </div>
+            <p>More specifically:</p>
+            <div class="formula-block">
+                η = (ṁ<sub>s</sub> × (h<sub>s</sub> - h<sub>fw</sub>)) / (ṁ<sub>f</sub> × CV<sub>f</sub>) × 100%
+            </div>
+            <p>Where:</p>
+            <ul>
+                <li>η (eta) = Boiler efficiency</li>
+                <li>ṁ<sub>s</sub> = Mass flow rate of steam (kg/s or kg/hr)</li>
+                <li>h<sub>s</sub> = Specific enthalpy of steam at boiler outlet (kJ/kg)</li>
+                <li>h<sub>fw</sub> = Specific enthalpy of feedwater at boiler inlet (kJ/kg)</li>
+                <li>ṁ<sub>f</sub> = Mass flow rate of fuel (kg/s or kg/hr)</li>
+                <li>CV<sub>f</sub> = Calorific Value of the fuel (kJ/kg)</li>
+            </ul>
+            <img src="images/boiler_efficiency.jpg" alt="Boiler Efficiency Concept" class="diagram">
+        </section>
+
+        <section>
+            <h2>Equivalent Evaporation (from and at 100°C)</h2>
+            <p>It is a standard measure to compare the capacity of different boilers. It represents the amount of water that would be evaporated from feedwater at 100°C to saturated steam at 100°C by the same amount of heat that the boiler actually supplies to the water/steam under operating conditions.</p>
+            <p><strong>Formula:</strong></p>
+            <div class="formula-block">
+                Equivalent Evaporation (ṁ<sub>e</sub>) = (ṁ<sub>s</sub> × (h<sub>s</sub> - h<sub>fw</sub>)) / h<sub>fg @ 100°C</sub>
+            </div>
+            <p>Where:</p>
+            <ul>
+                <li>ṁ<sub>e</sub> = Equivalent evaporation rate (kg/s, kg/hr, or kg/kg of fuel)</li>
+                <li>h<sub>fg @ 100°C</sub> = Latent heat of vaporization of water at 100°C (typically 2257 kJ/kg).</li>
+                <li>Other terms are as defined for efficiency.</li>
+            </ul>
+            <p>It is often expressed in kg of steam "from and at 100°C" per kg of fuel, or per hour.</p>
+        </section>
+
+        <section>
+            <h2>Boiler Heat Balance Sheet</h2>
+            <p>A heat balance sheet is an account of all the heat energy supplied by the fuel and how it is distributed (utilized and lost). It helps identify areas of heat loss and potential for efficiency improvements. The total heat input must equal the total heat output (utilized + losses).</p>
+            <p><strong>Heat Supplied (Input):</strong> Typically based on 1 kg of fuel.</p>
+            <ol>
+                <li>Heat from combustion of fuel = CV<sub>f</sub> of fuel (kJ/kg of fuel)</li>
+            </ol>
+            <p><strong>Heat Utilized & Lost (Output):</strong> Per kg of fuel.</p>
+            <ol>
+                <li><strong>Heat absorbed by water to form steam (Useful Heat):</strong>
+                    <div class="formula-block">Q<sub>useful</sub> = m<sub>s</sub> × (h<sub>s</sub> - h<sub>fw</sub>)</div>
+                    (Here m<sub>s</sub> is kg of steam per kg of fuel)
+                </li>
+                <li><strong>Heat loss due to dry flue gases:</strong>
+                    <div class="formula-block">Q<sub>drygas</sub> = m<sub>g</sub> × C<sub>pg</sub> × (T<sub>g</sub> - T<sub>a</sub>)</div>
+                    (m<sub>g</sub> = mass of dry flue gas/kg fuel, C<sub>pg</sub> = specific heat of dry gas, T<sub>g</sub> = flue gas temp, T<sub>a</sub> = ambient air temp)
+                </li>
+                <li><strong>Heat loss due to moisture in fuel:</strong>
+                    <div class="formula-block">Q<sub>moist_fuel</sub> = m<sub>moisture_in_fuel</sub> × [h<sub>sup.steam @ Tg, Ppartial</sub> - h<sub>water @ Ta</sub>]</div>
+                </li>
+                <li><strong>Heat loss due to water from combustion of hydrogen in fuel (H<sub>2</sub>):</strong>
+                    <div class="formula-block">Q<sub>H2O_comb</sub> = m<sub>H2O_from_H2</sub> × [h<sub>sup.steam @ Tg, Ppartial</sub> - h<sub>water @ Ta</sub>]</div>
+                    (m<sub>H2O_from_H2</sub> = 9 × mass of H<sub>2</sub> per kg fuel)
+                </li>
+                <li><strong>Heat loss due to moisture in combustion air:</strong>
+                    <div class="formula-block">Q<sub>moist_air</sub> = m<sub>air</sub> × humidity<sub>air</sub> × [h<sub>sup.steam @ Tg, Ppartial</sub> - h<sub>steam @ Ta, Ppartial</sub>]</div>
+                </li>
+                <li><strong>Heat loss due to incomplete combustion (CO in flue gas):</strong>
+                    <div class="formula-block">Q<sub>CO</sub> = (m<sub>CO</sub> × CV<sub>CO</sub>)</div>
+                    (m<sub>CO</sub> = mass of CO/kg fuel, CV<sub>CO</sub> = calorific value of CO to CO<sub>2</sub>)
+                </li>
+                <li><strong>Heat loss due to unburnt carbon in ash/refuse:</strong>
+                    <div class="formula-block">Q<sub>unburnt_C</sub> = m<sub>unburnt_C_in_ash</sub> × CV<sub>Carbon</sub></div>
+                </li>
+                <li><strong>Heat loss due to radiation and convection from boiler surfaces (Unaccounted Losses):</strong> Typically estimated or found by difference.
+                    <div class="formula-block">Q<sub>rad_conv</sub> = Heat Input - Σ (All other Utilized & Lost Heat)</div>
+                </li>
+            </ol>
+            <p>A detailed heat balance sheet is usually presented in a table format, showing each item as kJ/kg of fuel and as a percentage of the total heat supplied.</p>
+        </section>
+
+        <section class="questions">
+            <h3>Previous Year Questions & Numericals:</h3>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2018 Q7: Heat balance & efficiency of boiler.</strong></summary>
+                    <div class="pyq-answer">
+                        <p>Boiler efficiency has been defined above. A heat balance involves accounting for all energy inputs and outputs for a boiler.</p>
+                        <p><strong>Boiler Efficiency (η):</strong><br>
+                        η = (Heat Output in Steam) / (Heat Input from Fuel) × 100%</p>
+                        <p><strong>Heat Balance Sheet Purpose:</strong></p>
+                        <ul>
+                            <li>To determine the boiler efficiency by the indirect method (calculating losses).</li>
+                            <li>To identify and quantify individual heat losses.</li>
+                            <li>To pinpoint areas for potential improvement in boiler operation and design to reduce losses and increase efficiency.</li>
+                            <li>To compare performance under different operating conditions or with different fuels.</li>
+                        </ul>
+                        <p><strong>Procedure for Heat Balance (typically per kg of fuel or per hour):</strong></p>
+                        <ol>
+                            <li><strong>Calculate Heat Input:</strong> This is primarily the calorific value of the fuel multiplied by the amount of fuel burned. (e.g., Q<sub>in</sub> = ṁ<sub>f</sub> × CV<sub>f</sub>).</li>
+                            <li><strong>Calculate Heat Output (Useful Heat Absorbed by Steam):</strong> This is the heat absorbed by the feedwater to become steam at the outlet conditions (e.g., Q<sub>out</sub> = ṁ<sub>s</sub> × (h<sub>steam</sub> - h<sub>feedwater</sub>)).</li>
+                            <li><strong>Calculate Major Heat Losses:</strong>
+                                <ul>
+                                    <li>Loss due to dry flue gas (sensible heat).</li>
+                                    <li>Loss due to moisture from H<sub>2</sub> in fuel (latent and sensible heat of water vapor).</li>
+                                    <li>Loss due to moisture already present in fuel.</li>
+                                    <li>Loss due to moisture in combustion air.</li>
+                                    <li>Loss due to incomplete combustion (e.g., CO formation).</li>
+                                    <li>Loss due to unburnt carbon in ash and refuse.</li>
+                                    <li>Loss due to radiation, convection, and other unaccounted factors (often found by difference).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Tabulate the Balance:</strong> Present the heat input, useful heat output, and all losses in both absolute energy units (e.g., kJ/kg of fuel or kW) and as a percentage of the total heat input. The sum of useful heat output and all losses should equal the total heat input.</li>
+                        </ol>
+                        <p>The direct method of efficiency calculation is simpler (Q<sub>out</sub> / Q<sub>in</sub>). The indirect method (100% - Sum of % Losses) is often more accurate for detailed performance analysis as it highlights specific loss areas.</p>
+                    </div>
+                </details>
+            </div>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>(Similar to 2025 Q7b) Numerical: Equivalent Evaporation Calculation</strong></summary>
+                    <div class="pyq-answer">
+                        <p><strong>Problem:</strong> 8 kg of steam is produced at 14 bar and 0.95 dryness in a boiler fed with water at 39°C, per kg of coal consumed. Determine the equivalent evaporation from and at 100°C.</p>
+                        <h4>Given Data:</h4>
+                        <ul>
+                            <li>Mass of steam produced per kg of coal (m<sub>s</sub>/m<sub>f</sub>) = 8 kg steam / kg coal</li>
+                            <li>Steam pressure (P) = 14 bar</li>
+                            <li>Steam dryness fraction (x) = 0.95</li>
+                            <li>Feedwater temperature (T<sub>fw</sub>) = 39°C</li>
+                            <li>Latent heat of vaporization at 100°C (h<sub>fg@100</sub>) = 2257 kJ/kg (standard value)</li>
+                        </ul>
+                        <h4>Step 1: Determine Enthalpy of Feedwater (h<sub>fw</sub>)</h4>
+                        <p>h<sub>fw</sub> = Specific enthalpy of water at 39°C.</p>
+                        <p>Using approximation: h<sub>fw</sub> ≈ C<sub>p,water</sub> × T<sub>fw</sub> = 4.186 kJ/kg°C × 39°C ≈ 163.25 kJ/kg.</p>
+                        <p><em>(From steam tables, h<sub>f</sub> at 39°C is approximately 163.36 kJ/kg. We'll use this.)</em></p>
+                        <p>h<sub>fw</sub> = 163.36 kJ/kg</p>
+
+                        <h4>Step 2: Determine Enthalpy of Steam Produced (h<sub>s</sub>)</h4>
+                        <p>At 14 bar, from steam tables for saturated steam:</p>
+                        <ul>
+                            <li>h<sub>f</sub> (enthalpy of saturated liquid) ≈ 830.1 kJ/kg</li>
+                            <li>h<sub>fg</sub> (enthalpy of evaporation) ≈ 1957.7 kJ/kg</li>
+                        </ul>
+                        <p>Enthalpy of wet steam (h<sub>s</sub>) = h<sub>f</sub> + x × h<sub>fg</sub></p>
+                        <p>h<sub>s</sub> = 830.1 + (0.95 × 1957.7) = 830.1 + 1859.815 = 2689.915 kJ/kg</p>
+
+                        <h4>Step 3: Calculate Equivalent Evaporation (m<sub>e</sub>) per kg of coal</h4>
+                        <div class="formula-block">
+                           m<sub>e</sub> = ( (m<sub>s</sub>/m<sub>f</sub>) × (h<sub>s</sub> - h<sub>fw</sub>) ) / h<sub>fg@100°C</sub>
+                        </div>
+                        <p>m<sub>e</sub> = ( 8 kg steam/kg coal × (2689.915 kJ/kg - 163.36 kJ/kg) ) / 2257 kJ/kg</p>
+                        <p>m<sub>e</sub> = ( 8 × 2526.555 ) / 2257  kg steam (f&a 100°C) / kg coal</p>
+                        <p>m<sub>e</sub> = 20212.44 / 2257 ≈ 8.955 kg of steam (from & at 100°C) per kg of coal.</p>
+
+                        <p><strong>Answer: The equivalent evaporation is approximately 8.955 kg of steam (from and at 100°C) per kg of coal.</strong></p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="mcq">
+            <h3>MCQ:</h3>
+            <div class="mcq-item">
+                <p><strong>1. The unit of "Equivalent Evaporation" is typically:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) kg (or kg/hr, or kg/kg of fuel)</li>
+                    <li>b) kJ/kg</li>
+                    <li>c) Unitless</li>
+                    <li>d) kW</li>
+                </ul>
+                <button class="reveal-answer" data-answer="a">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: a) kg (or kg/hr, or kg/kg of fuel)</strong> (It represents a mass of steam).</p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>2. Boiler efficiency is defined as the ratio of:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Heat input from fuel to heat output in steam</li>
+                    <li>b) Heat output in steam to heat input from fuel</li>
+                    <li>c) Mass of steam generated to mass of fuel consumed</li>
+                    <li>d) Actual evaporation to equivalent evaporation</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Heat output in steam to heat input from fuel</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>3. The value 2257 kJ/kg in the context of boiler calculations typically represents:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Specific heat of water</li>
+                    <li>b) Calorific value of a standard fuel</li>
+                    <li>c) Latent heat of vaporization of water at 0°C</li>
+                    <li>d) Latent heat of vaporization of water at 100°C</li>
+                </ul>
+                <button class="reveal-answer" data-answer="d">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: d) Latent heat of vaporization of water at 100°C</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>4. Which of the following losses is usually the largest in a conventional boiler's heat balance?</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Loss due to unburnt carbon in ash</li>
+                    <li>b) Loss due to radiation and convection</li>
+                    <li>c) Loss due to moisture in fuel</li>
+                    <li>d) Loss due to dry flue gases (stack loss)</li>
+                </ul>
+                <button class="reveal-answer" data-answer="d">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: d) Loss due to dry flue gases (stack loss)</strong></p>
+            </div>
+             <div class="mcq-item">
+                <p><strong>5. A boiler produces 10 kg of steam per kg of fuel. If the factor of evaporation is 1.1, what is the equivalent evaporation per kg of fuel?</strong></p>
+                <ul class="mcq-options">
+                    <li>a) 9.09 kg</li>
+                    <li>b) 10 kg</li>
+                    <li>c) 11 kg</li>
+                    <li>d) 1.1 kg</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) 11 kg</strong> (Factor of Evaporation = (h<sub>s</sub> - h<sub>fw</sub>) / h<sub>fg@100</sub>. Equivalent Evaporation = Actual Evaporation × Factor of Evaporation)</p>
+            </div>
+        </section>
+
+        <section class="numerical-example">
+            <h3>Additional Numerical Problems (Thermodynamic Cycles)</h3>
+            <p>The following numerical problems relate more broadly to thermodynamic power cycles which utilize boilers. They often require the use of Mollier charts or detailed steam tables.</p>
+            <div class="pyq-item">
+                 <details>
+                    <summary><strong>Numerical: Reheat Cycle Analysis</strong></summary>
+                    <div class="pyq-answer">
+                        <p><strong>Problem:</strong> In a reheat cycle, the initial steam pressure and the maximum temperature are 150 bar and 550 °C respectively. If the condenser pressure is 0.1 bar and dryness fraction is 0.95 at condenser inlet then determine (i) Reheat Pressure, (ii) The cycle efficiency, (iii) The steam rate. Use Mollier diagram (or steam tables).</p>
+                        <p><em>This problem requires thermodynamic cycle analysis using steam tables or a Mollier chart. A full step-by-step solution involves plotting points on a T-s or h-s diagram and calculating enthalpies at various states.</em></p>
+                        <h4>Approach:</h4>
+                        <ol>
+                            <li><strong>State 1 (Boiler Outlet/HP Turbine Inlet):</strong> P<sub>1</sub> = 150 bar, T<sub>1</sub> = 550 °C. Find h<sub>1</sub>, s<sub>1</sub>.</li>
+                            <li><strong>State 4 (Condenser Inlet):</strong> P<sub>4</sub> = 0.1 bar, x<sub>4</sub> = 0.95. Find h<sub>4</sub>, s<sub>4</sub>.</li>
+                            <li><strong>State 2 (HP Turbine Outlet/Reheater Inlet):</strong> To find the reheat pressure (P<sub>2</sub>), we assume isentropic expansion in the LP turbine from state 3 (reheater outlet) to state 4. Since T<sub>3</sub> (reheat temp) is usually same as T<sub>1</sub>, we need to work backward or iterate for P<sub>2</sub>.
+                                <br>Alternatively, if the problem implies the expansion from state 1 to state 2 (HP exhaust) and then reheat to state 3 (T<sub>3</sub>=T<sub>1</sub>), and then expansion from 3 to 4. The problem is phrased such that we need to find P<sub>2</sub> such that after reheating to T<sub>3</sub>=550°C (at P<sub>2</sub>=P<sub>3</sub>) and expanding to 0.1 bar, x<sub>4</sub>=0.95. This is an iterative process if s<sub>3</sub> is not equal to s<sub>1</sub> (which it won't be necessarily).
+                                <br>A common simplification or assumption if not enough data is given: The reheat occurs at an optimal pressure (often ~20-25% of initial pressure), or it's chosen such that moisture at LP exhaust is limited. Here, the condition x<sub>4</sub>=0.95 *defines* the end state of LP expansion.
+                            </li>
+                            <li><strong>Finding Reheat Pressure (P<sub>reheat</sub> = P<sub>2</sub> = P<sub>3</sub>):</strong>
+                                <ul>
+                                    <li>At P<sub>4</sub> = 0.1 bar, find s<sub>f4</sub> and s<sub>g4</sub>. Calculate s<sub>4</sub> = s<sub>f4</sub> + x<sub>4</sub>s<sub>fg4</sub>.</li>
+                                    <li>Assume isentropic expansion in LP turbine: s<sub>3</sub> = s<sub>4</sub>.</li>
+                                    <li>State 3 is: T<sub>3</sub> = 550 °C, s<sub>3</sub> (known). From superheated steam tables, find P<sub>3</sub> (this is P<sub>reheat</sub>) and h<sub>3</sub>.</li>
+                                    <li><strong>(i) Reheat Pressure = P<sub>3</sub></strong>.</li>
+                                </ul>
+                            </li>
+                            <li><strong>State 2 (HP Turbine Outlet):</strong> Assume isentropic expansion in HP turbine: s<sub>2</sub> = s<sub>1</sub>. At P<sub>2</sub> (=P<sub>3</sub>) and s<sub>2</sub>, find h<sub>2</sub>.</li>
+                            <li><strong>State 5 (Condenser Outlet):</strong> P<sub>5</sub> = 0.1 bar, saturated liquid. Find h<sub>5</sub> = h<sub>f @ 0.1 bar</sub>.</li>
+                            <li><strong>State 6 (Pump Outlet/Boiler Inlet):</strong> P<sub>6</sub> = 150 bar. h<sub>6</sub> = h<sub>5</sub> + W<sub>p</sub>. Pump work W<sub>p</sub> = v<sub>f5</sub>(P<sub>6</sub>-P<sub>5</sub>).</li>
+                            <li><strong>Calculations:</strong>
+                                <ul>
+                                    <li>Turbine Work (W<sub>T</sub>) = (h<sub>1</sub>-h<sub>2</sub>) + (h<sub>3</sub>-h<sub>4</sub>)</li>
+                                    <li>Heat Supplied (Q<sub>in</sub>) = (h<sub>1</sub>-h<sub>6</sub>) + (h<sub>3</sub>-h<sub>2</sub>) (main boiler + reheater)</li>
+                                    <li><strong>(ii) Cycle Efficiency (η<sub>cycle</sub>)</strong> = (W<sub>T</sub> - W<sub>p_total</sub>) / Q<sub>in</sub>  (or W<sub>net</sub> / Q<sub>in</sub>)</li>
+                                    <li><strong>(iii) Steam Rate (SR)</strong> = 3600 / W<sub>net</sub> (kg/kWh), where W<sub>net</sub> is in kJ/kg.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <p><strong>Note:</strong> Performing these calculations requires detailed steam table lookups and potentially interpolation. For example (approximate values):
+                        <br>P<sub>1</sub>=150 bar, T<sub>1</sub>=550°C: h<sub>1</sub>≈3448.6 kJ/kg, s<sub>1</sub>≈6.5197 kJ/kgK.
+                        <br>P<sub>4</sub>=0.1 bar, x<sub>4</sub>=0.95: h<sub>f4</sub>≈191.8 kJ/kg, h<sub>fg4</sub>≈2392.1 kJ/kg => h<sub>4</sub>≈191.8 + 0.95*2392.1 ≈2464.3 kJ/kg.
+                        <br>s<sub>f4</sub>≈0.6492, s<sub>fg4</sub>≈7.4995 => s<sub>4</sub>≈0.6492 + 0.95*7.4995 ≈7.7737 kJ/kgK.
+                        <br>So, s<sub>3</sub> = 7.7737 kJ/kgK. At T<sub>3</sub>=550°C and s<sub>3</sub>=7.7737, find P<sub>3</sub> from superheated tables. This P<sub>3</sub> is P<sub>reheat</sub>. Then proceed.
+                        </p>
+                        <p><em>A full numerical solution requires access to steam tables or software for precise values. The steps above outline the methodology.</em></p>
+                    </div>
+                </details>
+            </div>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>Numerical: Rankine Cycle with Efficiencies</strong></summary>
+                    <div class="pyq-answer">
+                        <p><strong>Problem:</strong> A Rankine cycle operates between pressure of 80 bar and 0.1 bar. The maximum cycle temperature is 600 °C. If the steam turbine and condensate pump efficiencies are 0.9 and 0.8 respectively, calculate (i) specific work, (ii) heat supplied in the boiler, and (iii) thermal efficiency. Assume ideal process elsewhere.</p>
+                        <h4>Approach:</h4>
+                        <ol>
+                            <li><strong>State 1 (Turbine Inlet):</strong> P<sub>1</sub> = 80 bar, T<sub>1</sub> = 600 °C. Find h<sub>1</sub>, s<sub>1</sub> from superheated steam tables.</li>
+                            <li><strong>State 2s (Ideal Turbine Outlet):</strong> P<sub>2</sub> = 0.1 bar, s<sub>2s</sub> = s<sub>1</sub> (isentropic expansion). Find x<sub>2s</sub> (dryness fraction at ideal outlet) and then h<sub>2s</sub> = h<sub>f@0.1bar</sub> + x<sub>2s</sub> × h<sub>fg@0.1bar</sub>.</li>
+                            <li><strong>State 2a (Actual Turbine Outlet):</strong> Turbine efficiency η<sub>T</sub> = (h<sub>1</sub> - h<sub>2a</sub>) / (h<sub>1</sub> - h<sub>2s</sub>) = 0.9.
+                                <br>Calculate actual enthalpy drop: (h<sub>1</sub> - h<sub>2a</sub>) = η<sub>T</sub> × (h<sub>1</sub> - h<sub>2s</sub>).
+                                <br>So, h<sub>2a</sub> = h<sub>1</sub> - η<sub>T</sub> × (h<sub>1</sub> - h<sub>2s</sub>).
+                            </li>
+                            <li><strong>State 3 (Pump Inlet/Condenser Outlet):</strong> P<sub>3</sub> = 0.1 bar, saturated liquid. Find h<sub>3</sub> = h<sub>f@0.1bar</sub> and v<sub>3</sub> = v<sub>f@0.1bar</sub>.</li>
+                            <li><strong>State 4s (Ideal Pump Outlet):</strong> P<sub>4</sub> = 80 bar. Ideal pump work W<sub>ps</sub> = v<sub>3</sub> × (P<sub>4</sub> - P<sub>3</sub>).
+                                <br>h<sub>4s</sub> = h<sub>3</sub> + W<sub>ps</sub>.
+                            </li>
+                            <li><strong>State 4a (Actual Pump Outlet/Boiler Inlet):</strong> Pump efficiency η<sub>P</sub> = W<sub>ps</sub> / W<sub>pa</sub> = 0.8.
+                                <br>Actual pump work W<sub>pa</sub> = W<sub>ps</sub> / η<sub>P</sub>.
+                                <br>h<sub>4a</sub> = h<sub>3</sub> + W<sub>pa</sub>.
+                            </li>
+                            <li><strong>Calculations:</strong>
+                                <ul>
+                                    <li><strong>(i) Specific Work Output (W<sub>net</sub>):</strong>
+                                        <br>Actual Turbine Work (W<sub>Ta</sub>) = h<sub>1</sub> - h<sub>2a</sub>.
+                                        <br>W<sub>net</sub> = W<sub>Ta</sub> - W<sub>pa</sub>.
+                                    </li>
+                                    <li><strong>(ii) Heat Supplied in Boiler (Q<sub>in</sub>):</strong>
+                                        <br>Q<sub>in</sub> = h<sub>1</sub> - h<sub>4a</sub>.
+                                    </li>
+                                    <li><strong>(iii) Thermal Efficiency (η<sub>th</sub>):</strong>
+                                        <br>η<sub>th</sub> = W<sub>net</sub> / Q<sub>in</sub>.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <p><strong>Example values (approximate from tables/calculator):</strong>
+                        <br>P<sub>1</sub>=80 bar, T<sub>1</sub>=600°C: h<sub>1</sub>≈3642 kJ/kg, s<sub>1</sub>≈6.998 kJ/kgK.
+                        <br>P<sub>2</sub>=0.1 bar: h<sub>f</sub>≈191.8, h<sub>fg</sub>≈2392.1, s<sub>f</sub>≈0.6492, s<sub>g</sub>≈8.1488.
+                        <br>s<sub>2s</sub>=s<sub>1</sub>=6.998. x<sub>2s</sub> = (6.998-0.6492)/(8.1488-0.6492) ≈ 0.846.
+                        <br>h<sub>2s</sub> ≈ 191.8 + 0.846*2392.1 ≈ 2212.5 kJ/kg.
+                        <br>h<sub>2a</sub> = 3642 - 0.9*(3642-2212.5) = 3642 - 0.9*1429.5 = 3642 - 1286.55 = 2355.45 kJ/kg.
+                        <br>W<sub>Ta</sub> = 3642 - 2355.45 = 1286.55 kJ/kg.
+                        <br>P<sub>3</sub>=0.1 bar: h<sub>3</sub>=h<sub>f</sub>≈191.8 kJ/kg, v<sub>3</sub>=v<sub>f</sub>≈0.001010 m³/kg.
+                        <br>W<sub>ps</sub> = 0.001010 * (80-0.1)*100 kPa = 0.001010 * 79.9 * 100 ≈ 8.07 kJ/kg. (Note: 1 bar = 100 kPa)
+                        <br>W<sub>pa</sub> = 8.07 / 0.8 = 10.09 kJ/kg.
+                        <br>h<sub>4a</sub> = 191.8 + 10.09 = 201.89 kJ/kg.
+                        <br><strong>(i) Specific work (W<sub>net</sub>)</strong> = 1286.55 - 10.09 = 1276.46 kJ/kg.
+                        <br><strong>(ii) Heat supplied (Q<sub>in</sub>)</strong> = 3642 - 201.89 = 3440.11 kJ/kg.
+                        <br><strong>(iii) Thermal efficiency (η<sub>th</sub>)</strong> = 1276.46 / 3440.11 ≈ 0.3710 or 37.10%.
+                        </p>
+                        <p><em>Again, precise values require detailed steam tables. The methodology is key.</em></p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <p>© 2025 Boiler Classroom</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

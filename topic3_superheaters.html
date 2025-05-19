@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Superheaters, Reheaters, Attemperators</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Additional styles for this page if needed for the numerical problem */
+        .numerical-solution table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+        .numerical-solution th, .numerical-solution td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .numerical-solution th {
+            background-color: #f2f2f2;
+        }
+        .formula {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #e9e9e9;
+            padding: 5px;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 0.2em 0;
+        }
+        .ts-diagram-text {
+            text-align: center;
+            font-style: italic;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="home-link">Boiler Engineering Hub</a>
+        <h1>3. Superheaters, Reheaters, Attemperators</h1>
+    </header>
+    <nav class="topic-nav">
+        <a href="topic2_circulation.html">« Prev: Circulation</a>
+        <a href="topic4_draught.html">Next: Draught Systems »</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Superheater</h2>
+            <ul>
+                <li>A component in a boiler that heats steam above its saturation temperature (i.e., from dry saturated steam to superheated steam) while maintaining a relatively constant pressure.</li>
+                <li>Superheated steam contains more thermal energy per unit mass than saturated steam at the same pressure.</li>
+                <li><strong>Functions:</strong>
+                    <ul>
+                        <li><strong>Increases Overall Plant Efficiency:</strong> Higher steam temperature leads to a higher average temperature of heat addition in the thermodynamic cycle (e.g., Rankine cycle), improving cycle efficiency.</li>
+                        <li><strong>Reduces Turbine Blade Erosion:</strong> Superheating ensures that the steam remains dry or has very low moisture content throughout most of its expansion in the turbine. Wet steam can cause erosion and damage to turbine blades.</li>
+                        <li>Reduces specific steam consumption of the turbine.</li>
+                    </ul>
+                </li>
+                <li><strong>Types (based on heat transfer mode and location):</strong>
+                    <ul>
+                        <li><strong>Radiant Superheater:</strong> Located in the furnace, receives heat primarily by radiation from the flame and hot gases. Temperature tends to drop with increasing load.</li>
+                        <li><strong>Convective Superheater:</strong> Located in the convection pass of the boiler (flue gas path after the furnace), receives heat primarily by convection. Temperature tends to rise with increasing load.</li>
+                        <li><strong>Combined Superheater:</strong> Uses both radiant and convective sections to achieve a more stable steam temperature over a wider load range.</li>
+                    </ul>
+                </li>
+            </ul>
+            <img src="images/superheater.png" alt="Superheater Diagram" class="diagram">
+        </section>
+
+        <section>
+            <h2>Reheater</h2>
+            <ul>
+                <li>Used in large power plants, particularly those with high initial steam pressures, to improve thermal efficiency and further reduce moisture content in the low-pressure stages of the turbine.</li>
+                <li><strong>Process (Reheat Cycle):</strong>
+                    <ol>
+                        <li>High-pressure superheated steam expands through the high-pressure (HP) turbine section.</li>
+                        <li>The partially expanded, lower-pressure steam (still superheated or slightly wet) is extracted from the HP turbine exhaust.</li>
+                        <li>This steam is routed back to the boiler and passed through a reheater section (similar to a superheater, consisting of tubes heated by flue gases).</li>
+                        <li>In the reheater, the steam temperature is raised again, typically to near the initial superheat temperature, but at a lower pressure.</li>
+                        <li>The reheated steam then flows to the intermediate-pressure (IP) and/or low-pressure (LP) turbine sections to complete its expansion.</li>
+                    </ol>
+                </li>
+                <li><strong>Benefits:</strong> Increases cycle efficiency, reduces moisture in LP turbine stages (improving turbine life and efficiency), increases work output per kg of steam.</li>
+            </ul>
+            <!-- Conceptual Reheat Cycle T-S Diagram -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Rankine_cycle_with_reheat.jpg" alt="Reheat Rankine Cycle T-S Diagram" class="diagram">
+            <p class="ts-diagram-text">T-S Diagram of a Rankine Cycle with Reheat</p>
+        </section>
+
+        <section>
+            <h2>Attemperator (Desuperheater)</h2>
+            <ul>
+                <li>A device used to control and reduce the temperature of superheated steam to a desired setpoint.</li>
+                <li><strong>Purpose:</strong>
+                    <ul>
+                        <li>To protect downstream equipment (e.g., superheater final stages, turbines, piping) from excessively high temperatures.</li>
+                        <li>To maintain a constant steam temperature at the turbine inlet, especially during load changes or variations in boiler firing.</li>
+                        <li>To control reheat steam temperature.</li>
+                    </ul>
+                </li>
+                <li><strong>Working Principle:</strong> It works by injecting a precisely controlled amount of cooler, high-purity water (typically feedwater from the economizer outlet or boiler feed pump discharge) directly into the superheated steam path. The water evaporates, absorbing latent heat from the steam, thereby cooling the steam.</li>
+                <li><strong>Types:</strong>
+                    <ul>
+                        <li><strong>Spray Type:</strong> Most common. Water is sprayed as fine droplets into the steam flow for rapid evaporation and mixing.
+                            <!-- Placeholder for attemperator image if available -->
+                            <!-- <img src="images/attemperator_diagram.png" alt="Spray Attemperator Diagram" class="diagram" style="max-width:300px;"> -->
+                        </li>
+                        <li><strong>Surface Type:</strong> Less common. Steam passes over tubes through which cooler water flows. Heat exchange occurs without direct contact. Slower response than spray type.</li>
+                    </ul>
+                </li>
+                <li>Location: Often placed between superheater stages or before the final superheater outlet.</li>
+            </ul>
+        </section>
+
+        <section class="questions">
+            <h3>Previous Year Questions:</h3>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2017 Q8b: Efficiency analysis with economizer, superheater.</strong></summary>
+                    <div class="pyq-answer">
+                        <p>An economizer and a superheater are key components in a boiler system that significantly contribute to its overall thermal efficiency.</p>
+                        <h4>Economizer:</h4>
+                        <ul>
+                            <li><strong>Function:</strong> The economizer is a heat exchanger that recovers waste heat from the flue gases (after they have passed through most of the boiler, superheater, and reheater if present) before they exit to the chimney. This recovered heat is used to preheat the incoming feedwater before it enters the boiler drum.</li>
+                            <li><strong>Impact on Efficiency:</strong>
+                                <ul>
+                                    <li>By preheating the feedwater, the economizer reduces the amount of heat that needs to be supplied by the fuel in the furnace to raise the water temperature to saturation and then convert it to steam. This directly reduces fuel consumption for a given steam output.</li>
+                                    <li>It lowers the temperature of the flue gases exiting the stack, reducing heat loss up the chimney.</li>
+                                    <li>Each degree Celsius rise in feedwater temperature due to the economizer typically improves boiler efficiency by a small percentage (e.g., for every 6-7°C rise in feedwater temperature, efficiency can increase by about 1%).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <h4>Superheater:</h4>
+                        <ul>
+                            <li><strong>Function:</strong> The superheater raises the temperature of saturated steam from the boiler drum to a higher, superheated temperature at constant pressure, using heat from flue gases.</li>
+                            <li><strong>Impact on Efficiency (Overall Plant Efficiency):</strong>
+                                <ul>
+                                    <li>Superheating increases the enthalpy (total heat content) of the steam supplied to the prime mover (e.g., turbine).</li>
+                                    <li>In a Rankine cycle, increasing the average temperature at which heat is added to the working fluid (steam) increases the thermodynamic efficiency of the cycle. Superheated steam allows for higher heat addition temperatures.</li>
+                                    <li>It reduces the moisture content in the later stages of the turbine, which improves the internal efficiency of the turbine and prevents blade erosion. A drier expansion is closer to an ideal isentropic expansion.</li>
+                                    <li>This leads to more work output from the turbine per unit mass of steam, and thus improves the overall power plant efficiency (heat rate).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p><strong>Combined Effect on Boiler Efficiency Calculation:</strong></p>
+                        <p>Boiler efficiency (η<sub>boiler</sub>) is calculated as:
+                        <br><span class="formula">η<sub>boiler</sub> = (Heat absorbed by water/steam) / (Heat supplied by fuel)</span></p>
+                        <p>Heat absorbed by water/steam = m<sub>s</sub> × (h<sub>superheated steam</sub> - h<sub>feedwater INLET to economizer</sub>)</p>
+                        <p>The inclusion of an economizer means h<sub>feedwater INLET to economizer</sub> is at a lower temperature than h<sub>feedwater OUTLET of economizer / INLET to drum</sub>. The superheater ensures h<sub>superheated steam</sub> is significantly higher than h<sub>saturated steam</sub>.</p>
+                        <p>By utilizing waste heat (economizer) and increasing the useful energy in the steam (superheater), these components maximize the useful heat output from the boiler for a given fuel input, thereby increasing efficiency.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2019 Q4: Function of attemperator.</strong></summary>
+                    <div class="pyq-answer">
+                        <p>The primary function of an attemperator (also known as a desuperheater) is to <strong>control and reduce the temperature of superheated steam to a precise, desired setpoint.</strong></p>
+                        <p>This is crucial for several reasons:</p>
+                        <ol>
+                            <li><strong>Protection of Equipment:</strong>
+                                <ul>
+                                    <li><strong>Turbines:</strong> Steam turbines are designed to operate with steam at a specific temperature and pressure. Excessively high temperatures can lead to thermal stresses, creep, and damage to turbine blades, casings, and rotors.</li>
+                                    <li><strong>Superheater Tubes:</strong> The final stages of a superheater can overheat if the steam temperature is not controlled, potentially leading to tube failure.</li>
+                                    <li><strong>Piping and Valves:</strong> Downstream piping and valves are also designed for specific temperature limits.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Process Control:</strong> In industrial processes that use steam, a consistent steam temperature might be required for product quality or reaction control.</li>
+                            <li><strong>Stable Operation:</strong> Boiler load changes, variations in fuel quality, or changes in combustion conditions can cause fluctuations in the superheated steam temperature. Attemperators help maintain a stable outlet steam temperature despite these variations.</li>
+                            <li><strong>Reheat Temperature Control:</strong> In reheat cycles, attemperators are also used to control the temperature of the reheated steam before it enters the IP/LP turbines.</li>
+                        </ol>
+                        <p><strong>How it Works:</strong> Most commonly, a spray-type attemperator injects a controlled quantity of high-purity, cooler water (usually feedwater taken after the boiler feed pump) into the path of the superheated steam. This injected water evaporates by absorbing latent heat from the superheated steam, thereby reducing the steam's temperature.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2019 Q11b: Reheater in boiler.</strong></summary>
+                    <div class="pyq-answer">
+                        <p>A reheater is a component in a boiler, similar in construction to a superheater, used in steam power plants employing a reheat Rankine cycle. Its primary purpose is to <strong>reheat steam after it has partially expanded through the high-pressure (HP) section of a steam turbine.</strong></p>
+                        <p><strong>Location and Construction:</strong></p>
+                        <ul>
+                            <li>The reheater tubes are typically located in the convection pass of the boiler, where they are heated by the hot flue gases, similar to a convective superheater. Sometimes, radiant reheaters or combined radiant-convective reheaters are also used.</li>
+                            <li>It consists of banks of alloy steel tubes through which the steam from the HP turbine exhaust flows.</li>
+                        </ul>
+                        <p><strong>Working Process (Reheat Cycle):</strong></p>
+                        <ol>
+                            <li>High-pressure, superheated steam from the main superheater outlet enters the HP turbine and expands, producing work.</li>
+                            <li>The exhaust steam from the HP turbine, now at a lower pressure and temperature (but usually still superheated or slightly wet), is piped back to the boiler.</li>
+                            <li>This steam passes through the reheater tubes, where it absorbs heat from the flue gases, increasing its temperature again, typically to a value close to the initial superheat temperature at the HP turbine inlet. This reheating occurs at a nearly constant pressure (the HP turbine exhaust pressure, minus some pressure drop).</li>
+                            <li>The hot, reheated steam is then directed to the intermediate-pressure (IP) turbine and subsequently to the low-pressure (LP) turbine, where it expands further to produce more work before being exhausted to the condenser.</li>
+                        </ol>
+                        <p><strong>Advantages of Using a Reheater:</strong></p>
+                        <ul>
+                            <li><strong>Increased Thermal Efficiency:</strong> Reheating increases the average temperature at which heat is added to the cycle, leading to a higher thermodynamic efficiency of the power plant.</li>
+                            <li><strong>Reduced Moisture Content in LP Turbine Stages:</strong> By reheating, the steam remains superheated for a longer portion of its expansion through the IP and LP turbines. This significantly reduces the moisture content (improves dryness fraction) in the final turbine stages, which:
+                                <ul>
+                                    <li>Minimizes erosion of turbine blades.</li>
+                                    <li>Improves the internal efficiency of the LP turbine stages.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Increased Work Output:</strong> More work is extracted per unit mass of steam due to the additional expansion of reheated steam.</li>
+                        </ul>
+                        <p><strong>Considerations:</strong></p>
+                        <ul>
+                            <li>Reheaters add complexity and cost to the boiler and plant design.</li>
+                            <li>Pressure drop in the reheater and associated piping needs to be minimized.</li>
+                            <li>Control of reheat steam temperature is important, often requiring attemperation.</li>
+                        </ul>
+                        <p>Reheat cycles are common in modern, large-capacity, high-pressure thermal power plants to maximize efficiency and operational reliability.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="mcq">
+            <h3>MCQ:</h3>
+            <div class="mcq-item">
+                <p><strong>1. Water for attemperation is typically taken from:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Boiler drum</li>
+                    <li>b) Economizer outlet (feedwater pump discharge)</li>
+                    <li>c) Condenser hotwell</li>
+                    <li>d) Deaerator storage tank</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Economizer outlet (feedwater pump discharge)</strong> (It needs to be high-purity water at a pressure higher than the steam being attemperated.)</p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>2. The primary purpose of a superheater in a boiler is to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Increase steam pressure</li>
+                    <li>b) Remove moisture from flue gases</li>
+                    <li>c) Increase steam temperature above saturation</li>
+                    <li>d) Preheat combustion air</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Increase steam temperature above saturation</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>3. A reheater is used in a power plant cycle primarily to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Increase the pressure of steam after partial expansion</li>
+                    <li>b) Increase the temperature of steam after partial expansion</li>
+                    <li>c) Condense the steam after turbine exhaust</li>
+                    <li>d) Preheat the feedwater</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Increase the temperature of steam after partial expansion</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>4. Which of the following is a major benefit of superheating steam?</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Reduced boiler operating pressure</li>
+                    <li>b) Increased moisture content in the turbine</li>
+                    <li>c) Increased overall plant thermal efficiency</li>
+                    <li>d) Simpler boiler construction</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Increased overall plant thermal efficiency</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>5. An attemperator achieves steam temperature control by:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Mixing hot flue gases with steam</li>
+                    <li>b) Injecting cooler feedwater into the steam</li>
+                    <li>c) Bypassing a portion of the superheater</li>
+                    <li>d) Increasing the fuel firing rate</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Injecting cooler feedwater into the steam</strong></p>
+            </div>
+        </section>
+
+        <section class="numerical-solution">
+             <h3>Previous Year Numerical Question & Solution</h3>
+            <div class="pyq-item">
+            <details>
+                <summary><strong>Problem Statement: Marine Boiler Efficiency Calculation</strong></summary>
+                <div class="pyq-answer">
+                    <p>Calculate the efficiency of a marine boiler operating under the following conditions: feed water at 50 bar and 120 °C is supplied to the boiler at the rate of 30 kg/s. Of this, 25 kg/s leaves the superheater outlet at 40 bar and 450 °C and the remainder leaves the steam drum as dry saturated steam at 42 bar for auxiliary purposes. The fuel used is oil having CV of 40,414 MJ/m³ (Mega Joules per cubic meter) and is supplied at the rate of 7.2 m³/h.</p>
+                    <hr>
+                    <h4>Given Data:</h4>
+                    <ul>
+                        <li>Total feedwater supply rate (ṁ<sub>fw</sub>) = 30 kg/s</li>
+                        <li>Feedwater condition: P<sub>fw</sub> = 50 bar, T<sub>fw</sub> = 120 °C</li>
+                        <li>Superheated steam: ṁ<sub>sh</sub> = 25 kg/s, P<sub>sh</sub> = 40 bar, T<sub>sh</sub> = 450 °C</li>
+                        <li>Auxiliary steam (dry saturated): ṁ<sub>aux</sub> = 30 - 25 = 5 kg/s, P<sub>aux</sub> = 42 bar</li>
+                        <li>Fuel oil CV = 40,414 MJ/m³ = 40,414,000 kJ/m³</li>
+                        <li>Fuel supply rate (V̇<sub>f</sub>) = 7.2 m³/h</li>
+                    </ul>
+
+                    <h4>Step 1: Determine Enthalpies from Steam Tables</h4>
+                    <p>We need the following enthalpies (h):</p>
+                    <ol>
+                        <li><strong>h<sub>fw</sub> (Enthalpy of feedwater):</strong> At 50 bar, 120 °C.
+                            Since T<sub>sat</sub> at 50 bar is approx 264 °C, the feedwater is subcooled liquid.
+                            h<sub>fw</sub> ≈ h<sub>f</sub> at 120 °C. From steam tables, h<sub>f</sub> at 120 °C ≈ 503.7 kJ/kg.
+                            <em>(A more precise value would use compressed liquid tables or h<sub>f@T</sub> + v<sub>f@T</sub>(P-P<sub>sat@T</sub>), but h<sub>f@T</sub> is a good approximation.)</em>
+                        </li>
+                        <li><strong>h<sub>sh</sub> (Enthalpy of superheated steam):</strong> At 40 bar, 450 °C.
+                            From superheated steam tables, h<sub>sh</sub> ≈ 3330.3 kJ/kg.
+                        </li>
+                        <li><strong>h<sub>aux</sub> (Enthalpy of dry saturated steam for auxiliary):</strong> At 42 bar.
+                            From saturated steam tables, h<sub>g</sub> at 42 bar (h<sub>aux</sub>) ≈ 2800.3 kJ/kg.
+                        </li>
+                    </ol>
+                    <p><em>(Note: Use specific steam tables for accurate values.)</em></p>
+
+                    <h4>Step 2: Calculate Heat Output of the Boiler (Q<sub>out</sub>)</h4>
+                    <p>The boiler produces two streams of steam. The total heat absorbed by the water/steam is the sum of heat absorbed by each stream relative to the incoming feedwater.</p>
+                    <p>Heat absorbed for superheated steam = ṁ<sub>sh</sub> × (h<sub>sh</sub> - h<sub>fw</sub>)</p>
+                    <p>= 25 kg/s × (3330.3 kJ/kg - 503.7 kJ/kg)</p>
+                    <p>= 25 kg/s × 2826.6 kJ/kg = 70665 kJ/s = 70665 kW</p>
+                    <br>
+                    <p>Heat absorbed for auxiliary steam = ṁ<sub>aux</sub> × (h<sub>aux</sub> - h<sub>fw</sub>)</p>
+                    <p>= 5 kg/s × (2800.3 kJ/kg - 503.7 kJ/kg)</p>
+                    <p>= 5 kg/s × 2296.6 kJ/kg = 11483 kJ/s = 11483 kW</p>
+                    <br>
+                    <p>Total Heat Output (Q<sub>out</sub>) = 70665 kW + 11483 kW = 82148 kW</p>
+
+                    <h4>Step 3: Calculate Heat Input from Fuel (Q<sub>in</sub>)</h4>
+                    <p>Fuel supply rate V̇<sub>f</sub> = 7.2 m³/h.</p>
+                    <p>Convert to m³/s: V̇<sub>f</sub> = 7.2 m³/h × (1 h / 3600 s) = 0.002 m³/s.</p>
+                    <br>
+                    <p>Calorific Value (CV) = 40,414 MJ/m³ = 40,414,000 kJ/m³.</p>
+                    <br>
+                    <p>Heat Input (Q<sub>in</sub>) = V̇<sub>f</sub> × CV</p>
+                    <p>= 0.002 m³/s × 40,414,000 kJ/m³</p>
+                    <p>= 80828 kJ/s = 80828 kW</p>
+
+                    <h4>Step 4: Calculate Boiler Efficiency (η<sub>boiler</sub>)</h4>
+                    <p class="formula">η<sub>boiler</sub> = (Total Heat Output) / (Total Heat Input) × 100%</p>
+                    <p class="formula">η<sub>boiler</sub> = (Q<sub>out</sub> / Q<sub>in</sub>) × 100%</p>
+                    <p class="formula">η<sub>boiler</sub> = (82148 kW / 80828 kW) × 100%</p>
+                    <p class="formula">η<sub>boiler</sub> ≈ 1.01633 × 100%</p>
+                    <p class="formula">η<sub>boiler</sub> ≈ 101.63%</p>
+
+                    <h4>Analysis of Result:</h4>
+                    <p>An efficiency greater than 100% is physically impossible and indicates an issue with the problem statement, the data provided, or the assumed steam table values. Let's re-check common pitfalls:</p>
+                    <ul>
+                        <li><strong>Steam Table Accuracy:</strong> While approximate values are used here, they shouldn't lead to >100% unless very off.</li>
+                        <li><strong>CV Units:</strong> CV is given in MJ/m³. Assumed it's Gross Calorific Value (GCV) or Higher Heating Value (HHV). If Net Calorific Value (NCV) or Lower Heating Value (LHV) was intended and GCV used, it could slightly alter things, but not to this extent.</li>
+                        <li><strong>Data Inconsistency in the Problem:</strong> This is the most likely cause. The fuel consumption rate might be too low for the stated steam generation, or the CV might be for a different unit of fuel (e.g., per kg, and density is missing), or there's a typo in one of the energy values.</li>
+                    </ul>
+                    <p><strong>Assuming the calculation methodology and steam table values are reasonably correct, the provided data leads to an impossible efficiency.</strong></p>
+                    <p>If we proceed with the calculation as a mechanical exercise based on given numbers:</p>
+                    <p><strong>Final Answer (based on given numbers, despite >100%): η<sub>boiler</sub> ≈ 101.63%</strong></p>
+                    <p><strong>Important Note for Students:</strong> In an exam, if you encounter a result like this, double-check your calculations. If calculations are correct, explicitly state that the efficiency is >100%, which is impossible, and suggest that there might be an inconsistency in the provided problem data. Then, provide the answer based on the direct calculation. This shows you understand the concept of efficiency and can also perform the calculation.</p>
+                    <p>Let's assume for a moment the fuel consumption was higher, say 8.0 m³/h, which would be Q<sub>in</sub> = 0.002222 m³/s * 40414000 kJ/m³ = 89808 kW.
+                    Then efficiency would be 82148 / 89808 * 100% = 91.47%, which is a realistic value. This highlights the sensitivity to input data.</p>
+
+                </div>
+            </details>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <p>© 2025 Boiler Classroom</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

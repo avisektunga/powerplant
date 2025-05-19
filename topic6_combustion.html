@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6. Combustion Systems</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- OPTIONAL: For proper LaTeX rendering, add MathJax scripts here -->
+    <!--
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          displayMath: [['$$','$$'], ['\\[','\\]']],
+          processEscapes: true
+        }
+      });
+    </script>
+    -->
+    <style>
+        .formula-block {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        .numerical-solution table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+        .numerical-solution th, .numerical-solution td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .numerical-solution th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .numerical-solution .highlight-total {
+            font-weight: bold;
+            background-color: #e9e9e9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="home-link">Boiler Engineering Hub</a>
+        <h1>6. Combustion Systems</h1>
+    </header>
+    <nav class="topic-nav">
+        <a href="topic5_performance.html">« Prev: Boiler Performance</a>
+        <a href="topic7_environment.html">Next: Environmental Protection »</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Introduction to Combustion Systems</h2>
+            <p>Combustion is a rapid exothermic chemical reaction between a fuel (combustible material) and an oxidant (usually oxygen from the air) that produces heat and light. In boilers, the primary goal of the combustion system is to efficiently release the chemical energy stored in the fuel as thermal energy, which is then transferred to water to generate steam.</p>
+            <p>Effective combustion systems aim to:</p>
+            <ul>
+                <li>Maximize heat release from the fuel.</li>
+                <li>Ensure complete combustion to minimize unburnt fuel and products of incomplete combustion (like CO).</li>
+                <li>Minimize pollutant formation (e.g., NOx, SOx, particulate matter).</li>
+                <li>Provide stable and controllable heat output.</li>
+                <li>Operate safely over a range of loads.</li>
+            </ul>
+            <img src="images/combustion_system.jpg" alt="Combustion System Diagram" class="diagram">
+        </section>
+
+        <section>
+            <h2>Types of Fuel Combustion Systems</h2>
+            <h3>Solid Fuel Combustion</h3>
+            <ul>
+                <li><strong>Grate Firing:</strong> Solid fuel (e.g., lump coal, wood chips, biomass) is burned on a grate within the furnace. Air is supplied from below (primary air) and sometimes above (secondary air) the grate.
+                    <ul>
+                        <li><strong>Examples:</strong>
+                            <ul>
+                                <li><em>Hand Firing:</em> Manual feeding of fuel (small boilers).</li>
+                                <li><em>Stoker Firing (Mechanical Stokers):</em> Automatic fuel feeding. Types include:
+                                    <ul>
+                                        <li><u>Chain Grate/Traveling Grate Stoker:</u> Fuel is carried on a moving grate through the furnace. Ash is discharged at the end.</li>
+                                        <li><u>Spreader Stoker:</u> Fuel is thrown into the furnace and burns partly in suspension and partly on a grate.</li>
+                                        <li><u>Underfeed Stoker:</u> Fuel is fed from below the combustion zone.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Suitable for various sizes and types of solid fuels, but generally for smaller to medium-sized boilers.</li>
+                    </ul>
+                </li>
+                <li><strong>Pulverized Fuel (PF) Combustion:</strong> Solid fuel (mainly coal) is ground into a very fine powder (like talcum powder) in pulverizers (mills). This powder is then pneumatically conveyed by primary air and injected through burners into the furnace, where it burns in suspension, similar to a gaseous fuel.
+                    <ul>
+                        <li>Allows for high combustion rates and efficiencies.</li>
+                        <li>Provides rapid response to load changes.</li>
+                        <li>Common in large utility and industrial power boilers.</li>
+                        <li>Requires elaborate fuel preparation and handling systems.</li>
+                    </ul>
+                </li>
+                <li><strong>Fluidized Bed Combustion (FBC):</strong> Solid fuel particles are suspended (fluidized) in an upward-flowing stream of air passed through a bed of inert material (like sand or ash). The fuel burns within this turbulent, hot bed, which behaves like a fluid.
+                    <ul>
+                        <li><strong>Types:</strong>
+                            <ul>
+                                <li><em>Bubbling Fluidized Bed (BFB):</em> Lower fluidizing velocities, distinct bed surface.</li>
+                                <li><em>Circulating Fluidized Bed (CFB):</em> Higher fluidizing velocities, solids are entrained and circulated back to the bed via a cyclone separator.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Advantages:</strong>
+                            <ul>
+                                <li>Excellent fuel flexibility (can burn low-grade fuels, high-ash coals, biomass, waste).</li>
+                                <li>Lower combustion temperatures (typically 800-900°C) compared to PF (1300-1700°C), which significantly reduces thermal NOx formation.</li>
+                                <li>In-situ SOx capture by adding limestone or dolomite directly into the bed, forming calcium sulfate (gypsum).</li>
+                                <li>High heat transfer rates.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Liquid & Gaseous Fuel Combustion</h3>
+            <ul>
+                <li><strong>Burners:</strong> These are devices designed to properly mix fuel and air and provide a stable flame.
+                    <ul>
+                        <li>For liquid fuels (e.g., fuel oil), burners atomize the liquid into fine droplets to increase surface area for rapid vaporization and combustion. Atomization methods include pressure jet, air/steam atomization.</li>
+                        <li>For gaseous fuels (e.g., natural gas, biogas), burners ensure thorough mixing of gas and air before ignition.</li>
+                    </ul>
+                </li>
+                <li><strong>Advantages:</strong> Generally easier fuel handling and storage, better combustion control, quicker response to load changes, and typically cleaner combustion (lower particulate emissions) compared to solid fuels.</li>
+                <li><strong>Considerations:</strong> Fuel storage tanks, pumping/piping systems, burner design for flame stability, safety interlocks for fuel supply.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Key Combustion Concepts</h2>
+            <ul>
+                <li><strong>Stoichiometry:</strong> The branch of chemistry concerned with the relative quantities of reactants and products in chemical reactions. In combustion, it involves calculating the theoretical (ideal) amount of oxidant (usually air) required for complete combustion of a given amount of fuel.</li>
+                <li><strong>Air-Fuel Ratio (A/F):</strong> The ratio of the mass of air to the mass of fuel supplied for combustion.
+                    <ul>
+                        <li><strong>Stoichiometric A/F Ratio:</strong> The chemically correct A/F ratio for complete combustion, where all fuel is burned with no excess air and no unburnt fuel.</li>
+                        <li><strong>Excess Air:</strong> Air supplied beyond the stoichiometric requirement. It is necessary in practical systems to ensure complete combustion by providing enough oxygen to reach all fuel particles. Typically expressed as a percentage of stoichiometric air (e.g., 15-30% excess air).
+                            <ul>
+                                <li><em>Too little excess air:</em> Incomplete combustion, formation of CO, soot, unburnt fuel (efficiency loss, pollution).</li>
+                                <li><em>Too much excess air:</em> Reduces furnace temperature, increases flue gas volume and heat loss up the stack (efficiency loss).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Heating Value (Calorific Value - CV):</strong> The amount of heat released when a known amount of fuel is completely combusted.
+                    <ul>
+                        <li><em>Higher Heating Value (HHV) or Gross Calorific Value (GCV):</em> Assumes water vapor produced during combustion is condensed, and its latent heat is recovered.</li>
+                        <li><em>Lower Heating Value (LHV) or Net Calorific Value (NCV):</em> Assumes water vapor produced remains in gaseous state and its latent heat is not recovered. LHV is commonly used in boiler efficiency calculations in many regions.</li>
+                    </ul>
+                </li>
+                <li><strong>Heat Release Rate:</strong>
+                    <ul>
+                        <li><em>Volumetric Heat Release Rate:</em> Heat released per unit volume of the furnace per unit time (e.g., kW/m³). Important for furnace sizing.</li>
+                        <li><em>Grate Heat Release Rate (for grate firing):</em> Heat released per unit area of the grate per unit time (e.g., kW/m²).</li>
+                    </ul>
+                </li>
+                <li><strong>Combustion Efficiency:</strong> The percentage of the fuel's heating value that is effectively released as heat within the furnace. It is affected by unburnt fuel (e.g., carbon in ash, CO in flue gas).
+                    <div class="formula-block">Comb. Eff. = (Heat Released in Furnace) / (Heat Input from Fuel's CV) × 100%</div>
+                </li>
+                <li><strong>Flame Stability:</strong> The ability to maintain a stable flame at the burner under varying operating conditions (fuel flow, air flow, furnace temperature). Poor stability can lead to flameout or pulsations.</li>
+                <li><strong>Turndown Ratio:</strong> The ratio of the maximum to minimum heat input (or fuel firing rate) at which a burner or boiler can operate efficiently and stably. A high turndown ratio is desirable for good load-following capability.</li>
+            </ul>
+        </section>
+
+        <section class="questions">
+            <h3>Previous Year Questions & Numericals:</h3>
+            <div class="pyq-item">
+                <details>
+                                        <summary><strong>2018 Q2: Effect of moisture, sulphur, volatile matter (in coal) on combustion.</strong></summary>
+                    <div class="pyq-answer">
+                        <p>The properties of coal, such as its moisture content, sulphur content, and volatile matter, significantly affect its combustion characteristics and the design/operation of boiler systems.</p>
+                        <h4>Effect of Moisture:</h4>
+                        <ul>
+                            <li><strong>Reduces Heating Value:</strong> Moisture is non-combustible. Its presence reduces the effective calorific value of the coal per unit mass (as-fired basis).</li>
+                            <li><strong>Heat Loss:</strong> Moisture must be evaporated and superheated to the flue gas temperature. This requires sensible and latent heat, which is taken from the combustion process, thus lowering the flame temperature and reducing boiler efficiency (this heat is lost up the stack).</li>
+                            <li><strong>Ignition Difficulty:</strong> High moisture content can make coal more difficult to ignite and can lead to unstable combustion.</li>
+                            <li><strong>Handling Issues:</strong> Very wet coal can cause problems in handling, storage, and pulverization (e.g., clogging mills).</li>
+                            <li><strong>Increased Flue Gas Volume:</strong> The evaporated moisture adds to the total volume of flue gases, potentially increasing fan power consumption.</li>
+                        </ul>
+                        <h4>Effect of Sulphur:</h4>
+                        <ul>
+                            <li><strong>SOx Emissions:</strong> Sulphur in coal combusts to form sulphur dioxide (SO<sub>2</sub>) and a small amount of sulphur trioxide (SO<sub>3</sub>). These are major air pollutants contributing to acid rain.
+                                <div class="formula-block">S + O<sub>2</sub> → SO<sub>2</sub></div>
+                                <div class="formula-block">2SO<sub>2</sub> + O<sub>2</sub> ↔ 2SO<sub>3</sub></div>
+                            </li>
+                            <li><strong>Corrosion:</strong> SO<sub>3</sub> can combine with water vapor in cooler parts of the boiler (e.g., air preheater, economizer, stack) to form sulphuric acid (H<sub>2</sub>SO<sub>4</sub>), leading to acid dew point corrosion if temperatures drop below the acid dew point.</li>
+                            <li><strong>Ash Fusion Temperature:</strong> Sulphur compounds can sometimes lower the ash fusion temperature, increasing the risk of slagging and fouling on heat transfer surfaces.</li>
+                            <li><strong>Contribution to Heating Value:</strong> Sulphur does contribute a small amount to the heating value of the coal when it burns, but this is usually outweighed by its negative environmental and operational impacts.</li>
+                        </ul>
+                        <h4>Effect of Volatile Matter (VM):</h4>
+                        <ul>
+                            <li><strong>Ignition and Flame Stability:</strong> Volatile matter consists of gases and tars that are driven off when coal is heated. Coals with high VM content ignite more easily and burn with a longer, more luminous flame. This aids in flame stability.</li>
+                            <li><strong>Combustion Rate:</strong> High VM coals tend to burn faster in the initial stages of combustion.</li>
+                            <li><strong>Burner/Furnace Design:</strong> The amount and type of VM influence the design of burners and furnaces to ensure proper mixing and complete combustion of these volatiles. Insufficient air or poor mixing can lead to smoke and soot.</li>
+                            <li><strong>Caking Properties:</strong> Some coals with specific VM characteristics (caking coals) soften and swell upon heating, which can affect combustion on grates.</li>
+                            <li><strong>Suitability for Different Systems:</strong> High VM coals are generally preferred for pulverized coal firing due to easier ignition. Low VM coals (like anthracite) require specialized furnace designs or higher temperatures for efficient combustion.</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>Numerical: Heat Balance & Boiler Efficiency Calculation (Coal Fired)</strong></summary>
+                    <div class="pyq-answer">
+                        <p><strong>Problem:</strong> Coal of calorific value 28000 kJ/kg fired in a boiler generates 8 kg of steam per kg of coal at 35 bar and 350°C (assuming typo, typical superheat might be 350°C, if 830°C then it's extremely high and needs special tables, will proceed with 350°C). Temperature of feed water is 38°C. The products of combustion per kg of coal are 18.75 kg of gases with 0.75 kg of moisture (this moisture is total: from fuel + from H<sub>2</sub> combustion + from air). Boiler house temperature = 27°C, Flue gas temperature = 121°C. Partial pressure of moisture in flue gas may be assumed to be 0.07 bar. Specific heat of flue gases (C<sub>pg</sub>) = 1.005 kJ/kgK. Draw up a heat balance per kg of coal burnt and find the thermal efficiency of the boiler.</p>
+                        <p><em>Correction Note: If steam temp is indeed 830°C, enthalpy will be much higher. Assuming 350°C for a more standard calculation. If it's 830°C, use that value from appropriate tables.</em></p>
+
+                        <h4>Given Data (per kg of coal):</h4>
+                        <ul>
+                            <li>Calorific Value of Coal (CV) = 28000 kJ/kg</li>
+                            <li>Steam generated (m<sub>s</sub>) = 8 kg/kg coal</li>
+                            <li>Steam condition: P = 35 bar, T = 350°C</li>
+                            <li>Feedwater temperature (T<sub>fw</sub>) = 38°C</li>
+                            <li>Mass of flue gases (m<sub>g,total</sub>) = 18.75 kg/kg coal (this includes moisture)</li>
+                            <li>Mass of moisture in flue gases (m<sub>w,gas</sub>) = 0.75 kg/kg coal</li>
+                            <li>Boiler house temperature (Ambient temp, T<sub>a</sub>) = 27°C</li>
+                            <li>Flue gas temperature (T<sub>g</sub>) = 121°C</li>
+                            <li>Partial pressure of moisture in flue gas (p<sub>w</sub>) = 0.07 bar</li>
+                            <li>Specific heat of flue gases (C<sub>pg</sub>) = 1.005 kJ/kgK (assumed for dry part)</li>
+                        </ul>
+
+                        <h4>Step 1: Heat Input</h4>
+                        <p>Heat input from fuel = CV = <strong>28000 kJ/kg of coal</strong></p>
+
+                        <h4>Step 2: Determine Enthalpies for Steam Calculation</h4>
+                        <ul>
+                            <li><strong>h<sub>fw</sub> (Enthalpy of feedwater):</strong> At 38°C. From steam tables, h<sub>f</sub> at 38°C ≈ 159.19 kJ/kg.</li>
+                            <li><strong>h<sub>s</sub> (Enthalpy of superheated steam):</strong> At 35 bar, 350°C. From superheated steam tables, h<sub>s</sub> ≈ 3100.8 kJ/kg. <br><em>(If T=830°C, h<sub>s</sub> would be significantly higher, e.g., >4000 kJ/kg, from specialized tables).</em></li>
+                        </ul>
+
+                        <h4>Step 3: Calculate Heat Absorbed by Steam (Useful Heat Output)</h4>
+                        <div class="formula-block">Q<sub>useful</sub> = m<sub>s</sub> × (h<sub>s</sub> - h<sub>fw</sub>)</div>
+                        <p>Q<sub>useful</sub> = 8 kg/kg coal × (3100.8 kJ/kg - 159.19 kJ/kg)</p>
+                        <p>Q<sub>useful</sub> = 8 × 2941.61 = <strong>23532.88 kJ/kg of coal</strong></p>
+
+                        <h4>Step 4: Calculate Heat Losses</h4>
+                        <ol type="a">
+                            <li><strong>Loss due to dry flue gases:</strong>
+                                <p>Mass of dry flue gases (m<sub>dg</sub>) = m<sub>g,total</sub> - m<sub>w,gas</sub> = 18.75 - 0.75 = 18 kg/kg coal</p>
+                                <div class="formula-block">Q<sub>drygas</sub> = m<sub>dg</sub> × C<sub>pg</sub> × (T<sub>g</sub> - T<sub>a</sub>)</div>
+                                <p>Q<sub>drygas</sub> = 18 × 1.005 × (121 - 27) = 18 × 1.005 × 94 = 1699.86 kJ/kg coal</p>
+                            </li>
+                            <li><strong>Loss due to moisture in flue gases:</strong>
+                                <p>This moisture (m<sub>w,gas</sub> = 0.75 kg/kg coal) is formed from moisture in fuel, moisture from H<sub>2</sub> combustion, and moisture in air. The heat lost is the enthalpy it carries away above the enthalpy of water at ambient temperature.</p>
+                                <p>Enthalpy of superheated steam (moisture) in flue gas at T<sub>g</sub>=121°C and p<sub>w</sub>=0.07 bar:
+                                <br>T<sub>sat</sub> at 0.07 bar ≈ 39°C. Since T<sub>g</sub> (121°C) > T<sub>sat</sub> (39°C), the moisture is superheated.
+                                <br>h<sub>moisture_in_gas</sub> at 121°C, 0.07 bar ≈ h<sub>g@0.07bar</sub> + C<sub>p,steam</sub>(T<sub>g</sub> - T<sub>sat@0.07bar</sub>)
+                                <br>h<sub>g@0.07bar</sub> ≈ 2571.6 kJ/kg (from steam tables). C<sub>p,steam</sub> ≈ 2.0 kJ/kgK.
+                                <br>h<sub>moisture_in_gas</sub> ≈ 2571.6 + 2.0 × (121 - 39) = 2571.6 + 2.0 × 82 = 2571.6 + 164 = 2735.6 kJ/kg.
+                                </p>
+                                <p>Enthalpy of water at ambient temperature (T<sub>a</sub>=27°C): h<sub>water@Ta</sub> ≈ C<sub>p,water</sub> × T<sub>a</sub> = 4.186 × 27 ≈ 113.02 kJ/kg.
+                                <br>(Or h<sub>f</sub> at 27°C from steam tables ≈ 113.16 kJ/kg)
+                                </p>
+                                <div class="formula-block">Q<sub>moisture_loss</sub> = m<sub>w,gas</sub> × (h<sub>moisture_in_gas</sub> - h<sub>water@Ta</sub>)</div>
+                                <p>Q<sub>moisture_loss</sub> = 0.75 × (2735.6 - 113.16) = 0.75 × 2622.44 = 1966.83 kJ/kg coal</p>
+                            </li>
+                            <li><strong>Loss due to radiation, convection, and unaccounted (by difference):</strong>
+                                <div class="formula-block">Q<sub>unaccounted</sub> = Heat Input - (Q<sub>useful</sub> + Q<sub>drygas</sub> + Q<sub>moisture_loss</sub>)</div>
+                                <p>Q<sub>unaccounted</sub> = 28000 - (23532.88 + 1699.86 + 1966.83)</p>
+                                <p>Q<sub>unaccounted</sub> = 28000 - 27199.57 = 800.43 kJ/kg coal</p>
+                            </li>
+                        </ol>
+
+                        <h4>Step 5: Heat Balance Sheet (per kg of coal)</h4>
+                        <table class="numerical-solution">
+                            <tr><th>Heat Account Item</th><th>Energy (kJ/kg coal)</th><th>Percentage (%)</th></tr>
+                            <tr><td colspan="3"><strong>A. Heat Input</strong></td></tr>
+                            <tr><td>1. Heat from Combustion of Coal</td><td>28000.00</td><td>100.00%</td></tr>
+                            <tr class="highlight-total"><td><strong>Total Heat Input</strong></td><td><strong>28000.00</strong></td><td><strong>100.00%</strong></td></tr>
+                            <tr><td colspan="3"><strong>B. Heat Utilized & Losses</strong></td></tr>
+                            <tr><td>1. Heat Absorbed by Steam (Useful)</td><td>23532.88</td><td>84.05%</td></tr>
+                            <tr><td>2. Heat Loss due to Dry Flue Gases</td><td>1699.86</td><td>6.07%</td></tr>
+                            <tr><td>3. Heat Loss due to Moisture in Flue Gases</td><td>1966.83</td><td>7.02%</td></tr>
+                            <tr><td>4. Heat Loss due to Radiation, Convection & Unaccounted</td><td>800.43</td><td>2.86%</td></tr>
+                            <tr class="highlight-total"><td><strong>Total Heat Utilized & Losses</strong></td><td><strong>28000.00</strong></td><td><strong>100.00%</strong></td></tr>
+                        </table>
+
+                        <h4>Step 6: Thermal Efficiency of the Boiler (η<sub>th</sub>)</h4>
+                        <div class="formula-block">η<sub>th</sub> = (Q<sub>useful</sub> / Heat Input) × 100%</div>
+                        <p>η<sub>th</sub> = (23532.88 / 28000) × 100% = 0.84046 × 100% = <strong>84.05%</strong></p>
+
+                        <p><strong>Answer: The thermal efficiency of the boiler is approximately 84.05%.</strong> The heat balance sheet is provided above.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="mcq">
+            <h3>MCQ:</h3>
+            <div class="mcq-item">
+                <p><strong>1. Sulphur present in coal during combustion primarily leads to the formation of:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) NOx (Nitrogen Oxides)</li>
+                    <li>b) SOx (Sulphur Oxides)</li>
+                    <li>c) CO (Carbon Monoxide)</li>
+                    <li>d) Particulate Matter</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) SOx (Sulphur Oxides)</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>2. Which type of combustion system is best suited for burning low-grade fuels and in-situ SOx capture?</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Grate Firing</li>
+                    <li>b) Pulverized Fuel Combustion</li>
+                    <li>c) Fluidized Bed Combustion (FBC)</li>
+                    <li>d) Oil Burner Combustion</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Fluidized Bed Combustion (FBC)</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>3. "Excess air" in boiler combustion refers to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Air that does not participate in combustion and is lost.</li>
+                    <li>b) Air supplied beyond the theoretical amount needed for complete combustion.</li>
+                    <li>c) Air used for cooling the furnace walls.</li>
+                    <li>d) The total air supplied including primary and secondary air.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Air supplied beyond the theoretical amount needed for complete combustion.</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>4. Higher moisture content in coal generally leads to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Increased calorific value and higher flame temperature.</li>
+                    <li>b) Easier ignition and reduced flue gas volume.</li>
+                    <li>c) Lower effective heating value and increased heat loss.</li>
+                    <li>d) Reduced NOx emissions and better ash handling.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Lower effective heating value and increased heat loss.</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>5. Volatile matter in coal primarily affects its:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Ash content and slagging potential.</li>
+                    <li>b) Sulphur emissions.</li>
+                    <li>c) Ignition characteristics and flame length.</li>
+                    <li>d) Hardness and grindability.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Ignition characteristics and flame length.</strong></p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Boiler Classroom</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

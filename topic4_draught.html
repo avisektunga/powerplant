@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. Draught Systems</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .draught-diagram-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-top: 1em;
+        }
+        .draught-diagram-container figure {
+            margin: 10px;
+            text-align: center;
+            max-width: 300px; /* Adjust as needed */
+        }
+        .draught-diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        .draught-diagram-container figcaption {
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="home-link">Boiler Engineering Hub</a>
+        <h1>4. Draught - Induced, Forced, Secondary Air Fans</h1>
+    </header>
+    <nav class="topic-nav">
+        <a href="topic3_superheaters.html">« Prev: Superheaters</a>
+        <a href="topic5_performance.html">Next: Boiler Performance »</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Draught (Draft)</h2>
+            <p>Draught is the small pressure difference between the atmosphere and the gases within a boiler system (furnace, flue gas passages, chimney) that causes the flow of air into the furnace and the flow of combustion products (flue gases) out through the chimney. It is essential for:</p>
+            <ul>
+                <li>Supplying sufficient air for complete combustion of fuel.</li>
+                <li>Removing the products of combustion from the furnace.</li>
+                <li>Dispersing flue gases into the atmosphere at a suitable height.</li>
+            </ul>
+            <p>Draught can be classified into:</p>
+            <ul>
+                <li><strong>Natural Draught:</strong> Created by the chimney effect due to the density difference between the hot flue gases inside the chimney and the cooler ambient air outside. The hotter, lighter gases in the chimney rise, creating a lower pressure at the chimney base, which draws air and flue gases through the system. Taller chimneys produce greater natural draught.</li>
+                <li><strong>Artificial Draught:</strong> Created using mechanical means, typically fans. It is more controllable and can achieve much higher pressure differences than natural draught, necessary for modern large boilers with high resistances.
+                    <ul>
+                        <li><strong>Mechanical Draught:</strong> Uses fans (Forced Draught, Induced Draught, or Balanced Draught).</li>
+                        <li><strong>Steam Jet Draught:</strong> Uses high-velocity jets of steam to induce or force air/gas flow. Less common in modern large boilers due to lower efficiency and steam consumption, but sometimes used in locomotives or small boilers.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Induced Draught (ID Fan)</h2>
+            <ul>
+                <li>An ID fan is located in the flue gas path, typically between the boiler's last heat recovery unit (e.g., air preheater or ESP/baghouse) and the chimney.</li>
+                <li>It draws (induces) flue gases out of the furnace and through the boiler passes, dust collectors, and other equipment.</li>
+                <li>This creates a negative pressure (below atmospheric pressure) throughout the furnace and flue gas system up to the fan inlet. The pressure at the ID fan outlet is slightly positive to discharge gases up the chimney.</li>
+                <li>Maintaining a slightly negative furnace pressure (e.g., -5 to -10 mm of water column) is crucial to prevent leakage of hot, toxic flue gases and fly ash into the boiler house, ensuring operator safety and cleanliness.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Forced Draught (FD Fan)</h2>
+            <ul>
+                <li>An FD fan is located at the air inlet side of the boiler system, typically before the air preheater (if present) or directly supplying air to the windbox and burners/grate.</li>
+                <li>It pushes (forces) combustion air into the furnace at a pressure above atmospheric.</li>
+                <li>This creates a positive pressure in the windbox and potentially in the furnace if only an FD fan is used (pressurized furnace).</li>
+            </ul>
+             <img src="images/boiler_draught.png" alt="Boiler Draught Diagram (showing FD and ID fans for balanced draught)" class="diagram">
+             <p style="text-align:center; font-style:italic;">Typical Balanced Draught System</p>
+        </section>
+
+        <section>
+            <h2>Balanced Draught</h2>
+            <ul>
+                <li>This system uses both an FD fan and an ID fan operating in conjunction.</li>
+                <li>The FD fan supplies the required quantity of combustion air to the furnace.</li>
+                <li>The ID fan removes the flue gases from the furnace and maintains the furnace pressure at a desired slightly negative value (e.g., -5 to -10 mm WC).</li>
+                <li>This combination offers precise control over both air supply and furnace pressure, preventing both blowback of hot gases (if furnace pressure is too high) and excessive air ingress (if furnace pressure is too low).</li>
+                <li>Balanced draught is the most common system for medium to large utility and industrial boilers.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Secondary Air Fans (SA Fans)</h2>
+            <ul>
+                <li>In addition to primary air (mixed with fuel at the burner or supplied under the grate), secondary air is often required for complete combustion.</li>
+                <li>SA fans supply this additional air, usually at a higher pressure than primary air, into the furnace at strategic locations above or around the main combustion zone.</li>
+                <li><strong>Functions of Secondary Air:</strong>
+                    <ul>
+                        <li>Ensures complete combustion of volatile matter and unburnt carbon particles released from the fuel.</li>
+                        <li>Improves turbulence and mixing in the furnace.</li>
+                        <li>Can be used for staged combustion to control NOx formation by creating fuel-rich and fuel-lean zones.</li>
+                    </ul>
+                </li>
+                <li>In some systems, the FD fan may be designed to supply both primary and secondary air through different ducts and dampers. However, in large pulverized coal boilers or fluidized bed boilers, separate SA fans (and sometimes Tertiary Air fans) are common for better control.</li>
+            </ul>
+        </section>
+
+        <section class="questions">
+            <h3>Previous Year Questions:</h3>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2017 Q10c: Draw diagrams of ID, FD, balanced draught.</strong></summary>
+                    <div class="pyq-answer">
+                        <p>Here are conceptual diagrams illustrating Forced Draught (FD), Induced Draught (ID), and Balanced Draught systems. The key components are the boiler/furnace, chimney, and the fan(s).</p>
+
+                        <div class="draught-diagram-container">
+                            <figure>
+                                <img src="https://i.imgur.com/sVz8r3f.png" alt="Forced Draught Diagram">
+                                <figcaption><strong>1. Forced Draught (FD) System:</strong><br>
+                                The FD fan pushes air into the furnace. Furnace pressure is above atmospheric.
+                                </figcaption>
+                            </figure>
+                            <figure>
+                                <img src="https://i.imgur.com/i1g2F8L.png" alt="Induced Draught Diagram">
+                                <figcaption><strong>2. Induced Draught (ID) System:</strong><br>
+                                The ID fan pulls flue gases from the furnace. Furnace pressure is below atmospheric.
+                                </figcaption>
+                            </figure>
+                            <figure>
+                                <img src="https://i.imgur.com/YgM7x1T.png" alt="Balanced Draught Diagram">
+                                <figcaption><strong>3. Balanced Draught System:</strong><br>
+                                Both FD and ID fans are used. FD fan supplies air, ID fan removes flue gases. Furnace pressure is maintained slightly below atmospheric.
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <p><strong>Explanation of Components in Diagrams:</strong></p>
+                        <ul>
+                            <li><strong>Boiler/Furnace:</strong> Where combustion takes place.</li>
+                            <li><strong>APH (Air Preheater):</strong> Recovers heat from flue gases to preheat combustion air (common in larger systems).</li>
+                            <li><strong>Dust Collector (DC/ESP/Baghouse):</strong> Removes particulate matter from flue gases.</li>
+                            <li><strong>FD Fan:</strong> Forces air into the system.</li>
+                            <li><strong>ID Fan:</strong> Induces (pulls) gases out of the system.</li>
+                            <li><strong>Chimney/Stack:</strong> Discharges flue gases to the atmosphere.</li>
+                            <li>Arrows indicate the direction of air/flue gas flow.</li>
+                            <li>Pressure indications (+ for positive, - for negative relative to atmospheric) show typical pressure profiles.</li>
+                        </ul>
+                         <p><em>(Note: These are simplified diagrams. Actual systems include dampers, ducting, and control systems.)</em></p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2019 Q11a: ID fan short note.</strong></summary>
+                    <div class="pyq-answer">
+                        <h4>Induced Draught (ID) Fan</h4>
+                        <p>An Induced Draught (ID) fan is a crucial component in most medium to large boiler systems, responsible for extracting flue gases from the boiler furnace and discharging them to the atmosphere via the chimney.</p>
+                        <p><strong>Location:</strong> It is typically installed after all heat recovery equipment (like economizers, air preheaters) and pollution control devices (like electrostatic precipitators or bag filters), but before the chimney.</p>
+                        <p><strong>Function and Working:</strong></p>
+                        <ul>
+                            <li>The primary function of the ID fan is to create a negative pressure (suction) within the furnace and the flue gas passages of the boiler. This negative pressure ensures that:
+                                <ul>
+                                    <li>Combustion air is drawn into the furnace (especially if no FD fan is present or in conjunction with an FD fan).</li>
+                                    <li>Hot combustion products (flue gases) are effectively pulled through the various sections of the boiler (superheaters, reheaters, economizer, air preheater) and pollution control equipment.</li>
+                                    <li>It overcomes the flow resistance offered by these components and ductwork.</li>
+                                </ul>
+                            </li>
+                            <li>By maintaining a furnace pressure slightly below atmospheric (e.g., -5 to -10 mm water column), the ID fan prevents the leakage of hot, toxic flue gases and fly ash from the furnace into the boiler house. This is vital for operator safety and plant cleanliness.</li>
+                            <li>The ID fan handles hot, often corrosive, and dust-laden flue gases. Therefore, its construction materials and design (e.g., blade type, bearings) must be robust and suitable for such harsh conditions.</li>
+                            <li>The capacity and speed of the ID fan are controlled to match the boiler load and maintain the desired furnace pressure. Variable speed drives (VSDs) or inlet guide vanes (IGVs) are commonly used for this control, enhancing energy efficiency.</li>
+                        </ul>
+                        <p><strong>In Balanced Draught Systems:</strong> The ID fan works in conjunction with a Forced Draught (FD) fan. The FD fan supplies air, while the ID fan removes flue gases, and their combined operation maintains the furnace at the desired slight negative pressure.</p>
+                        <p>In summary, the ID fan is essential for proper flue gas removal, maintaining safe furnace operating conditions, and enabling efficient heat recovery in boiler systems.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="mcq">
+            <h3>MCQ:</h3>
+            <div class="mcq-item">
+                <p><strong>1. Draught requirement in a boiler depends least on:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Resistance in flue gas circuit (e.g., through economizer, superheater, air preheater, ducts)</li>
+                    <li>b) Rate of combustion (amount of fuel burned per unit time)</li>
+                    <li>c) Height of the chimney (primarily for natural draught impact on overall system design)</li>
+                    <li>d) Type of boiler mountings (e.g., safety valve, water level indicator)</li>
+                </ul>
+                <button class="reveal-answer" data-answer="d">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: d) Type of boiler mountings (e.g., safety valve, water level indicator)</strong> (Boiler mountings are for safety and operation, they don't significantly contribute to the flow resistance that draught must overcome. The original answer 'Ambient temperature' has some effect, but less than the type of mountings on draught *requirement*.)</p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>2. In a balanced draught system, the furnace pressure is typically maintained:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Significantly above atmospheric pressure</li>
+                    <li>b) Slightly below atmospheric pressure</li>
+                    <li>c) Equal to atmospheric pressure</li>
+                    <li>d) Significantly below atmospheric pressure (near vacuum)</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Slightly below atmospheric pressure</strong> (e.g., -5 to -10 mm WC)</p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>3. Which fan in a boiler system handles hot, dust-laden flue gases?</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Forced Draught (FD) Fan</li>
+                    <li>b) Induced Draught (ID) Fan</li>
+                    <li>c) Secondary Air (SA) Fan</li>
+                    <li>d) Primary Air (PA) Fan</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Induced Draught (ID) Fan</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>4. Natural draught in a chimney is primarily caused by:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) The kinetic energy of flue gases</li>
+                    <li>b) The height of the chimney alone</li>
+                    <li>c) The density difference between hot flue gases and cooler ambient air</li>
+                    <li>d) The pressure created by a fan at the chimney base</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) The density difference between hot flue gases and cooler ambient air</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>5. The main purpose of using both FD and ID fans in a balanced draught system is to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Maximize the positive pressure in the furnace</li>
+                    <li>b) Minimize the number of fans required</li>
+                    <li>c) Precisely control combustion air flow and furnace pressure</li>
+                    <li>d) Exclusively use natural draught for primary combustion</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Precisely control combustion air flow and furnace pressure</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>6. Secondary air is supplied to a furnace primarily to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Cool down the flue gases before they enter the chimney</li>
+                    <li>b) Increase the furnace pressure significantly</li>
+                    <li>c) Ensure complete combustion of fuel and reduce unburnt losses</li>
+                    <li>d) Primarily assist in fuel atomization</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Ensure complete combustion of fuel and reduce unburnt losses</strong></p>
+            </div>
+
+        </section>
+    </main>
+    <footer>
+        <p>© 2023 Boiler Classroom</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
