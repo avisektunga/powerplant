@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13. Condensing Systems</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- RECOMMENDED: Add MathJax for proper LaTeX rendering if needed for any formulas -->
+    <!--
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          displayMath: [['$$','$$'], ['\\[','\\]']],
+          processEscapes: true
+        }
+      });
+    </script>
+    -->
+    <style>
+        .formula-block {
+            background-color: #f0f0f0; padding: 10px; margin: 10px 0;
+            border: 1px solid #ddd; border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.8; overflow-x: auto;
+        }
+        .diagram-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-top: 1em;
+        }
+        .diagram-container figure {
+            margin: 10px;
+            text-align: center;
+            max-width: 450px;
+        }
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        .diagram-container figcaption {
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: #555;
+        }
+        .comparison-table { /* For the Jet vs Surface table */
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .comparison-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="home-link">Engineering Learning Hub</a>
+        <h1>13. Condensing Systems</h1>
+    </header>
+    <nav class="topic-nav">
+        <a href="topic12_turbine_losses_governing.html">« Prev: Losses & Governing</a>
+        <a href="index.html">Back to Main Topics »</a> <!-- Or link to a future topic if any -->
+    </nav>
+    <main>
+        <section>
+            <h2>Introduction to Condensing Systems</h2>
+            <p>In steam power plants, a condensing system is used to condense the exhaust steam from the low-pressure (LP) turbine outlet. The primary component of this system is the **condenser**. Condensing the exhaust steam serves several crucial purposes:</p>
+            <ul>
+                <li><strong>Creates Vacuum at Turbine Exhaust:</strong> When steam condenses, its specific volume drastically reduces (e.g., steam at 0.1 bar has a specific volume of about 14.67 m³/kg, while water at the same pressure has about 0.001 m³/kg). This rapid volume reduction creates a vacuum (pressure well below atmospheric) at the turbine exhaust.</li>
+                <li><strong>Increases Turbine Work Output & Efficiency:</strong> The vacuum at the exhaust allows the steam to expand to a much lower pressure in the turbine, thereby increasing the enthalpy drop across the turbine and significantly increasing the work output and thermal efficiency of the Rankine cycle.</li>
+                <li><strong>Recovers High-Purity Condensate:</strong> The condensed steam (condensate) is high-purity water, which can be reused as boiler feedwater, minimizing the need for extensive makeup water treatment. This is particularly important for surface condensers.</li>
+                <li><strong>Reduces Exhaust Steam Volume:</strong> Handling a large volume of exhaust steam directly would require enormous exhaust ducting and stacks.</li>
+            </ul>
+            <p>The condensing system typically includes the condenser itself, cooling water pumps, condensate extraction pumps, and an air extraction system (vacuum pump or steam jet ejector) to remove non-condensable gases.</p>
+        </section>
+
+        <section>
+            <h2>Classification of Condensers</h2>
+            <p>Condensers are broadly classified based on how the cooling medium (usually water) interacts with the exhaust steam:</p>
+            <div class="diagram-container">
+                 <figure>
+                    <img src="images/condenser_classification_overview.png" alt="Condenser Classification Overview">
+                    <figcaption>Broad Classification of Steam Condensers</figcaption>
+                </figure>
+            </div>
+            <ol>
+                <li>
+                    <strong>Direct Contact (Jet) Condensers:</strong>
+                    <ul>
+                        <li>In these condensers, the exhaust steam and the cooling water come into direct contact and mix intimately. The steam gives up its latent heat to the cooling water, and the mixture of condensate and cooling water is then pumped out.</li>
+                        <li><strong>Sub-types:</strong>
+                            <ul>
+                                <li><strong>Parallel Flow Jet Condenser:</strong> Steam and cooling water flow in the same direction.</li>
+                                <li><strong>Counter Flow (Low-Level) Jet Condenser:</strong> Steam flows upwards, and cooling water sprays downwards. Requires a condensate extraction pump.</li>
+                                <li><strong>Barometric (High-Level) Jet Condenser:</strong> A type of counter flow condenser placed at a height of at least 10.36 meters (barometric height) above the hotwell. The condensate and cooling water drain out by gravity through a long tailpipe (barometric leg), eliminating the need for an extraction pump.</li>
+                                <li><strong>Ejector Condenser:</strong> Uses a series of converging nozzles for cooling water and a diverging cone. Steam is entrained and condensed by the high-velocity water jets.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Indirect Contact (Surface) Condensers:</strong>
+                    <ul>
+                        <li>In these condensers, the exhaust steam and the cooling water do **not** mix directly. They are separated by a heat transfer surface, typically a large number of tubes.</li>
+                        <li>Exhaust steam flows over the outer surface of the tubes, while cooling water flows through the inside of the tubes (or vice-versa in some designs). Heat is transferred from the steam to the cooling water through the tube walls, causing the steam to condense.</li>
+                        <li>The condensate (pure water) is collected in a hotwell and can be reused as boiler feedwater.</li>
+                        <li><strong>Sub-types (based on shell design and flow paths):</strong>
+                            <ul>
+                                <li><strong>Downflow Surface Condenser:</strong> Steam enters at the top and flows downwards over the tube banks. Air extraction is usually from the bottom.</li>
+                                <li><strong>Central Flow Surface Condenser:</strong> Steam enters the shell radially inwards towards a central suction point for air extraction, improving heat transfer and reducing undercooling of condensate.</li>
+                                <li><strong>Regenerative Surface Condenser:</strong> Designed so that the condensate is reheated by passing through some of the incoming exhaust steam, reducing undercooling and improving thermal efficiency.</li>
+                                <li><strong>Evaporative Condenser:</strong> Steam condenses inside tubes over which air is blown and water is sprayed. Latent heat is removed primarily by evaporation of the sprayed water. Used where cooling water is scarce.</li>
+                            </ul>
+                        </li>
+                        <li>Surface condensers are almost exclusively used in large thermal power plants due to the need for high-purity feedwater.</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <section class="questions">
+            <h3>Previous Year Questions & Key Concepts:</h3>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2019: Classify condensers. Explain working of surface condenser.</strong></summary>
+                    <div class="pyq-answer">
+                        <h4>Classification of Condensers:</h4>
+                        <p><em>(The classification provided in the section above covers this part comprehensively, detailing Direct Contact/Jet Condensers and Indirect Contact/Surface Condensers with their sub-types.)</em></p>
+                        <hr>
+                        <h4>Working of a Surface Condenser:</h4>
+                        <div class="diagram-container">
+                            <figure style="max-width: 600px;">
+                                <img src="images/surface_condenser_diagram.png" alt="Shell and Tube Surface Condenser Diagram">
+                                <figcaption>Typical Shell-and-Tube Surface Condenser</figcaption>
+                            </figure>
+                        </div>
+                        <p>A surface condenser is a type of shell-and-tube heat exchanger designed to condense exhaust steam from a turbine by transferring its latent heat to a cooling medium (usually water) without direct contact between the steam and the coolant.</p>
+                        <p><strong>Key Components:</strong></p>
+                        <ul>
+                            <li><strong>Shell:</strong> A large, airtight cylindrical or rectangular vessel that encloses the tube bundle and provides space for steam distribution.</li>
+                            <li><strong>Tube Bundle:</strong> Consists of a large number of small-diameter tubes (typically made of brass, stainless steel, or titanium) through which cooling water flows. The tubes are fixed between two tube plates at either end of the shell.</li>
+                            <li><strong>Water Boxes:</strong> Enclosures at each end of the condenser that distribute cooling water to the tubes and collect it after it has passed through them. They often have partitions to create multiple passes for the cooling water, increasing its velocity and heat transfer efficiency.</li>
+                            <li><strong>Steam Inlet:</strong> A large opening at the top or side of the shell where exhaust steam from the turbine enters.</li>
+                            <li><strong>Condensate Outlet (Hotwell):</strong> A collection point, usually at the bottom of the shell, where the condensed steam (condensate) accumulates. A condensate extraction pump removes this water.</li>
+                            <li><strong>Air Extraction Outlet:</strong> An outlet connected to an air extraction system (vacuum pump or steam jet ejector) to remove air and other non-condensable gases that leak into the system or are released from the steam. This is crucial for maintaining the vacuum.</li>
+                            <li><strong>Baffle Plates/Support Plates:</strong> Used within the shell to direct steam flow across the tubes for better heat transfer and to support the long tubes, preventing vibration.</li>
+                        </ul>
+                        <p><strong>Working Principle:</strong></p>
+                        <ol>
+                            <li>Exhaust steam from the low-pressure turbine outlet, at a very low pressure (vacuum), enters the condenser shell.</li>
+                            <li>Cooling water (from a river, lake, sea, or cooling tower) is pumped through the inside of the numerous tubes in the tube bundle.</li>
+                            <li>The exhaust steam comes into contact with the cold outer surfaces of these tubes.</li>
+                            <li>Heat is transferred from the steam to the cooling water through the tube walls. The steam loses its latent heat of vaporization and condenses into liquid water (condensate).</li>
+                            <li>The condensate droplets fall from the tubes and collect in the hotwell at the bottom of the condenser.</li>
+                            <li>The condensate, being high-purity water, is then pumped by the condensate extraction pump back to the boiler feedwater system (usually via deaerators and feedwater heaters).</li>
+                            <li>Air and other non-condensable gases that enter with the steam or leak into the vacuum system do not condense. They accumulate and would reduce the vacuum and heat transfer efficiency if not removed. An air extraction system continuously removes these gases, maintaining the desired low pressure (high vacuum) in the condenser.</li>
+                            <li>The cooling water, having absorbed the heat from the steam, becomes warmer and is discharged from the condenser. It may be returned to its source or sent to a cooling tower to be cooled and recirculated.</li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2023: Differentiate between jet and surface type condensers.</strong></summary>
+                    <div class="pyq-answer">
+                        <h4>Differentiation between Jet (Direct Contact) and Surface (Indirect Contact) Condensers:</h4>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Jet Condenser (Direct Contact)</th>
+                                    <th>Surface Condenser (Indirect Contact)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Mixing of Steam & Cooling Water</strong></td>
+                                    <td>Steam and cooling water mix directly.</td>
+                                    <td>Steam and cooling water are separated by tube walls; no direct mixing.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Condensate Purity & Reusability</strong></td>
+                                    <td>Condensate is mixed with cooling water, so its purity depends on cooling water quality. Generally not suitable for direct reuse as boiler feedwater unless cooling water is very pure.</td>
+                                    <td>Condensate is pure (distilled water quality) and is ideal for reuse as boiler feedwater, saving on makeup water and treatment costs.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Heat Transfer</strong></td>
+                                    <td>Very efficient direct heat transfer.</td>
+                                    <td>Less direct heat transfer, relies on conduction through tube walls. Requires larger surface area.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Vacuum Efficiency</strong></td>
+                                    <td>Generally achieves a lower vacuum compared to surface condensers (typically around 0.1-0.2 bar absolute). Presence of dissolved air in cooling water can limit vacuum.</td>
+                                    <td>Can achieve a higher vacuum (lower absolute pressure, e.g., 0.05-0.1 bar absolute) due to better air extraction and no contamination from cooling water air.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cooling Water Quantity</strong></td>
+                                    <td>Requires less cooling water for the same amount of steam if the condensate-cooling water mixture is discarded. However, if condensate is to be recovered with some purity, it can be complex.</td>
+                                    <td>Requires a larger quantity of cooling water because all heat must be carried away by it.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Construction & Cost</strong></td>
+                                    <td>Simpler construction, more compact, lower initial cost.</td>
+                                    <td>More complex construction (tube bundles, tube plates, water boxes), larger size, higher initial cost and maintenance (e.g., tube cleaning).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pumping Requirements</strong></td>
+                                    <td>Requires a pump to remove the mixture of condensate and cooling water (unless barometric type). Cooling water may need to be pumped to a certain height.</td>
+                                    <td>Requires separate pumps for condensate extraction and cooling water circulation. Air extraction pump is also essential.</td>
+                                </tr>
+                                 <tr>
+                                    <td><strong>Corrosion/Scaling</strong></td>
+                                    <td>Less prone to scaling on heat transfer surfaces as there are none in the direct contact zone. Corrosion depends on cooling water.</td>
+                                    <td>Prone to scaling and corrosion of tubes depending on cooling water quality, requiring periodic cleaning.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Typical Applications</strong></td>
+                                    <td>Process industries, geothermal plants, smaller power plants where feedwater purity is less critical or abundant clean cooling water is available. Some marine applications.</td>
+                                    <td>Almost universally used in large thermal power plants (coal, nuclear, gas) where high-purity feedwater is essential for boiler operation.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="mcq">
+            <h3>MCQ:</h3>
+            <div class="mcq-item">
+                <p><strong>1. The primary reason for using a condenser in a steam power plant is to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Cool down the boiler.</li>
+                    <li>b) Reduce the turbine exhaust pressure significantly below atmospheric, increasing work output.</li>
+                    <li>c) Heat the feedwater before it enters the boiler.</li>
+                    <li>d) Increase the temperature of the exhaust steam.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Reduce the turbine exhaust pressure significantly below atmospheric, increasing work output.</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>2. In which type of condenser do the exhaust steam and cooling water mix directly?</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Surface condenser</li>
+                    <li>b) Shell and tube condenser</li>
+                    <li>c) Jet condenser (Direct contact condenser)</li>
+                    <li>d) Evaporative condenser</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Jet condenser (Direct contact condenser)</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>3. A major advantage of a surface condenser over a jet condenser is:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Lower initial cost and simpler construction.</li>
+                    <li>b) The condensate can be reused as pure boiler feedwater.</li>
+                    <li>c) It requires less cooling water for the same duty.</li>
+                    <li>d) It achieves a lower vacuum.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) The condensate can be reused as pure boiler feedwater.</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>4. The purpose of an air extraction pump (or ejector) in a condenser system is to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Pump cooling water through the condenser.</li>
+                    <li>b) Extract condensate from the hotwell.</li>
+                    <li>c) Remove air and other non-condensable gases to maintain vacuum.</li>
+                    <li>d) Increase the pressure of the exhaust steam.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Remove air and other non-condensable gases to maintain vacuum.</strong></p>
+            </div>
+             <div class="mcq-item">
+                <p><strong>5. A Barometric Jet Condenser is characterized by:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Requiring a high-capacity condensate extraction pump.</li>
+                    <li>b) Its placement at a significant height (over 10m) to allow gravity discharge of water.</li>
+                    <li>c) Using surface heat transfer principles.</li>
+                    <li>d) Being suitable only for very small turbines.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Its placement at a significant height (over 10m) to allow gravity discharge of water.</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>6. "Condenser vacuum" refers to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) The absolute pressure inside the condenser being higher than atmospheric pressure.</li>
+                    <li>b) The absolute pressure inside the condenser being lower than atmospheric pressure.</li>
+                    <li>c) The pressure of the cooling water.</li>
+                    <li>d) The absence of any non-condensable gases.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) The absolute pressure inside the condenser being lower than atmospheric pressure.</strong></p>
+            </div>
+
+        </section>
+    </main>
+    <footer>
+        <p>© 2023 Engineering Classroom</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
