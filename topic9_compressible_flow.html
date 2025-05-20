@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9. Thermodynamics of Compressible Flow (Nozzles)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- RECOMMENDED: Add MathJax for proper LaTeX rendering -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          displayMath: [['$$','$$'], ['\\[','\\]']],
+          processEscapes: true
+        }
+      });
+    </script>
+    <style>
+        .formula-block {
+            background-color: #f0f0f0; padding: 10px; margin: 10px 0;
+            border: 1px solid #ddd; border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.8; overflow-x: auto;
+        }
+        .diagram-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-top: 1em;
+        }
+        .diagram-container figure {
+            margin: 10px;
+            text-align: center;
+            max-width: 400px; /* Adjust as needed */
+        }
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        .diagram-container figcaption {
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: #555;
+        }
+        .derivation-step {
+            margin-bottom: 0.8em;
+        }
+        .derivation-step strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="home-link">Engineering Learning Hub</a>
+        <h1>9. Thermodynamics of Compressible Fluid Flow (Nozzles)</h1>
+    </header>
+    <nav class="topic-nav">
+        <a href="topic8_turbine_basics.html">« Prev: Turbine Basics</a>
+        <a href="topic10_velocity_diagrams.html">Next: Velocity Diagrams »</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Introduction to Compressible Flow</h2>
+            <p>Compressible flow is a branch of fluid mechanics where the fluid density changes significantly due to changes in pressure and temperature. This is typical for gases flowing at high velocities, such as steam in turbine nozzles or air in jet engines.</p>
+            <p>Key concepts in compressible flow include:</p>
+            <ul>
+                <li><strong>Mach Number (M):</strong> The ratio of the local flow velocity (V) to the local speed of sound (a). $M = V/a$.
+                    <ul>
+                        <li>$M < 1$: Subsonic flow</li>
+                        <li>$M = 1$: Sonic flow (choked flow)</li>
+                        <li>$M > 1$: Supersonic flow</li>
+                    </ul>
+                </li>
+                <li><strong>Speed of Sound (a):</strong> For an ideal gas, $a = \sqrt{\gamma R T}$, where $\gamma$ is the specific heat ratio, R is the specific gas constant, and T is the absolute temperature. For steam, properties are typically obtained from steam tables.</li>
+                <li><strong>Stagnation Properties:</strong> Properties the fluid would attain if brought to rest isentropically (e.g., stagnation temperature $T_0$, stagnation pressure $P_0$).</li>
+            </ul>
+        </section>
+
+        <section class="questions">
+            <h3>Previous Year Questions & Key Concepts:</h3>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2018: Derive the continuity equation for compressible fluid flow.</strong></summary>
+                    <div class="pyq-answer">
+                        <h4>Derivation of the Continuity Equation for Compressible Fluid Flow</h4>
+                        <p>The continuity equation is an expression of the principle of conservation of mass.</p>
+                        <p>Consider a fixed control volume (CV) in space through which fluid is flowing.
+                            <!-- Placeholder for control volume diagram -->
+                            <img src="images/control_volume_flow.png" alt="Control Volume for Flow Analysis" class="diagram" style="max-width:300px; margin:auto; display:block;">
+                        </p>
+                        <p>The principle of mass conservation states:</p>
+                        <div class="formula-block">
+                            $\left( \text{Rate of mass accumulation within CV} \right) = \left( \text{Rate of mass inflow into CV} \right) - \left( \text{Rate of mass outflow from CV} \right)$
+                        </div>
+                        <p>Let:</p>
+                        <ul>
+                            <li>$\rho$ = density of the fluid</li>
+                            <li>$dV$ = an elemental volume within the CV</li>
+                            <li>$d\vec{A}$ = an elemental area on the control surface (CS), with vector normal pointing outwards</li>
+                            <li>$\vec{V}$ = velocity vector of the fluid</li>
+                        </ul>
+                        <p>The mass within the control volume is $m_{CV} = \int_{CV} \rho \, dV$.</p>
+                        <p>The rate of mass accumulation within the CV is $\frac{\partial}{\partial t} \int_{CV} \rho \, dV$.</p>
+                        <p>The net rate of mass outflow across the control surface (CS) is $\int_{CS} \rho (\vec{V} \cdot d\vec{A})$.
+                        (Note: $\vec{V} \cdot d\vec{A}$ is positive for outflow and negative for inflow).</p>
+                        <p>So, the conservation of mass can be written as:</p>
+                        <div class="formula-block">
+                            $\frac{\partial}{\partial t} \int_{CV} \rho \, dV + \int_{CS} \rho (\vec{V} \cdot d\vec{A}) = 0$
+                        </div>
+                        <p>This is the integral form of the continuity equation.</p>
+                        <p>Using the divergence theorem (Gauss's theorem), $\int_{CS} (\rho \vec{V}) \cdot d\vec{A} = \int_{CV} \nabla \cdot (\rho \vec{V}) \, dV$.</p>
+                        <p>Substituting this into the integral form:</p>
+                        <div class="formula-block">
+                            $\int_{CV} \left( \frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \vec{V}) \right) \, dV = 0$
+                        </div>
+                        <p>Since this must hold for any arbitrary control volume, the integrand itself must be zero. This gives the differential form of the continuity equation (also known as the general continuity equation):</p>
+                        <div class="formula-block">
+                            $\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \vec{V}) = 0$
+                        </div>
+                        <p>Expanding the divergence term: $\nabla \cdot (\rho \vec{V}) = \vec{V} \cdot \nabla \rho + \rho (\nabla \cdot \vec{V})$.</p>
+                        <p>So, $\frac{\partial \rho}{\partial t} + \vec{V} \cdot \nabla \rho + \rho (\nabla \cdot \vec{V}) = 0$.</p>
+                        <p>The first two terms represent the material derivative (or substantial derivative) of density: $\frac{D\rho}{Dt} = \frac{\partial \rho}{\partial t} + \vec{V} \cdot \nabla \rho$.</p>
+                        <p>Thus, the continuity equation can also be written as:</p>
+                        <div class="formula-block">
+                            $\frac{D\rho}{Dt} + \rho (\nabla \cdot \vec{V}) = 0$
+                        </div>
+
+                        <p><strong>For Steady Flow:</strong> $\frac{\partial \rho}{\partial t} = 0$. The equation becomes:</p>
+                        <div class="formula-block">
+                            $\nabla \cdot (\rho \vec{V}) = 0$
+                        </div>
+
+                        <p><strong>For Steady, One-Dimensional Flow:</strong>
+                        Consider flow through a duct of varying cross-sectional area A.
+                        <br>Mass flow rate $\dot{m} = \rho A V$.
+                        <br>For steady flow, the mass flow rate is constant: $\dot{m} = \text{constant}$.
+                        <br>So, $d(\rho A V) = 0$.
+                        <br>Applying product rule: $A V d\rho + \rho V dA + \rho A dV = 0$.
+                        <br>Dividing by $\rho A V$:
+                        </p>
+                        <div class="formula-block">
+                           $\frac{d\rho}{\rho} + \frac{dA}{A} + \frac{dV}{V} = 0$
+                        </div>
+                        <p>This is the differential form of the continuity equation for steady, 1-D compressible flow.
+                        If integrated, it simply means $\rho A V = \text{constant}$ at any two sections 1 and 2:
+                        $\rho_1 A_1 V_1 = \rho_2 A_2 V_2$.
+                        </p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>(Similar to 2025 PYQ) Explain isentropic flow through a nozzle and its characteristics.</strong></summary>
+                    <div class="pyq-answer">
+                        <h4>Isentropic Flow Through a Nozzle</h4>
+                        <p>Isentropic flow is a type of fluid flow that is both **adiabatic** (no heat transfer to or from the fluid) and **reversible** (no frictional losses or other irreversibilities). For such a flow, the entropy of the fluid remains constant ($s = \text{constant}$).</p>
+                        <p>A nozzle is a duct of varying cross-sectional area designed to accelerate a fluid. The primary purpose of a nozzle in steam turbines or jet engines is to convert the thermal energy (enthalpy) of the fluid into kinetic energy.</p>
+
+                        <p><strong>Governing Equations for Isentropic Flow:</strong></p>
+                        <ul>
+                            <li><strong>Continuity Equation (steady, 1D):</strong> $\rho A V = \text{constant}$ or $\frac{d\rho}{\rho} + \frac{dA}{A} + \frac{dV}{V} = 0$</li>
+                            <li><strong>Energy Equation (Steady Flow Energy Equation - SFEE, adiabatic, no work):</strong>
+                                <br>$h_1 + \frac{V_1^2}{2} = h_2 + \frac{V_2^2}{2} = h_0 = \text{constant}$ (Stagnation enthalpy $h_0$ is constant).
+                                <br>For an ideal gas, $C_p T_1 + \frac{V_1^2}{2} = C_p T_2 + \frac{V_2^2}{2} = C_p T_0$.
+                            </li>
+                            <li><strong>Isentropic Relations (for an ideal gas):</strong>
+                                <div class="formula-block">
+                                    $\frac{P}{\rho^\gamma} = \text{constant}$ <br>
+                                    $\frac{T}{P^{(\gamma-1)/\gamma}} = \text{constant}$ <br>
+                                    $\frac{T}{\rho^{\gamma-1}} = \text{constant}$
+                                </div>
+                                Where $\gamma$ is the specific heat ratio ($C_p/C_v$). For steam, these relations are approximated or steam tables are used directly for entropy.
+                            </li>
+                        </ul>
+
+                        <p><strong>Area-Velocity Relationship (Hugoniot Equation):</strong>
+                        <br>Combining continuity, momentum (or Euler's equation $dP = -\rho V dV$), and the definition of speed of sound ($a^2 = dP/d\rho$ for isentropic flow), we get the crucial area-velocity relationship for 1D isentropic flow:
+                        </p>
+                        <div class="formula-block">
+                            $\frac{dA}{A} = \frac{dV}{V} (M^2 - 1)$
+                        </div>
+                        <p>This equation dictates the nozzle shape required for accelerating or decelerating flow:</p>
+                        <ul>
+                            <li><strong>Subsonic Flow ($M < 1$):</strong> $(M^2 - 1)$ is negative.
+                                <ul>
+                                    <li>To accelerate flow ($dV > 0$), area must decrease ($dA < 0$) → **Convergent Nozzle**.</li>
+                                    <li>To decelerate flow ($dV < 0$), area must increase ($dA > 0$) → **Divergent Diffuser**.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Supersonic Flow ($M > 1$):</strong> $(M^2 - 1)$ is positive.
+                                <ul>
+                                    <li>To accelerate flow ($dV > 0$), area must increase ($dA > 0$) → **Divergent Nozzle**.</li>
+                                    <li>To decelerate flow ($dV < 0$), area must decrease ($dA < 0$) → **Convergent Diffuser**.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Sonic Flow ($M = 1$):</strong> $(M^2 - 1) = 0$. This implies $dA/A = 0$, meaning the area must be at a minimum (throat) or maximum. For continuous acceleration from subsonic to supersonic, $M=1$ occurs at the point of minimum area, called the **throat**.</li>
+                        </ul>
+
+                        <h4>Characteristics of Isentropic Flow in Nozzles:</h4>
+                        <div class="diagram-container">
+                             <figure>
+                                <img src="images/convergent_nozzle.png" alt="Convergent Nozzle Flow">
+                                <figcaption>Convergent Nozzle: Accelerates subsonic flow.</figcaption>
+                            </figure>
+                             <figure>
+                                <img src="images/convergent_divergent_nozzle.png" alt="Convergent-Divergent Nozzle Flow">
+                                <figcaption>Convergent-Divergent (De Laval) Nozzle: Can accelerate flow to supersonic speeds.</figcaption>
+                            </figure>
+                        </div>
+
+                        <ol>
+                            <li><strong>Convergent Nozzle:</strong>
+                                <ul>
+                                    <li>If the back pressure ($P_b$) is gradually lowered from the inlet stagnation pressure ($P_0$), the mass flow rate increases and the exit velocity increases.</li>
+                                    <li>The maximum velocity at the exit of a convergent nozzle is sonic ($M=1$), which occurs when $P_b / P_0 \le P^* / P_0$ (critical pressure ratio). $P^*$ is the critical pressure.</li>
+                                    <li>Once $M=1$ is reached at the exit (throat), the nozzle is said to be **choked**. Further reduction in back pressure will not increase the mass flow rate or the conditions upstream of the exit. The flow adjusts downstream of the exit via expansion waves.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Convergent-Divergent (De Laval) Nozzle:</strong>
+                                <ul>
+                                    <li>Designed to accelerate flow from subsonic at the inlet to sonic at the throat ($M=1$), and then to supersonic ($M>1$) in the divergent section.</li>
+                                    <li>**Choking:** Similar to a convergent nozzle, the flow chokes at the throat ($M=1$) when the pressure ratio across the nozzle reaches the critical value. The mass flow rate becomes maximum and constant for further reductions in back pressure.</li>
+                                    <li>**Operation based on Back Pressure ($P_b$):**
+                                        <ul>
+                                            <li>If $P_b$ is high (slightly below $P_0$): Flow is subsonic throughout, nozzle acts as a Venturi.</li>
+                                            <li>If $P_b$ is lowered to $P^*$: Sonic flow at throat, subsonic in divergent part (diffuser action).</li>
+                                            <li>If $P_b$ is lowered further (below design pressure for supersonic exit): Over-expansion occurs, leading to oblique shock waves inside or at the exit of the divergent section if $P_b$ is higher than the design exit pressure for full supersonic expansion. If $P_b$ is lower than design exit pressure, expansion waves form at exit.</li>
+                                            <li>If $P_b$ matches the design exit pressure for full supersonic expansion: Smooth supersonic flow in the divergent section.</li>
+                                            <li>If $P_b$ is very low: Under-expansion may occur if the nozzle isn't long enough, resulting in further expansion outside the nozzle.</li>
+                                        </ul>
+                                    </li>
+                                    <li>During acceleration, pressure (P) and temperature (T) decrease, while velocity (V) and Mach number (M) increase. Density ($\rho$) also decreases.</li>
+                                </ul>
+                                 <div class="diagram-container">
+                                     <figure>
+                                        <img src="images/pressure_velocity_mach_nozzle.png" alt="Properties variation in C-D Nozzle">
+                                        <figcaption>Variation of P, V, M, T along a C-D Nozzle (for supersonic exit design).</figcaption>
+                                    </figure>
+                                </div>
+                            </li>
+                            <li><strong>Critical Pressure Ratio ($P^*/P_0$):</strong> The ratio of throat pressure to inlet stagnation pressure when $M=1$ at the throat. For an ideal gas:
+                                <div class="formula-block">
+                                $\frac{P^*}{P_0} = \left( \frac{2}{\gamma + 1} \right)^{\gamma / (\gamma - 1)}$
+                                </div>
+                                For air ($\gamma = 1.4$), $P^*/P_0 \approx 0.528$. For superheated steam ($\gamma \approx 1.3$), $P^*/P_0 \approx 0.546$.
+                            </li>
+                        </ol>
+                        <p>Isentropic nozzle efficiency is defined as the ratio of actual kinetic energy at the exit to the ideal (isentropic) kinetic energy at the exit for the same pressure drop. For ideal isentropic flow, this efficiency is 100% by definition, but in real nozzles, friction reduces it.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="mcq">
+            <h3>MCQ:</h3>
+            <div class="mcq-item">
+                <p><strong>1. The continuity equation for steady, one-dimensional compressible flow states that:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) $\rho A V^2 = \text{constant}$</li>
+                    <li>b) $\rho A V = \text{constant}$</li>
+                    <li>c) $A V / \rho = \text{constant}$</li>
+                    <li>d) $P + \frac{1}{2}\rho V^2 = \text{constant}$</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) $\rho A V = \text{constant}$</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>2. For subsonic compressible flow ($M < 1$) through a nozzle, to increase the velocity, the area must:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Increase (divergent)</li>
+                    <li>b) Decrease (convergent)</li>
+                    <li>c) Remain constant</li>
+                    <li>d) First increase then decrease</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Decrease (convergent)</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>3. In a convergent-divergent (De Laval) nozzle, sonic velocity ($M=1$) is typically achieved at the:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Inlet section</li>
+                    <li>b) Convergent section</li>
+                    <li>c) Throat (minimum area)</li>
+                    <li>d) Divergent section exit</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Throat (minimum area)</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>4. If a convergent nozzle is "choked," it means:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) The flow has stopped completely.</li>
+                    <li>b) The mass flow rate is maximum for the given inlet conditions and cannot be increased by further lowering back pressure.</li>
+                    <li>c) The exit velocity is supersonic.</li>
+                    <li>d) The nozzle is blocked by foreign particles.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) The mass flow rate is maximum for the given inlet conditions and cannot be increased by further lowering back pressure.</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>5. For supersonic compressible flow ($M > 1$) through a nozzle, to further increase the velocity, the area must:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Increase (divergent)</li>
+                    <li>b) Decrease (convergent)</li>
+                    <li>c) Remain constant</li>
+                    <li>d) First decrease then increase</li>
+                </ul>
+                <button class="reveal-answer" data-answer="a">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: a) Increase (divergent)</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>6. The stagnation enthalpy ($h_0$) in an adiabatic nozzle flow:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Increases along the flow direction.</li>
+                    <li>b) Decreases along the flow direction due to acceleration.</li>
+                    <li>c) Remains constant throughout the nozzle.</li>
+                    <li>d) Is equal to the static enthalpy at the throat.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Remains constant throughout the nozzle.</strong> (This is from SFEE: $h + V^2/2 = h_0 = \text{constant}$ for adiabatic flow with no work.)</p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>7. The critical pressure ratio ($P^*/P_0$) for a nozzle depends primarily on:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) The nozzle inlet temperature only.</li>
+                    <li>b) The nozzle length and exit area.</li>
+                    <li>c) The specific heat ratio ($\gamma$) of the fluid.</li>
+                    <li>d) The ambient atmospheric pressure.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) The specific heat ratio ($\gamma$) of the fluid.</strong></p>
+            </div>
+
+        </section>
+    </main>
+    <footer>
+        <p>© 2023 Engineering Classroom</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
