@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. Velocity Diagrams & Blade Performance</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- RECOMMENDED: Add MathJax for proper LaTeX rendering -->
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          displayMath: [['$$','$$'], ['\\[','\\]']],
+          processEscapes: true
+        }
+      });
+    </script>
+    <style>
+        .formula-block {
+            background-color: #f0f0f0; padding: 10px; margin: 10px 0;
+            border: 1px solid #ddd; border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.8; overflow-x: auto;
+        }
+        .diagram-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around; /* Centers items if they don't fill the line */
+            align-items: flex-start;
+            margin-top: 1em;
+        }
+        .diagram-container figure {
+            margin: 10px;
+            text-align: center;
+            max-width: 450px; /* Adjust as needed for potentially wider diagrams */
+        }
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        .diagram-container figcaption {
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: #555;
+        }
+        .derivation-step {
+            margin-bottom: 0.8em;
+        }
+        .derivation-step strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="home-link">Engineering Learning Hub</a>
+        <h1>10. Velocity Diagrams, Blade Efficiency & Optimum Velocity Ratio</h1>
+    </header>
+    <nav class="topic-nav">
+        <a href="topic9_compressible_flow.html">« Prev: Compressible Flow</a>
+        <a href="topic11_multistaging_compounding.html">Next: Multi-Staging »</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Introduction to Velocity Diagrams</h2>
+            <p>Velocity diagrams (or velocity triangles) are graphical representations of the various velocity vectors of steam as it passes through the nozzles (or fixed blades) and moving blades of a turbine stage. They are essential tools for analyzing the energy transfer, forces on the blades, work done, and efficiency of turbine stages.</p>
+            <p>For each row of blades (fixed or moving), there is an inlet velocity triangle and an outlet velocity triangle.</p>
+            <p><strong>Key Velocity Components:</strong></p>
+            <ul>
+                <li>$U$: Mean blade velocity (peripheral speed of the rotor at the mean blade height). $U = \pi D N / 60$, where D is mean diameter, N is RPM.</li>
+                <li>$V_1$: Absolute velocity of steam leaving the nozzle (or fixed blades) and entering the moving blades.</li>
+                <li>$\alpha_1$: Nozzle angle (or fixed blade exit angle), the angle $V_1$ makes with the direction of blade motion $U$.</li>
+                <li>$V_{r1}$: Relative velocity of steam entering the moving blades (velocity of steam as seen by an observer on the moving blade). $V_{r1} = \vec{V_1} - \vec{U}$.</li>
+                <li>$\beta_1$: Moving blade inlet angle. Ideally, the blade is shaped so that steam enters smoothly along this direction to avoid shock losses.</li>
+                <li>$V_{r2}$: Relative velocity of steam leaving the moving blades.</li>
+                <li>$\beta_2$: Moving blade outlet angle.</li>
+                <li>$V_2$: Absolute velocity of steam leaving the moving blades. $V_2 = \vec{V_{r2}} + \vec{U}$.</li>
+                <li>$\alpha_2$: Absolute steam exit angle from moving blades (this becomes the inlet angle for the next stage's fixed blades, if any).</li>
+                <li>$V_{w1}, V_{w2}$: Tangential components of $V_1$ and $V_2$ respectively (velocities of whirl). $V_{w1} = V_1 \cos \alpha_1$, $V_{w2} = V_2 \cos \alpha_2$. These are responsible for the tangential force and work done.</li>
+                <li>$V_{f1}, V_{f2}$: Axial components of $V_1$ and $V_2$ respectively (velocities of flow). $V_{f1} = V_1 \sin \alpha_1$, $V_{f2} = V_2 \sin \alpha_2$. These are responsible for axial thrust and must be managed for steam to pass through the turbine.</li>
+            </ul>
+        </section>
+
+        <section class="questions">
+            <h3>Previous Year Questions & Derivations:</h3>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2019 & 2023: Draw velocity diagram for impulse turbine, derive blade efficiency, work done.</strong></summary>
+                    <div class="pyq-answer">
+                        <h4>Velocity Diagram for a Single-Stage Impulse Turbine</h4>
+                        <p>In an impulse turbine stage, steam expands in the stationary nozzles, gaining kinetic energy. This high-velocity steam then impinges on the moving blades. Ideally, there is no pressure drop across the moving blades.</p>
+
+                        <div class="diagram-container">
+                             <figure>
+                                <!-- Placeholder for Inlet Velocity Triangle -->
+                                <img src="images/velocity_triangle_inlet.png" alt="Inlet Velocity Triangle for Impulse Turbine">
+                                <figcaption>Inlet Velocity Triangle</figcaption>
+                            </figure>
+                             <figure>
+                                <!-- Placeholder for Outlet Velocity Triangle -->
+                                <img src="images/velocity_triangle_outlet.png" alt="Outlet Velocity Triangle for Impulse Turbine">
+                                <figcaption>Outlet Velocity Triangle</figcaption>
+                            </figure>
+                        </div>
+                        <div class="diagram-container">
+                             <figure style="max-width: 600px;"> <!-- Wider figure for combined diagram -->
+                                <!-- Placeholder for Combined Velocity Diagram -->
+                                <img src="images/velocity_triangle_combined.png" alt="Combined Velocity Diagram for Impulse Turbine">
+                                <figcaption>Combined Velocity Diagram (Inlet and Outlet)</figcaption>
+                            </figure>
+                        </div>
+
+                        <p><strong>Construction Notes:</strong></p>
+                        <ul>
+                            <li>The base of both triangles is the blade velocity $U$.</li>
+                            <li><strong>Inlet Triangle:</strong> $V_1$ is drawn at angle $\alpha_1$. $U$ is subtracted vectorially from $V_1$ to get $V_{r1}$ at angle $\beta_1$.</li>
+                            <li><strong>Outlet Triangle:</strong> $V_{r2}$ is drawn at angle $\beta_2$. For frictionless blades, $|V_{r2}| = |V_{r1}|$. With friction, $|V_{r2}| = k \cdot |V_{r1}|$, where $k$ is the blade velocity coefficient or friction factor ($k < 1$). $U$ is added vectorially to $V_{r2}$ to get $V_2$ at angle $\alpha_2$.</li>
+                        </ul>
+
+                        <h4>Derivation of Work Done (per unit mass of steam)</h4>
+                        <p>The work done on the blades by the steam is due to the change in the tangential momentum of the steam. From Euler's turbine equation, for an axial flow turbine stage with mean blade speed $U$:</p>
+                        <div class="formula-block">
+                            $W = U (V_{w1} - V_{w2})$
+                        </div>
+                        <p>Where:</p>
+                        <ul>
+                            <li>$V_{w1} = V_1 \cos \alpha_1$ (tangential component of $V_1$)</li>
+                            <li>$V_{w2} = V_2 \cos \alpha_2$ (tangential component of $V_2$)</li>
+                        </ul>
+                        <p>The sign of $V_{w2}$ is important. If $V_{w2}$ is in the same direction as $U$ (i.e., $\alpha_2 < 90^\circ$), the term is $U(V_{w1} - V_{w2})$. If $V_{w2}$ is in the opposite direction to $U$ (i.e., $\alpha_2 > 90^\circ$), then $V_{w2}$ itself is negative when considering its contribution to $\Delta V_w$, so the formula becomes $W = U(V_{w1} + |V_{w2}|)$. It's often written as $W = U \cdot \Delta V_w$, where $\Delta V_w$ is the algebraic change in whirl velocity in the direction of $U$.</p>
+                        <p>Alternatively, from the geometry of the velocity triangles:</p>
+                        <div class="formula-block">
+                        $V_{w1} = V_{r1} \cos \beta_1 + U$  (if $\beta_1$ is acute from $U$ direction) <br>
+                        $V_{w2} = V_{r2} \cos \beta_2 - U$  (if $V_{r2} \cos \beta_2 > U$) or $U - V_{r2} \cos \beta_2$ (if $V_{r2} \cos \beta_2 < U$ and in same direction as U)
+                        </div>
+                        <p>A common expression using relative velocities for symmetrical impulse blades ($\beta_1=\beta_2$ and $V_{r1}=V_{r2}$ for no friction):
+                        $V_{w1} = V_1 \cos \alpha_1$
+                        $V_{r1x} = V_{w1} - U = V_1 \cos \alpha_1 - U$
+                        $V_{r2x} = V_{r1x}$ (tangential component of relative velocity, changes sign if exit angle $\beta_2$ defined symmetrically)
+                        $V_{w2} = U - V_{r2x} = U - (V_1 \cos \alpha_1 - U) = 2U - V_1 \cos \alpha_1$
+                        Work Done $W = U(V_{w1} - V_{w2}) = U[V_1 \cos \alpha_1 - (2U - V_1 \cos \alpha_1)] = 2U(V_1 \cos \alpha_1 - U)$
+                        </p>
+
+                        <h4>Derivation of Blade Efficiency (Diagram Efficiency, $\eta_b$)</h4>
+                        <p>Blade efficiency is the ratio of work done on the blades to the kinetic energy of the steam supplied to the blades (from the nozzles).</p>
+                        <div class="formula-block">
+                            $\eta_b = \frac{\text{Work done per unit mass of steam}}{\text{Kinetic energy supplied per unit mass of steam at inlet to moving blades}}$
+                        </div>
+                        <div class="formula-block">
+                            $\eta_b = \frac{W}{\frac{1}{2} V_1^2} = \frac{U (V_{w1} - V_{w2})}{\frac{1}{2} V_1^2}$
+                        </div>
+                        <p>Substituting $W = 2U(V_1 \cos \alpha_1 - U)$ (for symmetrical, frictionless impulse blades):</p>
+                        <div class="formula-block">
+                             $\eta_b = \frac{2U(V_1 \cos \alpha_1 - U)}{\frac{1}{2} V_1^2} = \frac{4U(V_1 \cos \alpha_1 - U)}{V_1^2}$
+                        </div>
+                        <p>Let $\rho = U/V_1$ be the blade speed ratio.</p>
+                        <div class="formula-block">
+                            $\eta_b = 4\rho (\cos \alpha_1 - \rho)$
+                        </div>
+
+                        <h4>Optimum Blade Speed Ratio for Maximum Efficiency (Single-Stage Impulse)</h4>
+                        <p>To find the condition for maximum blade efficiency, we differentiate $\eta_b$ with respect to $\rho$ and set the derivative to zero:</p>
+                        <p>$\frac{d\eta_b}{d\rho} = \frac{d}{d\rho} [4\rho \cos \alpha_1 - 4\rho^2] = 4 \cos \alpha_1 - 8\rho = 0$</p>
+                        <p>This gives the optimum blade speed ratio:</p>
+                        <div class="formula-block">
+                            $\rho_{opt} = \frac{U}{V_1} = \frac{\cos \alpha_1}{2}$
+                        </div>
+                        <p>Substituting this optimum ratio back into the efficiency formula:</p>
+                        <div class="formula-block">
+                            $\eta_{b,max} = 4 \left( \frac{\cos \alpha_1}{2} \right) \left( \cos \alpha_1 - \frac{\cos \alpha_1}{2} \right) = 2 \cos \alpha_1 \left( \frac{\cos \alpha_1}{2} \right) = \cos^2 \alpha_1$
+                        </div>
+                        <p>Thus, the maximum blade efficiency for a single-stage impulse turbine (with symmetrical blades and no friction) is $\cos^2 \alpha_1$. This typically occurs when the absolute exit velocity $V_2$ is axial ($\alpha_2 = 90^\circ$), meaning $V_{w2} = 0$, minimizing kinetic energy loss at the exit.</p>
+                        <div class="diagram-container">
+                             <figure>
+                                <!-- Placeholder for Efficiency vs Speed Ratio Graph -->
+                                <img src="images/blade_efficiency_vs_speed_ratio.png" alt="Blade Efficiency vs Blade Speed Ratio for Impulse Turbine">
+                                <figcaption>Blade Efficiency vs. Blade Speed Ratio ($\rho = U/V_1$)</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2017: Explain how turbine performance is evaluated using blade efficiency.</strong></summary>
+                    <div class="pyq-answer">
+                        <p>Turbine performance evaluation involves assessing how effectively the turbine converts the available energy in the steam into useful work. Blade efficiency (also known as diagram efficiency or rotor efficiency) is a key parameter in this evaluation, specifically for individual stages or rows of blades.</p>
+                        <p><strong>Blade Efficiency ($\eta_b$):</strong></p>
+                        <div class="formula-block">
+                            $\eta_b = \frac{\text{Work done by the steam on the blades per unit mass}}{\text{Energy available to the blades per unit mass}}$
+                        </div>
+                        <ul>
+                            <li><strong>Work Done:</strong> Calculated using Euler's turbine equation $W = U \cdot \Delta V_w$, derived from velocity diagrams. It represents the actual energy transferred from the steam to the rotor.</li>
+                            <li><strong>Energy Available:</strong>
+                                <ul>
+                                    <li>For an **impulse stage**, the energy available to the moving blades is primarily the kinetic energy of the steam jet leaving the nozzles: $KE_{inlet} = \frac{1}{2}V_1^2$. So, $\eta_b = W / (\frac{1}{2}V_1^2)$.</li>
+                                    <li>For a **reaction stage**, energy is available from both the kinetic energy of steam entering the moving blades ($V_1$) and the enthalpy drop (expansion) that occurs within the moving blades themselves. The denominator becomes the sum of these energy contributions for the stage.
+                                        More generally, it's the isentropic enthalpy drop across the stage that could be converted to KE or work. The stage efficiency is often defined as:
+                                        $\eta_{stage} = \frac{\text{Actual work done by stage}}{\text{Isentropic enthalpy drop in stage}}$
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p><strong>How Blade Efficiency Evaluates Performance:</strong></p>
+                        <ol>
+                            <li><strong>Design Optimization:</strong> Blade efficiency helps engineers design optimal blade profiles, inlet/outlet angles ($\beta_1, \beta_2$), nozzle angles ($\alpha_1$), and blade speed ratios ($U/V_1$) to maximize energy extraction for a given stage. For example, the derivation shows that for a single impulse stage, maximum efficiency is achieved at a specific blade speed ratio.</li>
+                            <li><strong>Loss Identification:</strong> A lower-than-expected blade efficiency indicates higher losses within the blade passage. These losses can include:
+                                <ul>
+                                    <li>Friction losses as steam flows over blade surfaces.</li>
+                                    <li>Shock losses if steam does not enter the blades smoothly (blade angles not matching relative flow angles).</li>
+                                    <li>Tip leakage losses (in reaction turbines or shrouded impulse blades).</li>
+                                    <li>Secondary flow losses.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Comparison of Designs:</strong> Blade efficiency allows for the comparison of different blade designs or staging arrangements under similar operating conditions.</li>
+                            <li><strong>Component of Overall Efficiency:</strong> While blade efficiency focuses on the rotor, the overall turbine efficiency also considers nozzle efficiency, losses between stages, mechanical losses (bearings, etc.), and leaving losses (kinetic energy of exhaust steam). However, high blade efficiency is fundamental to achieving high overall turbine efficiency.</li>
+                            <li><strong>Impact of Operating Conditions:</strong> Analyzing how blade efficiency changes with varying steam conditions (pressure, temperature, flow rate) or turbine speed helps understand the turbine's part-load performance and operating range.</li>
+                        </ol>
+                        <p>In essence, blade efficiency quantifies the effectiveness of the moving blades in converting the available steam energy (primarily kinetic for impulse, kinetic + pressure for reaction) into mechanical work on the rotor. It's a critical measure for the aerodynamic performance of the blading.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="mcq">
+            <h3>MCQ:</h3>
+            <div class="mcq-item">
+                <p><strong>1. In a velocity diagram for a turbine blade, $V_{r1}$ represents:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Absolute velocity of steam at inlet to the nozzle.</li>
+                    <li>b) Absolute velocity of steam at inlet to the moving blade.</li>
+                    <li>c) Relative velocity of steam at inlet to the moving blade.</li>
+                    <li>d) Blade velocity.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Relative velocity of steam at inlet to the moving blade.</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>2. The work done by steam on the blades in an axial flow turbine stage is primarily due to the change in:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Axial velocity of steam ($V_f$).</li>
+                    <li>b) Tangential velocity (whirl velocity) of steam ($V_w$).</li>
+                    <li>c) Blade velocity ($U$).</li>
+                    <li>d) Static pressure of steam across the blades.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Tangential velocity (whirl velocity) of steam ($V_w$).</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>3. For a single-stage impulse turbine with symmetrical blades and no friction, maximum blade efficiency ($\cos^2 \alpha_1$) occurs when the blade speed ratio ($U/V_1$) is:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) $\cos \alpha_1$</li>
+                    <li>b) $\sin \alpha_1$</li>
+                    <li>c) $0.5 \cos \alpha_1$</li>
+                    <li>d) $2 \cos \alpha_1$</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) $0.5 \cos \alpha_1$</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>4. If the absolute velocity of steam leaving the moving blades ($V_2$) is purely axial, then:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) The whirl component $V_{w2}$ is maximum.</li>
+                    <li>b) The whirl component $V_{w2}$ is zero.</li>
+                    <li>c) The blade efficiency is zero.</li>
+                    <li>d) The blade speed $U$ is zero.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) The whirl component $V_{w2}$ is zero.</strong> (This condition leads to maximum work extraction for a given $V_{w1}$ and $U$ for impulse turbines, and is a design goal for maximum efficiency in many cases.)</p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>5. The blade velocity coefficient 'k' ($V_{r2} = k \cdot V_{r1}$) accounts for:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Pressure drop in the nozzles.</li>
+                    <li>b) Friction losses as steam flows over the moving blades.</li>
+                    <li>c) Heat loss from the turbine casing.</li>
+                    <li>d) Change in blade velocity $U$.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Friction losses as steam flows over the moving blades.</strong></p>
+            </div>
+             <div class="mcq-item">
+                <p><strong>6. For an impulse turbine stage, the "energy supplied to the blades" in the blade efficiency formula is typically:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Enthalpy drop in the nozzles.</li>
+                    <li>b) Kinetic energy of steam leaving the nozzles ($V_1^2/2$).</li>
+                    <li>c) Kinetic energy of steam leaving the moving blades ($V_2^2/2$).</li>
+                    <li>d) Total enthalpy drop in the stage.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Kinetic energy of steam leaving the nozzles ($V_1^2/2$).</strong></p>
+            </div>
+
+        </section>
+    </main>
+    <footer>
+        <p>© 2023 Engineering Classroom</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
