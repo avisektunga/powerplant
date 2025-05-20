@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8. Steam Turbines & Classification</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Add MathJax if you plan to use LaTeX for formulas -->
+    <style>
+        .formula-block { /* You might have this in your main style.css */
+            background-color: #f0f0f0; padding: 10px; margin: 10px 0;
+            border: 1px solid #ddd; border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.8; overflow-x: auto;
+        }
+        .diagram-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-top: 1em;
+        }
+        .diagram-container figure {
+            margin: 10px;
+            text-align: center;
+            max-width: 350px; /* Adjust as needed */
+        }
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        .diagram-container figcaption {
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="home-link">Engineering Learning Hub</a>
+        <h1>8. Steam Turbines & Classification</h1>
+    </header>
+    <nav class="topic-nav">
+        <a href="topic7_environment.html">« Prev: Environment</a>
+        <a href="topic9_compressible_flow.html">Next: Compressible Flow »</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Introduction to Steam Turbines</h2>
+            <p>A steam turbine is a rotary mechanical device that extracts thermal energy from pressurized steam and converts it into useful rotary motion. This rotary motion is then typically used to drive an electrical generator to produce electricity, or to power machinery like pumps and compressors.</p>
+            <p>The basic principle involves directing high-velocity jets of steam onto a series of blades attached to a rotor, causing the rotor to spin. The steam expands and cools as it passes through the turbine stages, giving up its energy to the blades.</p>
+        </section>
+
+        <section>
+            <h2>Classification of Steam Turbines</h2>
+            <p>Steam turbines can be classified based on various criteria:</p>
+            <ol>
+                <li>
+                    <strong>Based on the Principle of Steam Action:</strong>
+                    <ul>
+                        <li><strong>Impulse Turbine:</strong> The expansion of steam and the resulting pressure drop occur mainly in stationary nozzles. The high-velocity steam jets from the nozzles impinge on the moving blades, causing them to rotate due to the change in momentum (impulse force). Pressure across the moving blades remains relatively constant. Example: De Laval turbine, Curtis turbine (velocity compounded).</li>
+                        <li><strong>Reaction Turbine:</strong> Steam expansion and pressure drop occur in both stationary (fixed) blades and moving blades. The moving blades are shaped like nozzles, causing further expansion and acceleration of steam relative to the blades. The rotation is caused by both impulse effect (due to entering steam) and reaction effect (due to accelerating steam leaving the blades). Example: Parsons turbine.</li>
+                        <li><strong>Impulse-Reaction Turbine:</strong> Most modern large turbines are a combination, typically with impulse stages at the high-pressure end and reaction stages at the low-pressure end.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Based on the Direction of Steam Flow:</strong>
+                    <ul>
+                        <li><strong>Axial Flow Turbine:</strong> Steam flows along the axis of the turbine shaft. Most common type for power generation.</li>
+                        <li><strong>Radial Flow Turbine:</strong> Steam flows radially outwards or inwards. Example: Ljungstrom turbine (a type of reaction turbine). Tangential flow (Helical flow) turbines also exist but are less common.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Based on the Number of Stages:</strong>
+                    <ul>
+                        <li><strong>Single-Stage Turbine:</strong> Expansion of steam from inlet to exhaust pressure occurs in a single stage (one set of nozzles and blades). Typically used for small power applications or as auxiliary drives. Example: De Laval turbine.</li>
+                        <li><strong>Multi-Stage Turbine:</strong> Steam expansion is divided into multiple stages to improve efficiency and manage blade speeds. Each stage consists of a set of nozzles/fixed blades and moving blades. Most power plant turbines are multi-stage.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Based on Steam Inlet/Exhaust Conditions:</strong>
+                    <ul>
+                        <li><strong>Condensing Turbine:</strong> Exhaust steam pressure is below atmospheric pressure (vacuum), maintained by a condenser. Maximizes enthalpy drop and efficiency. Common in power plants.</li>
+                        <li><strong>Non-Condensing (Back-Pressure) Turbine:</strong> Exhaust steam pressure is above atmospheric pressure. The exhaust steam is used for process heating (cogeneration).</li>
+                        <li><strong>Extraction (Pass-Out) Turbine:</strong> Steam is extracted from one or more intermediate stages at specific pressures for process use or feedwater heating, while the remaining steam continues to expand to the exhaust.</li>
+                        <li><strong>Reheat Turbine:</strong> Steam is extracted after partial expansion in the HP turbine, returned to the boiler for reheating, and then readmitted to the IP/LP turbine.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Based on Type of Compounding (for Impulse Turbines):</strong>
+                    <ul>
+                        <li>Pressure Compounding (Rateau staging)</li>
+                        <li>Velocity Compounding (Curtis staging)</li>
+                        <li>Pressure-Velocity Compounding</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Based on Casing Arrangement:</strong>
+                    <ul>
+                        <li>Single Casing</li>
+                        <li>Tandem Compound (Multiple casings driving a single generator on one shaft)</li>
+                        <li>Cross Compound (Multiple casings driving separate generators or on parallel shafts)</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <section class="questions">
+            <h3>Previous Year Questions:</h3>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2017: Classify steam turbines. Compare impulse and reaction types.</strong></summary>
+                    <div class="pyq-answer">
+                        <h4>Classification of Steam Turbines:</h4>
+                        <p><em>(The classification provided in the section above covers this part comprehensively.)</em></p>
+                        <h4>Comparison of Impulse and Reaction Turbines:</h4>
+                        <table class="numerical-solution"> <!-- Reusing class for table style -->
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Impulse Turbine</th>
+                                    <th>Reaction Turbine</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Steam Expansion</strong></td>
+                                    <td>Primarily in stationary nozzles. Pressure drop mainly in nozzles.</td>
+                                    <td>In both stationary (fixed) blades and moving blades. Continuous pressure drop.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pressure Across Moving Blades</strong></td>
+                                    <td>Remains relatively constant (ideally).</td>
+                                    <td>Decreases as steam expands through them.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Blade Profile</strong></td>
+                                    <td>Symmetrical (profile type blades), cup-shaped.</td>
+                                    <td>Asymmetrical (aerofoil type blades), nozzle-shaped.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Relative Steam Velocity at Outlet</strong></td>
+                                    <td>May be same or less than at inlet to moving blades (due to friction).</td>
+                                    <td>Increases relative to moving blade as steam expands.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Blade Speed</strong></td>
+                                    <td>Generally lower for a given pressure drop per stage compared to reaction for same efficiency.</td>
+                                    <td>Generally higher for a given pressure drop per stage. Requires more stages for same overall pressure drop if blade speeds are kept similar.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Number of Stages</strong></td>
+                                    <td>Fewer stages for a given total pressure drop (larger pressure drop per stage is possible).</td>
+                                    <td>Requires more stages for the same total pressure drop to maintain reasonable efficiency and blade speeds.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Efficiency</strong></td>
+                                    <td>Stage efficiency can be high. Overall efficiency often good with compounding.</td>
+                                    <td>Generally higher stage efficiency due to continuous expansion and better flow guidance.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Blade Manufacturing & Design</strong></td>
+                                    <td>Simpler blade profiles.</td>
+                                    <td>More complex aerofoil blade profiles.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Axial Thrust</strong></td>
+                                    <td>Lower axial thrust due to minimal pressure difference across moving blades.</td>
+                                    <td>Higher axial thrust due to pressure drop across moving blades, requiring balancing arrangements (e.g., dummy pistons, double flow).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Steam Leakage at Blade Tips</strong></td>
+                                    <td>Less critical due to small pressure difference across moving blades. Radial clearances can be larger.</td>
+                                    <td>More critical due to pressure difference across moving blade tips, requiring smaller clearances and sealing arrangements (e.g., shrouds, tip seals).</td>
+                                </tr>
+                                 <tr>
+                                    <td><strong>Suitability</strong></td>
+                                    <td>Often used for initial high-pressure stages of multi-stage turbines. Well-suited for velocity compounding.</td>
+                                    <td>Common for intermediate and low-pressure stages. Efficient for large volume flow. Parsons turbine is a classic example.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            </div>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>2023: Describe working principle of impulse turbine with velocity diagram.</strong></summary>
+                    <div class="pyq-answer">
+                        <h4>Working Principle of a Single-Stage Impulse Turbine:</h4>
+                        <p>The fundamental principle of an impulse turbine is the conversion of the kinetic energy of a high-velocity fluid jet into mechanical work by changing the direction (and hence momentum) of the fluid flow.</p>
+                        <ol>
+                            <li><strong>Nozzle Action:</strong> High-pressure steam from the boiler is expanded in one or more stationary nozzles. In the nozzles, the pressure energy of the steam is converted into kinetic energy, resulting in a high-velocity jet of steam. The pressure of the steam drops significantly as it passes through the nozzle, but its velocity increases substantially.</li>
+                            <li><strong>Impulse on Blades:</strong> This high-velocity steam jet is then directed onto a series of curved blades (often cup-shaped or symmetrical profile) mounted on the periphery of a rotor (wheel). The steam impinges on the concave surface of the blades.</li>
+                            <li><strong>Change in Momentum:</strong> As the steam flows over the curved surface of the blades, its direction of velocity changes. This change in direction results in a change in the momentum of the steam. According to Newton's second law (F = rate of change of momentum), this change in momentum exerts a force (impulse force) on the blades.</li>
+                            <li><strong>Rotor Rotation:</strong> This tangential force on the blades creates a torque on the rotor, causing it to rotate and produce mechanical work.</li>
+                            <li><strong>Constant Pressure Across Moving Blades (Ideal):</strong> Ideally, in a pure impulse stage, there is no pressure drop across the moving blades. The steam pressure remains constant as it passes over the blades. In reality, there might be a slight pressure drop due to friction.</li>
+                            <li><strong>Energy Transfer:</strong> The kinetic energy of the steam jet is absorbed by the blades, resulting in a reduction in the absolute velocity of the steam as it leaves the blades.</li>
+                        </ol>
+
+                        <div class="diagram-container">
+                             <figure>
+                                <!-- You should replace this with an actual diagram -->
+                                <img src="https://i.imgur.com/qO2g3tq.png" alt="Conceptual Impulse Turbine Working Diagram">
+                                <figcaption>Conceptual Diagram: Nozzle and Impulse Blade Interaction</figcaption>
+                            </figure>
+                            <figure>
+                                <!-- You should replace this with an actual diagram -->
+                                <img src="https://i.imgur.com/E2J6EAm.png" alt="Simple Velocity Diagram for Impulse Turbine Blade">
+                                <figcaption>Simplified Inlet and Outlet Velocity Triangles for an Impulse Turbine Blade</figcaption>
+                            </figure>
+                        </div>
+
+                        <h4>Velocity Diagram (Simplified for a single stage):</h4>
+                        <p>Velocity diagrams are vector diagrams that represent the various velocities of steam relative to the nozzles, blades, and casing.</p>
+                        <ul>
+                            <li><strong>V<sub>1</sub>:</strong> Absolute velocity of steam leaving the nozzle and entering the moving blades (at an angle α<sub>1</sub> to the direction of blade motion).</li>
+                            <li><strong>U:</strong> Mean blade velocity (peripheral velocity of the rotor).</li>
+                            <li><strong>V<sub>r1</sub>:</strong> Relative velocity of steam entering the moving blades (vector difference V<sub>1</sub> - U, at an angle β<sub>1</sub> to the direction of blade motion). The blade inlet angle is designed to match β<sub>1</sub> for smooth entry.</li>
+                            <li><strong>V<sub>r2</sub>:</strong> Relative velocity of steam leaving the moving blades (at an angle β<sub>2</sub>). In an ideal impulse blade with no friction, |V<sub>r2</sub>| = |V<sub>r1</sub>|. With friction, |V<sub>r2</sub>| = k × |V<sub>r1</sub>|, where k is the blade velocity coefficient (k < 1). The blade outlet angle is designed around β<sub>2</sub>.</li>
+                            <li><strong>V<sub>2</sub>:</strong> Absolute velocity of steam leaving the moving blades (vector sum V<sub>r2</sub> + U, at an angle α<sub>2</sub>).</li>
+                        </ul>
+                        <p><strong>Components of Absolute Velocities:</strong></p>
+                        <ul>
+                            <li><strong>V<sub>w1</sub>, V<sub>w2</sub>:</strong> Velocities of whirl (tangential components of V<sub>1</sub> and V<sub>2</sub>, respectively). V<sub>w1</sub> = V<sub>1</sub>cosα<sub>1</sub>. V<sub>w2</sub> = V<sub>2</sub>cosα<sub>2</sub>.</li>
+                            <li><strong>V<sub>f1</sub>, V<sub>f2</sub>:</strong> Velocities of flow (axial components of V<sub>1</sub> and V<sub>2</sub>, respectively). V<sub>f1</sub> = V<sub>1</sub>sinα<sub>1</sub>. V<sub>f2</sub> = V<sub>2</sub>sinα<sub>2</sub>.</li>
+                        </ul>
+                        <p><strong>Work Done and Power:</strong> The tangential force on the blades is due to the change in the velocity of whirl.
+                        <br>Work done per unit mass of steam = U × (V<sub>w1</sub> ± V<sub>w2</sub>). The sign depends on the direction of V<sub>w2</sub>. If V<sub>w1</sub> and V<sub>w2</sub> are in the same direction (common in impulse), it's U(V<sub>w1</sub> - V<sub>w2</sub>) if V<sub>w2</sub> is positive, or U(V<sub>w1</sub> + |V<sub>w2</sub>|) if V<sub>w2</sub> is in the opposite direction of U. A more general form is U × ΔV<sub>w</sub>.
+                        <br>Power = ṁ × U × (V<sub>w1</sub> ± V<sub>w2</sub>), where ṁ is the mass flow rate of steam.</p>
+                        <p><em>A detailed drawing of the velocity triangles at inlet and outlet, combined at their base (U), would typically be required. The diagram above is a highly simplified representation.</em></p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="mcq">
+            <h3>MCQ:</h3>
+            <div class="mcq-item">
+                <p><strong>1. In an impulse turbine, the primary expansion of steam occurs in the:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Moving blades only</li>
+                    <li>b) Stationary nozzles only</li>
+                    <li>c) Both nozzles and moving blades equally</li>
+                    <li>d) Condenser</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Stationary nozzles only</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>2. Which type of turbine typically requires more stages for the same overall pressure drop?</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Impulse turbine</li>
+                    <li>b) Reaction turbine</li>
+                    <li>c) Both require the same number of stages</li>
+                    <li>d) Single-stage De Laval turbine</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Reaction turbine</strong> (as pressure drop per stage is smaller for optimal efficiency)</p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>3. The blades of a reaction turbine are shaped like:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Symmetrical cups</li>
+                    <li>b) Flat plates</li>
+                    <li>c) Aerofoils or nozzles</li>
+                    <li>d) Helical screws</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Aerofoils or nozzles</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>4. A turbine that exhausts steam at a pressure below atmospheric is called a:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Back-pressure turbine</li>
+                    <li>b) Pass-out turbine</li>
+                    <li>c) Condensing turbine</li>
+                    <li>d) Topping turbine</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Condensing turbine</strong></p>
+            </div>
+
+            <div class="mcq-item">
+                <p><strong>5. In an ideal impulse turbine stage, the pressure of steam as it passes over the moving blades:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Increases significantly</li>
+                    <li>b) Decreases significantly</li>
+                    <li>c) Remains relatively constant</li>
+                    <li>d) Fluctuates unpredictably</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Remains relatively constant</strong></p>
+            </div>
+             <div class="mcq-item">
+                <p><strong>6. The De Laval turbine is an example of a:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Single-stage reaction turbine</li>
+                    <li>b) Multi-stage impulse turbine</li>
+                    <li>c) Single-stage impulse turbine</li>
+                    <li>d) Radial flow turbine</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Single-stage impulse turbine</strong></p>
+            </div>
+             <div class="mcq-item">
+                <p><strong>7. Higher axial thrust is generally a characteristic of which type of turbine, requiring balancing arrangements?</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Impulse turbine</li>
+                    <li>b) Reaction turbine</li>
+                    <li>c) Both experience similar axial thrust</li>
+                    <li>d) Helical flow turbine</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Reaction turbine</strong></p>
+            </div>
+
+        </section>
+    </main>
+    <footer>
+        <p>© 2023 Engineering Classroom</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
