@@ -24,35 +24,57 @@
             border: 1px solid #ddd; border-radius: 5px;
             font-family: 'Courier New', Courier, monospace;
             line-height: 1.8; overflow-x: auto;
+            font-size: 0.9em; /* Slightly smaller for dense formulas */
         }
         .diagram-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around; /* Centers items if they don't fill the line */
+            justify-content: space-around;
             align-items: flex-start;
             margin-top: 1em;
+            margin-bottom: 1em;
         }
         .diagram-container figure {
             margin: 10px;
             text-align: center;
-            max-width: 450px; /* Adjust as needed for potentially wider diagrams */
+            max-width: 450px;
         }
         .diagram-container img {
             max-width: 100%;
             height: auto;
             border: 1px solid #ddd;
             padding: 5px;
+            background-color: #fff; /* White background for diagrams */
         }
         .diagram-container figcaption {
             font-size: 0.9em;
             margin-top: 5px;
             color: #555;
         }
-        .derivation-step {
-            margin-bottom: 0.8em;
+        .derivation-step, .solution-step {
+            margin-bottom: 1em;
         }
-        .derivation-step strong {
+        .derivation-step strong, .solution-step strong {
             color: #333;
+            display: block;
+            margin-bottom: 0.3em;
+        }
+        .numerical-solution table { /* For any tables within numericals */
+            width: auto; /* Adjust as needed, maybe not full width */
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+        .numerical-solution th, .numerical-solution td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: left;
+        }
+        .numerical-solution th {
+            background-color: #e9e9e9;
+        }
+        .final-answer {
+            font-weight: bold;
+            color: #006400; /* Dark green for answers */
         }
     </style>
 </head>
@@ -68,163 +90,327 @@
     <main>
         <section>
             <h2>Introduction to Velocity Diagrams</h2>
-            <p>Velocity diagrams (or velocity triangles) are graphical representations of the various velocity vectors of steam as it passes through the nozzles (or fixed blades) and moving blades of a turbine stage. They are essential tools for analyzing the energy transfer, forces on the blades, work done, and efficiency of turbine stages.</p>
-            <p>For each row of blades (fixed or moving), there is an inlet velocity triangle and an outlet velocity triangle.</p>
-            <p><strong>Key Velocity Components:</strong></p>
+            <p>Velocity diagrams (or velocity triangles) are graphical vector representations crucial for analyzing steam flow through turbine stages. They depict the absolute and relative velocities of steam at the inlet and outlet of both stationary (nozzles/fixed blades) and moving blades.</p>
+            <p><strong>Key Velocity Components (Axial Flow Turbine):</strong></p>
             <ul>
-                <li>$U$: Mean blade velocity (peripheral speed of the rotor at the mean blade height). $U = \pi D N / 60$, where D is mean diameter, N is RPM.</li>
-                <li>$V_1$: Absolute velocity of steam leaving the nozzle (or fixed blades) and entering the moving blades.</li>
-                <li>$\alpha_1$: Nozzle angle (or fixed blade exit angle), the angle $V_1$ makes with the direction of blade motion $U$.</li>
-                <li>$V_{r1}$: Relative velocity of steam entering the moving blades (velocity of steam as seen by an observer on the moving blade). $V_{r1} = \vec{V_1} - \vec{U}$.</li>
-                <li>$\beta_1$: Moving blade inlet angle. Ideally, the blade is shaped so that steam enters smoothly along this direction to avoid shock losses.</li>
-                <li>$V_{r2}$: Relative velocity of steam leaving the moving blades.</li>
-                <li>$\beta_2$: Moving blade outlet angle.</li>
-                <li>$V_2$: Absolute velocity of steam leaving the moving blades. $V_2 = \vec{V_{r2}} + \vec{U}$.</li>
-                <li>$\alpha_2$: Absolute steam exit angle from moving blades (this becomes the inlet angle for the next stage's fixed blades, if any).</li>
-                <li>$V_{w1}, V_{w2}$: Tangential components of $V_1$ and $V_2$ respectively (velocities of whirl). $V_{w1} = V_1 \cos \alpha_1$, $V_{w2} = V_2 \cos \alpha_2$. These are responsible for the tangential force and work done.</li>
-                <li>$V_{f1}, V_{f2}$: Axial components of $V_1$ and $V_2$ respectively (velocities of flow). $V_{f1} = V_1 \sin \alpha_1$, $V_{f2} = V_2 \sin \alpha_2$. These are responsible for axial thrust and must be managed for steam to pass through the turbine.</li>
+                <li>$U$: Mean blade velocity (peripheral speed of the rotor). $U = \frac{\pi D N}{60}$.</li>
+                <li>$V_1$: Absolute velocity of steam at inlet to moving blades (exit from nozzles/fixed blades).</li>
+                <li>$\alpha_1$: Angle of $V_1$ with the direction of blade motion $U$ (Nozzle angle).</li>
+                <li>$V_{r1}$: Relative velocity of steam at inlet to moving blades ($\vec{V_{r1}} = \vec{V_1} - \vec{U}$).</li>
+                <li>$\beta_1$: Angle of $V_{r1}$ (Moving blade inlet angle).</li>
+                <li>$V_{r2}$: Relative velocity of steam at outlet from moving blades.</li>
+                <li>$\beta_2$: Angle of $V_{r2}$ (Moving blade outlet angle).</li>
+                <li>$V_2$: Absolute velocity of steam at outlet from moving blades ($\vec{V_2} = \vec{V_{r2}} + \vec{U}$).</li>
+                <li>$\alpha_2$: Angle of $V_2$.</li>
+                <li>$V_{w1}, V_{w2}$: Tangential (Whirl) components of $V_1, V_2$. ($V_{w1} = V_1 \cos\alpha_1$, $V_{w2} = V_2 \cos\alpha_2$).</li>
+                <li>$V_{f1}, V_{f2}$: Axial (Flow) components of $V_1, V_2$. ($V_{f1} = V_1 \sin\alpha_1$, $V_{f2} = V_2 \sin\alpha_2$).</li>
             </ul>
+            <p>Work Done per unit mass (Euler's Equation): $W = U(V_{w1} \pm V_{w2})$. The sign depends on the direction of $V_{w2}$. More generally, $W = U \Delta V_w$.
+            <br>Power Developed $P = \dot{m} W$, where $\dot{m}$ is the mass flow rate of steam.</p>
+            <p>Blade (Diagram) Efficiency $\eta_b = \frac{\text{Work Done on Blades}}{\text{Energy Supplied to Blades}}$.</p>
+        </section>
+
+        <section>
+            <h2>Impulse Turbine Velocity Diagrams & Performance</h2>
+            <p>In an ideal impulse turbine stage, steam expansion occurs only in the nozzles, and pressure remains constant across the moving blades. The moving blades are typically symmetrical ($\beta_1 = \beta_2$).</p>
+            <div class="diagram-container">
+                 <figure style="max-width: 500px;">
+                    <img src="images/impulse_velocity_triangle_combined.png" alt="Combined Velocity Diagram for Impulse Turbine">
+                    <figcaption>Combined Velocity Diagram for Impulse Turbine Stage</figcaption>
+                </figure>
+            </div>
+            <div class="derivation-step">
+                <strong>Work Done & Blade Efficiency for Impulse Turbine:</strong>
+                <p>For symmetrical blades ($\beta_1 = \beta_2$) and considering blade friction ($k = V_{r2}/V_{r1}$, where $k$ is blade velocity coefficient):</p>
+                <p>$V_{w1} = V_1 \cos\alpha_1$</p>
+                <p>From inlet triangle: $V_{r1} \cos\beta_1 = V_1 \cos\alpha_1 - U$</p>
+                <p>From outlet triangle: $V_{w2} = U - V_{r2} \cos\beta_2 = U - k V_{r1} \cos\beta_1$ (assuming $\beta_2$ makes $V_{r2}$ component oppose U direction when $V_{w2}$ is positive)</p>
+                <div class="formula-block">
+                $W = U(V_{w1} - V_{w2}) = U(V_1 \cos\alpha_1 - (U - k V_{r1} \cos\beta_1))$
+                <br>If $\beta_1 = \beta_2$ and $V_{r1}\cos\beta_1 = V_1\cos\alpha_1 - U$:
+                <br>$W = U(V_1 \cos\alpha_1 - (U - k(V_1 \cos\alpha_1 - U)))$
+                <br>$W = U(V_1 \cos\alpha_1 - U + k V_1 \cos\alpha_1 - kU)$
+                <br>$W = U(V_1 \cos\alpha_1 (1+k) - U(1+k)) = U(1+k)(V_1 \cos\alpha_1 - U)$
+                </div>
+                <p>Energy supplied to blades = $\frac{1}{2}V_1^2$.</p>
+                <div class="formula-block">
+                $\eta_b = \frac{U(1+k)(V_1 \cos\alpha_1 - U)}{\frac{1}{2}V_1^2} = \frac{2U(1+k)(V_1 \cos\alpha_1 - U)}{V_1^2}$
+                </div>
+                <p>If frictionless ($k=1$): $W = 2U(V_1 \cos\alpha_1 - U)$ and $\eta_b = \frac{4U(V_1 \cos\alpha_1 - U)}{V_1^2}$.</p>
+                <p><strong>Optimum Blade Speed Ratio ($\rho = U/V_1$) for Maximum Efficiency (frictionless, symmetrical):</strong></p>
+                <div class="formula-block">
+                $\rho_{opt} = \frac{U}{V_1} = \frac{\cos\alpha_1}{2}$
+                </div>
+                <p>Maximum blade efficiency:</p>
+                <div class="formula-block">
+                $\eta_{b,max} = \cos^2\alpha_1$
+                </div>
+                 <div class="diagram-container">
+                     <figure>
+                        <img src="images/blade_efficiency_vs_speed_ratio.png" alt="Blade Efficiency vs Blade Speed Ratio for Impulse Turbine">
+                        <figcaption>Blade Efficiency vs. Blade Speed Ratio ($\rho = U/V_1$)</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Reaction Turbine Velocity Diagrams & Performance</h2>
+            <p>In a reaction turbine stage, steam expands in both fixed and moving blades. The moving blades are aerofoil shaped. A common type is the 50% reaction (Parsons) turbine where enthalpy drop is equally shared and velocity diagrams are symmetrical ($\alpha_1 = \beta_2$, $\alpha_2 = \beta_1$, $V_1=V_{r2}$, $V_2=V_{r1}$).</p>
+            <div class="diagram-container">
+                 <figure style="max-width: 500px;">
+                    <img src="images/reaction_velocity_triangle_combined.png" alt="Combined Velocity Diagram for 50% Reaction Turbine">
+                    <figcaption>Combined Velocity Diagram for 50% Reaction Turbine Stage</figcaption>
+                </figure>
+            </div>
+            <div class="derivation-step">
+                <strong>Work Done & Blade Efficiency for 50% Reaction Turbine:</strong>
+                <p>Assumptions: $\alpha_1 = \beta_2$, $\beta_1 = \alpha_2$, $V_1=V_{r2}$, $V_2=V_{r1}$.</p>
+                <p>$V_{w1} = V_1 \cos\alpha_1$</p>
+                <p>$V_{w2} = V_2 \cos\alpha_2 = V_{r1} \cos\beta_1$. Since $\beta_1 = \alpha_2$, $V_{w2} = V_{r1} \cos\alpha_2$.
+                Usually for reaction turbines, $V_{w2}$ is negative (directed opposite to $U$), so $W = U(V_{w1} + |V_{w2}|)$.
+                <br>From inlet triangle: $V_{r1} \cos\beta_1 = V_1 \cos\alpha_1 - U$.
+                <br>So, $|V_{w2}| = V_1 \cos\alpha_1 - U$. (Using symmetry $V_2=V_{r1}$ and $\alpha_2=\beta_1$)
+                </p>
+                <div class="formula-block">
+                $W = U(V_1 \cos\alpha_1 + (V_1 \cos\alpha_1 - U)) = U(2V_1 \cos\alpha_1 - U)$
+                </div>
+                <p>Energy supplied to the stage per unit mass (enthalpy drop in the stage):
+                $\Delta h_{stage} = \Delta h_{fixed} + \Delta h_{moving}$. For 50% reaction, these are equal.
+                <br>$\Delta h_{stage} = (V_1^2 - V_2^2)/2 + (V_{r2}^2 - V_{r1}^2)/2$.
+                <br>Using symmetry $V_1=V_{r2}$ and $V_2=V_{r1}$: $\Delta h_{stage} = V_1^2 - V_{r1}^2$.
+                <br>From inlet triangle $V_{r1}^2 = V_1^2 + U^2 - 2UV_1\cos\alpha_1$.
+                <br>So, $\Delta h_{stage} = V_1^2 - (V_1^2 + U^2 - 2UV_1\cos\alpha_1) = 2UV_1\cos\alpha_1 - U^2$.
+                </p>
+                <div class="formula-block">
+                $\eta_b = \frac{W}{\Delta h_{stage}} = \frac{U(2V_1 \cos\alpha_1 - U)}{2UV_1\cos\alpha_1 - U^2} = \frac{2V_1 \cos\alpha_1 - U}{2V_1\cos\alpha_1 - U}$ (This simplifies further if $U$ is not zero)
+                <br>This specific efficiency definition simplifies to 1 if ideal. A more common definition uses KE associated with $V_1$ and change in $V_r$:
+                $\eta_b = \frac{U(2V_1 \cos\alpha_1 - U)}{V_1^2 - U^2 + 2UV_1 \cos\alpha_1}$ (from some texts, depends on definition of energy input for reaction blade)
+                </div>
+                <p><strong>Optimum Blade Speed Ratio ($\rho = U/V_1$) for Maximum Efficiency (50% reaction, frictionless, symmetrical):</strong></p>
+                <div class="formula-block">
+                $\rho_{opt} = \frac{U}{V_1} = \cos\alpha_1$
+                </div>
+                <p>Maximum blade efficiency:</p>
+                <div class="formula-block">
+                $\eta_{b,max} = \frac{2\cos^2\alpha_1}{1+\cos^2\alpha_1}$ (This is a common result)
+                <br>When $U/V_1 = \cos\alpha_1$, the work done $W = V_1\cos\alpha_1(2V_1\cos\alpha_1 - V_1\cos\alpha_1) = V_1^2\cos^2\alpha_1$.
+                And $\Delta h_{stage} = 2(V_1\cos\alpha_1)^2 - (V_1\cos\alpha_1)^2 = V_1^2\cos^2\alpha_1$. This suggests $\eta_b=1$ under these ideal conditions if $\Delta h_{stage}$ is used as input.
+                If the denominator is taken as total KE input and generated in moving blade, the $\frac{2\cos^2\alpha_1}{1+\cos^2\alpha_1}$ form arises.
+                Typically, $\eta_{b,max}$ approaches $2\cos^2\alpha_1 / (1+\cos^2\alpha_1)$ or for axial discharge $\alpha_2=90^\circ$, it is $\cos^2\alpha_1$.
+                </p>
+            </div>
         </section>
 
         <section class="questions">
-            <h3>Previous Year Questions & Derivations:</h3>
-            <div class="pyq-item">
+            <h3>Previous Year Questions & Solved Numericals:</h3>
+            <!-- PYQ summaries already covered in derivations above -->
+             <div class="pyq-item">
                 <details>
-                    <summary><strong>2019 & 2023: Draw velocity diagram for impulse turbine, derive blade efficiency, work done.</strong></summary>
-                    <div class="pyq-answer">
-                        <h4>Velocity Diagram for a Single-Stage Impulse Turbine</h4>
-                        <p>In an impulse turbine stage, steam expands in the stationary nozzles, gaining kinetic energy. This high-velocity steam then impinges on the moving blades. Ideally, there is no pressure drop across the moving blades.</p>
-
-                        <div class="diagram-container">
-                             <figure>
-                                <!-- Placeholder for Inlet Velocity Triangle -->
-                                <img src="images/velocity_triangle_inlet.png" alt="Inlet Velocity Triangle for Impulse Turbine">
-                                <figcaption>Inlet Velocity Triangle</figcaption>
-                            </figure>
-                             <figure>
-                                <!-- Placeholder for Outlet Velocity Triangle -->
-                                <img src="images/velocity_triangle_outlet.png" alt="Outlet Velocity Triangle for Impulse Turbine">
-                                <figcaption>Outlet Velocity Triangle</figcaption>
-                            </figure>
-                        </div>
-                        <div class="diagram-container">
-                             <figure style="max-width: 600px;"> <!-- Wider figure for combined diagram -->
-                                <!-- Placeholder for Combined Velocity Diagram -->
-                                <img src="images/velocity_triangle_combined.png" alt="Combined Velocity Diagram for Impulse Turbine">
-                                <figcaption>Combined Velocity Diagram (Inlet and Outlet)</figcaption>
-                            </figure>
-                        </div>
-
-                        <p><strong>Construction Notes:</strong></p>
+                    <summary><strong>Numerical 1: Impulse Turbine Power Calculation</strong></summary>
+                    <div class="pyq-answer solution-step">
+                        <p><strong>Problem:</strong> Steam enters the turbine at 300 m/s when the nozzle angle is 20°. The diameter of turbine is 100cm and it rotates at 3000 rev/min. The blades are equiangular. If the friction loss is 35% of kinetic energy corresponding to relative velocity at inlet, find the power developed by the turbine. The axial thrust is 150 N. (Assume mass flow rate $\dot{m}$ is needed or power per unit mass flow).</p>
+                        <strong>Given Data:</strong>
                         <ul>
-                            <li>The base of both triangles is the blade velocity $U$.</li>
-                            <li><strong>Inlet Triangle:</strong> $V_1$ is drawn at angle $\alpha_1$. $U$ is subtracted vectorially from $V_1$ to get $V_{r1}$ at angle $\beta_1$.</li>
-                            <li><strong>Outlet Triangle:</strong> $V_{r2}$ is drawn at angle $\beta_2$. For frictionless blades, $|V_{r2}| = |V_{r1}|$. With friction, $|V_{r2}| = k \cdot |V_{r1}|$, where $k$ is the blade velocity coefficient or friction factor ($k < 1$). $U$ is added vectorially to $V_{r2}$ to get $V_2$ at angle $\alpha_2$.</li>
+                            <li>$V_1 = 300 \text{ m/s}$</li>
+                            <li>$\alpha_1 = 20^\circ$</li>
+                            <li>$D = 100 \text{ cm} = 1 \text{ m}$</li>
+                            <li>$N = 3000 \text{ rev/min}$</li>
+                            <li>Equiangular blades: $\beta_1 = \beta_2$</li>
+                            <li>Friction loss = 35% of KE of $V_{r1}$ ⇒ $\frac{1}{2}V_{r2}^2 = (1-0.35) \frac{1}{2}V_{r1}^2 = 0.65 \frac{1}{2}V_{r1}^2$
+                                <br>So, $V_{r2}^2 = 0.65 V_{r1}^2 \implies V_{r2} = \sqrt{0.65} V_{r1} \approx 0.806 V_{r1}$. So, blade velocity coefficient $k \approx 0.806$.</li>
+                            <li>Axial Thrust $F_a = 150 \text{ N}$ (This info seems extra if power is asked per unit mass, or $\dot{m}$ is missing).</li>
                         </ul>
-
-                        <h4>Derivation of Work Done (per unit mass of steam)</h4>
-                        <p>The work done on the blades by the steam is due to the change in the tangential momentum of the steam. From Euler's turbine equation, for an axial flow turbine stage with mean blade speed $U$:</p>
-                        <div class="formula-block">
-                            $W = U (V_{w1} - V_{w2})$
-                        </div>
-                        <p>Where:</p>
-                        <ul>
-                            <li>$V_{w1} = V_1 \cos \alpha_1$ (tangential component of $V_1$)</li>
-                            <li>$V_{w2} = V_2 \cos \alpha_2$ (tangential component of $V_2$)</li>
-                        </ul>
-                        <p>The sign of $V_{w2}$ is important. If $V_{w2}$ is in the same direction as $U$ (i.e., $\alpha_2 < 90^\circ$), the term is $U(V_{w1} - V_{w2})$. If $V_{w2}$ is in the opposite direction to $U$ (i.e., $\alpha_2 > 90^\circ$), then $V_{w2}$ itself is negative when considering its contribution to $\Delta V_w$, so the formula becomes $W = U(V_{w1} + |V_{w2}|)$. It's often written as $W = U \cdot \Delta V_w$, where $\Delta V_w$ is the algebraic change in whirl velocity in the direction of $U$.</p>
-                        <p>Alternatively, from the geometry of the velocity triangles:</p>
-                        <div class="formula-block">
-                        $V_{w1} = V_{r1} \cos \beta_1 + U$  (if $\beta_1$ is acute from $U$ direction) <br>
-                        $V_{w2} = V_{r2} \cos \beta_2 - U$  (if $V_{r2} \cos \beta_2 > U$) or $U - V_{r2} \cos \beta_2$ (if $V_{r2} \cos \beta_2 < U$ and in same direction as U)
-                        </div>
-                        <p>A common expression using relative velocities for symmetrical impulse blades ($\beta_1=\beta_2$ and $V_{r1}=V_{r2}$ for no friction):
-                        $V_{w1} = V_1 \cos \alpha_1$
-                        $V_{r1x} = V_{w1} - U = V_1 \cos \alpha_1 - U$
-                        $V_{r2x} = V_{r1x}$ (tangential component of relative velocity, changes sign if exit angle $\beta_2$ defined symmetrically)
-                        $V_{w2} = U - V_{r2x} = U - (V_1 \cos \alpha_1 - U) = 2U - V_1 \cos \alpha_1$
-                        Work Done $W = U(V_{w1} - V_{w2}) = U[V_1 \cos \alpha_1 - (2U - V_1 \cos \alpha_1)] = 2U(V_1 \cos \alpha_1 - U)$
-                        </p>
-
-                        <h4>Derivation of Blade Efficiency (Diagram Efficiency, $\eta_b$)</h4>
-                        <p>Blade efficiency is the ratio of work done on the blades to the kinetic energy of the steam supplied to the blades (from the nozzles).</p>
-                        <div class="formula-block">
-                            $\eta_b = \frac{\text{Work done per unit mass of steam}}{\text{Kinetic energy supplied per unit mass of steam at inlet to moving blades}}$
-                        </div>
-                        <div class="formula-block">
-                            $\eta_b = \frac{W}{\frac{1}{2} V_1^2} = \frac{U (V_{w1} - V_{w2})}{\frac{1}{2} V_1^2}$
-                        </div>
-                        <p>Substituting $W = 2U(V_1 \cos \alpha_1 - U)$ (for symmetrical, frictionless impulse blades):</p>
-                        <div class="formula-block">
-                             $\eta_b = \frac{2U(V_1 \cos \alpha_1 - U)}{\frac{1}{2} V_1^2} = \frac{4U(V_1 \cos \alpha_1 - U)}{V_1^2}$
-                        </div>
-                        <p>Let $\rho = U/V_1$ be the blade speed ratio.</p>
-                        <div class="formula-block">
-                            $\eta_b = 4\rho (\cos \alpha_1 - \rho)$
-                        </div>
-
-                        <h4>Optimum Blade Speed Ratio for Maximum Efficiency (Single-Stage Impulse)</h4>
-                        <p>To find the condition for maximum blade efficiency, we differentiate $\eta_b$ with respect to $\rho$ and set the derivative to zero:</p>
-                        <p>$\frac{d\eta_b}{d\rho} = \frac{d}{d\rho} [4\rho \cos \alpha_1 - 4\rho^2] = 4 \cos \alpha_1 - 8\rho = 0$</p>
-                        <p>This gives the optimum blade speed ratio:</p>
-                        <div class="formula-block">
-                            $\rho_{opt} = \frac{U}{V_1} = \frac{\cos \alpha_1}{2}$
-                        </div>
-                        <p>Substituting this optimum ratio back into the efficiency formula:</p>
-                        <div class="formula-block">
-                            $\eta_{b,max} = 4 \left( \frac{\cos \alpha_1}{2} \right) \left( \cos \alpha_1 - \frac{\cos \alpha_1}{2} \right) = 2 \cos \alpha_1 \left( \frac{\cos \alpha_1}{2} \right) = \cos^2 \alpha_1$
-                        </div>
-                        <p>Thus, the maximum blade efficiency for a single-stage impulse turbine (with symmetrical blades and no friction) is $\cos^2 \alpha_1$. This typically occurs when the absolute exit velocity $V_2$ is axial ($\alpha_2 = 90^\circ$), meaning $V_{w2} = 0$, minimizing kinetic energy loss at the exit.</p>
-                        <div class="diagram-container">
-                             <figure>
-                                <!-- Placeholder for Efficiency vs Speed Ratio Graph -->
-                                <img src="images/blade_efficiency_vs_speed_ratio.png" alt="Blade Efficiency vs Blade Speed Ratio for Impulse Turbine">
-                                <figcaption>Blade Efficiency vs. Blade Speed Ratio ($\rho = U/V_1$)</figcaption>
-                            </figure>
-                        </div>
-                    </div>
-                </details>
-            </div>
-            <div class="pyq-item">
-                <details>
-                    <summary><strong>2017: Explain how turbine performance is evaluated using blade efficiency.</strong></summary>
-                    <div class="pyq-answer">
-                        <p>Turbine performance evaluation involves assessing how effectively the turbine converts the available energy in the steam into useful work. Blade efficiency (also known as diagram efficiency or rotor efficiency) is a key parameter in this evaluation, specifically for individual stages or rows of blades.</p>
-                        <p><strong>Blade Efficiency ($\eta_b$):</strong></p>
-                        <div class="formula-block">
-                            $\eta_b = \frac{\text{Work done by the steam on the blades per unit mass}}{\text{Energy available to the blades per unit mass}}$
-                        </div>
-                        <ul>
-                            <li><strong>Work Done:</strong> Calculated using Euler's turbine equation $W = U \cdot \Delta V_w$, derived from velocity diagrams. It represents the actual energy transferred from the steam to the rotor.</li>
-                            <li><strong>Energy Available:</strong>
-                                <ul>
-                                    <li>For an **impulse stage**, the energy available to the moving blades is primarily the kinetic energy of the steam jet leaving the nozzles: $KE_{inlet} = \frac{1}{2}V_1^2$. So, $\eta_b = W / (\frac{1}{2}V_1^2)$.</li>
-                                    <li>For a **reaction stage**, energy is available from both the kinetic energy of steam entering the moving blades ($V_1$) and the enthalpy drop (expansion) that occurs within the moving blades themselves. The denominator becomes the sum of these energy contributions for the stage.
-                                        More generally, it's the isentropic enthalpy drop across the stage that could be converted to KE or work. The stage efficiency is often defined as:
-                                        $\eta_{stage} = \frac{\text{Actual work done by stage}}{\text{Isentropic enthalpy drop in stage}}$
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <p><strong>How Blade Efficiency Evaluates Performance:</strong></p>
+                        <strong>Solution Steps:</strong>
                         <ol>
-                            <li><strong>Design Optimization:</strong> Blade efficiency helps engineers design optimal blade profiles, inlet/outlet angles ($\beta_1, \beta_2$), nozzle angles ($\alpha_1$), and blade speed ratios ($U/V_1$) to maximize energy extraction for a given stage. For example, the derivation shows that for a single impulse stage, maximum efficiency is achieved at a specific blade speed ratio.</li>
-                            <li><strong>Loss Identification:</strong> A lower-than-expected blade efficiency indicates higher losses within the blade passage. These losses can include:
-                                <ul>
-                                    <li>Friction losses as steam flows over blade surfaces.</li>
-                                    <li>Shock losses if steam does not enter the blades smoothly (blade angles not matching relative flow angles).</li>
-                                    <li>Tip leakage losses (in reaction turbines or shrouded impulse blades).</li>
-                                    <li>Secondary flow losses.</li>
-                                </ul>
+                            <li><strong>Calculate Blade Speed (U):</strong>
+                                <div class="formula-block">$U = \frac{\pi D N}{60} = \frac{\pi \times 1 \times 3000}{60} = 50\pi \approx 157.08 \text{ m/s}$</div>
                             </li>
-                            <li><strong>Comparison of Designs:</strong> Blade efficiency allows for the comparison of different blade designs or staging arrangements under similar operating conditions.</li>
-                            <li><strong>Component of Overall Efficiency:</strong> While blade efficiency focuses on the rotor, the overall turbine efficiency also considers nozzle efficiency, losses between stages, mechanical losses (bearings, etc.), and leaving losses (kinetic energy of exhaust steam). However, high blade efficiency is fundamental to achieving high overall turbine efficiency.</li>
-                            <li><strong>Impact of Operating Conditions:</strong> Analyzing how blade efficiency changes with varying steam conditions (pressure, temperature, flow rate) or turbine speed helps understand the turbine's part-load performance and operating range.</li>
+                            <li><strong>Inlet Velocity Triangle:</strong>
+                                <div class="formula-block">$V_{w1} = V_1 \cos\alpha_1 = 300 \cos 20^\circ \approx 300 \times 0.9397 \approx 281.91 \text{ m/s}$</div>
+                                <div class="formula-block">$V_{f1} = V_1 \sin\alpha_1 = 300 \sin 20^\circ \approx 300 \times 0.3420 \approx 102.61 \text{ m/s}$</div>
+                                <div class="formula-block">$V_{r1}^2 = V_{f1}^2 + (V_{w1}-U)^2 = (102.61)^2 + (281.91 - 157.08)^2 = 10528.93 + (124.83)^2 = 10528.93 + 15582.53 = 26111.46$</div>
+                                <div class="formula-block">$V_{r1} = \sqrt{26111.46} \approx 161.59 \text{ m/s}$</div>
+                                <div class="formula-block">$\tan\beta_1 = \frac{V_{f1}}{V_{w1}-U} = \frac{102.61}{124.83} \approx 0.822 \implies \beta_1 \approx 39.42^\circ$</div>
+                            </li>
+                            <li><strong>Outlet Velocity Triangle:</strong>
+                                <p>Equiangular blades: $\beta_2 = \beta_1 \approx 39.42^\circ$.</p>
+                                <div class="formula-block">$V_{r2} = k \cdot V_{r1} = 0.806 \times 161.59 \approx 130.24 \text{ m/s}$</div>
+                                <div class="formula-block">$V_{w2} = U - V_{r2} \cos\beta_2 = 157.08 - 130.24 \cos 39.42^\circ = 157.08 - 130.24 \times 0.7725 = 157.08 - 100.61 \approx 56.47 \text{ m/s}$</div>
+                                 (Assuming $V_{w2}$ is in the direction of $U$. If $\beta_2$ definition makes $V_{r2}\cos\beta_2$ negative relative to $V_{w1}-U$, then $V_{w2} = U - V_{r2x}$ where $V_{r2x}$ is the component of $V_{r2}$ along U's line of action).
+                                <br>A common convention for equiangular impulse blades: $V_{w1} = V_1\cos\alpha_1$, $V_{w2} = (k(V_1\cos\alpha_1 - U) - U)\cos\phi$ where $\phi$ is angle of $V_{w2}$ relative to $U$.
+                                <br>More directly, $V_{w_2} = V_{r2}\cos\beta_2 - U$ if $\beta_2$ is defined such that $V_{r2}\cos\beta_2 > U$. Or $V_{w_2} = U - V_{r2}\cos\beta_2$ if $V_{r2}\cos\beta_2 < U$ and its projection is in direction of U.
+                                <br>Let's use $\Delta V_w = (V_{w1}-U) - (- (V_{w2,rel})) = V_{r1}\cos\beta_1 - (-kV_{r1}\cos\beta_2) = V_{r1}\cos\beta_1 (1+k)$ for equiangular.
+                                <br>$\Delta V_w = V_{r1}\cos\beta_1 (1+k) = (V_1\cos\alpha_1 - U)(1+k) = (281.91 - 157.08)(1+0.806) = 124.83 \times 1.806 \approx 225.44 \text{ m/s}$.
+                                <div class="formula-block">Work done $W = U \cdot \Delta V_w = 157.08 \times 225.44 \approx 35410.6 \text{ J/kg} = 35.41 \text{ kJ/kg}$</div>
+                                <p>The axial thrust $F_a = \dot{m}(V_{f1} - V_{f2}) = 150N$. This implies $\dot{m}$ can be found if $V_{f2}$ is calculated.
+                                $V_{f2} = V_{r2}\sin\beta_2 = 130.24 \sin 39.42^\circ \approx 130.24 \times 0.635 \approx 82.70 \text{ m/s}$.
+                                $\dot{m} (102.61 - 82.70) = 150 \implies \dot{m} \times 19.91 = 150 \implies \dot{m} \approx 150 / 19.91 \approx 7.53 \text{ kg/s}$.
+                                </p>
+                            </li>
+                            <li><strong>Power Developed:</strong>
+                                <div class="formula-block">$P = \dot{m} W = 7.53 \text{ kg/s} \times 35.41 \text{ kJ/kg} \approx 266.64 \text{ kW}$</div>
+                            </li>
                         </ol>
-                        <p>In essence, blade efficiency quantifies the effectiveness of the moving blades in converting the available steam energy (primarily kinetic for impulse, kinetic + pressure for reaction) into mechanical work on the rotor. It's a critical measure for the aerodynamic performance of the blading.</p>
+                        <p class="final-answer">Power Developed $\approx 266.64 \text{ kW}$.</p>
                     </div>
                 </details>
             </div>
+            <!-- Add other numerical solutions here in similar <details> blocks -->
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>Numerical 2: Impulse Turbine Analysis</strong></summary>
+                    <div class="pyq-answer solution-step">
+                        <p><strong>Problem:</strong> In an impulse turbine (single row wheel) the mean diameter of blades is 1.05 m and speed is 3000 r.p.m. Nozzle angle is 18°, ratio of blade speed to steam speed ($U/V_1$) is 0.42, ratio of relative velocity at outlet to inlet ($V_{r2}/V_{r1}$) is 0.84. Outlet angle ($\beta_2$) is 3° less than inlet angle ($\beta_1$). Steam flow $\dot{m} = 10 \text{ kg/s}$. Find: (i) Tangential Thrust, (ii) Axial Thrust, (iii) Resultant Thrust, (iv) Power developed, (v) Blading efficiency.</p>
+                        <strong>Given Data:</strong>
+                        <ul>
+                            <li>$D = 1.05 \text{ m}$, $N = 3000 \text{ rpm}$</li>
+                            <li>$\alpha_1 = 18^\circ$</li>
+                            <li>$\rho = U/V_1 = 0.42$</li>
+                            <li>$k = V_{r2}/V_{r1} = 0.84$</li>
+                            <li>$\beta_2 = \beta_1 - 3^\circ$</li>
+                            <li>$\dot{m} = 10 \text{ kg/s}$</li>
+                        </ul>
+                        <strong>Solution Steps:</strong>
+                        <ol>
+                            <li>$U = \frac{\pi D N}{60} = \frac{\pi \times 1.05 \times 3000}{60} \approx 164.93 \text{ m/s}$.</li>
+                            <li>$V_1 = U / 0.42 = 164.93 / 0.42 \approx 392.69 \text{ m/s}$.</li>
+                            <li>Inlet Triangle:
+                                <br>$V_{w1} = V_1 \cos\alpha_1 = 392.69 \cos 18^\circ \approx 373.45 \text{ m/s}$.
+                                <br>$V_{f1} = V_1 \sin\alpha_1 = 392.69 \sin 18^\circ \approx 121.34 \text{ m/s}$.
+                                <br>$\tan\beta_1 = \frac{V_{f1}}{V_{w1}-U} = \frac{121.34}{373.45-164.93} = \frac{121.34}{208.52} \approx 0.5819 \implies \beta_1 \approx 30.19^\circ$.
+                                <br>$V_{r1} = \frac{V_{f1}}{\sin\beta_1} = \frac{121.34}{\sin 30.19^\circ} \approx \frac{121.34}{0.5029} \approx 241.30 \text{ m/s}$.
+                            </li>
+                            <li>Outlet Triangle:
+                                <br>$\beta_2 = \beta_1 - 3^\circ = 30.19^\circ - 3^\circ = 27.19^\circ$.
+                                <br>$V_{r2} = k V_{r1} = 0.84 \times 241.30 \approx 202.69 \text{ m/s}$.
+                                <br>$V_{w2} = U - V_{r2} \cos\beta_2 = 164.93 - 202.69 \cos 27.19^\circ = 164.93 - 202.69 \times 0.890 \approx 164.93 - 180.39 \approx -15.46 \text{ m/s}$. (Negative means $V_{w2}$ is opposite to $U$).
+                                <br>$V_{f2} = V_{r2} \sin\beta_2 = 202.69 \sin 27.19^\circ \approx 202.69 \times 0.457 \approx 92.63 \text{ m/s}$.
+                            </li>
+                            <li>Calculations:
+                                <br>(i) Tangential Thrust $F_t = \dot{m} (V_{w1} - V_{w2}) = 10 \times (373.45 - (-15.46)) = 10 \times (373.45 + 15.46) = 10 \times 388.91 \approx 3889.1 \text{ N}$.
+                                <br>(ii) Axial Thrust $F_a = \dot{m} (V_{f1} - V_{f2}) = 10 \times (121.34 - 92.63) = 10 \times 28.71 \approx 287.1 \text{ N}$.
+                                <br>(iii) Resultant Thrust $F_R = \sqrt{F_t^2 + F_a^2} = \sqrt{(3889.1)^2 + (287.1)^2} \approx \sqrt{15125098 + 82426} \approx \sqrt{15207524} \approx 3899.68 \text{ N}$.
+                                <br>(iv) Power Developed $P = F_t \times U = 3889.1 \times 164.93 \approx 641460 \text{ W} = 641.46 \text{ kW}$.
+                                (Also $P = \dot{m} U (V_{w1}-V_{w2}) = 10 \times 164.93 \times 388.91 \approx 641.46 \text{ kW}$).
+                                <br>(v) Blading Efficiency $\eta_b = \frac{2 U (V_{w1}-V_{w2})}{V_1^2} = \frac{2 \times 164.93 \times 388.91}{(392.69)^2} = \frac{128292}{154205} \approx 0.8319 \text{ or } 83.19\%$.
+                            </li>
+                        </ol>
+                        <p class="final-answer">
+                        (i) Tangential Thrust $\approx 3889.1 \text{ N}$ <br>
+                        (ii) Axial Thrust $\approx 287.1 \text{ N}$ <br>
+                        (iii) Resultant Thrust $\approx 3899.68 \text{ N}$ <br>
+                        (iv) Power Developed $\approx 641.46 \text{ kW}$ <br>
+                        (v) Blading Efficiency $\approx 83.19\%$
+                        </p>
+                    </div>
+                </details>
+            </div>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>Numerical 3: Impulse Turbine Blade Angles & Power</strong></summary>
+                    <div class="pyq-answer solution-step">
+                        <p><strong>Problem:</strong> In a single stage impulse turbine, isentropic enthalpy drop $\Delta h_s = 200 \text{ kJ/kg}$ occurs in nozzle (eff. $\eta_N=96\%$, angle $\alpha_1=15^\circ$). Blade velocity coeff. $k_b=0.96$. Ratio of blade speed to steam velocity $U/V_1=0.5$. Steam mass flow $\dot{m}=20\text{kg/s}$. Velocity of steam entering nozzle $V_0=50 \text{ m/s}$. Find: a) Blade angles $\beta_1, \beta_2$ if steam enters smoothly & leaves axially. b) Blade efficiency $\eta_b$. c) Power developed P. d) Axial thrust $F_a$.</p>
+                        <strong>Given Data:</strong>
+                        <ul>
+                            <li>$\Delta h_s = 200 \text{ kJ/kg} = 200000 \text{ J/kg}$</li>
+                            <li>$\eta_N = 0.96$</li>
+                            <li>$\alpha_1 = 15^\circ$</li>
+                            <li>$k_b = 0.96$</li>
+                            <li>$U/V_1 = 0.5 \implies U = 0.5 V_1$</li>
+                            <li>$\dot{m} = 20 \text{ kg/s}$</li>
+                            <li>$V_0 = 50 \text{ m/s}$ (inlet to nozzle)</li>
+                        </ul>
+                        <strong>Solution Steps:</strong>
+                        <ol>
+                            <li>Actual enthalpy drop in nozzle: $\Delta h_{actual,N} = \eta_N \Delta h_s = 0.96 \times 200 = 192 \text{ kJ/kg}$.</li>
+                            <li>Velocity $V_1$ from nozzle: $\Delta h_{actual,N} = \frac{V_1^2 - V_0^2}{2000}$.
+                                <br>$192 = \frac{V_1^2 - (50)^2}{2000} \implies 192 \times 2000 = V_1^2 - 2500 \implies 384000 = V_1^2 - 2500$.
+                                <br>$V_1^2 = 384000 + 2500 = 386500 \implies V_1 = \sqrt{386500} \approx 621.69 \text{ m/s}$.
+                            </li>
+                            <li>Blade speed $U = 0.5 V_1 = 0.5 \times 621.69 \approx 310.85 \text{ m/s}$.</li>
+                            <li>Inlet Velocity Triangle (Steam enters smoothly $\implies$ blade inlet angle = relative steam angle):
+                                <br>$V_{w1} = V_1 \cos\alpha_1 = 621.69 \cos 15^\circ \approx 600.35 \text{ m/s}$.
+                                <br>$V_{f1} = V_1 \sin\alpha_1 = 621.69 \sin 15^\circ \approx 160.90 \text{ m/s}$.
+                                <br>$\tan\beta_1 = \frac{V_{f1}}{V_{w1}-U} = \frac{160.90}{600.35-310.85} = \frac{160.90}{289.50} \approx 0.5558 \implies \beta_1 \approx 29.06^\circ$.
+                                <br>$V_{r1} = \frac{V_{f1}}{\sin\beta_1} = \frac{160.90}{\sin 29.06^\circ} \approx \frac{160.90}{0.4857} \approx 331.27 \text{ m/s}$.
+                            </li>
+                            <li>Outlet Velocity Triangle (Steam leaves axially $\implies \alpha_2 = 90^\circ \implies V_{w2} = 0$):
+                                <br>$V_{r2} = k_b V_{r1} = 0.96 \times 331.27 \approx 318.02 \text{ m/s}$.
+                                <br>Since $V_{w2} = 0$, from outlet triangle: $U = V_{r2} \cos\beta_2$.
+                                <br>$\cos\beta_2 = U/V_{r2} = 310.85 / 318.02 \approx 0.9775 \implies \beta_2 \approx 12.18^\circ$.
+                                <br>$V_{f2} = V_2 = V_{r2} \sin\beta_2 = 318.02 \sin 12.18^\circ \approx 318.02 \times 0.211 \approx 67.10 \text{ m/s}$.
+                            </li>
+                            <li>Calculations:
+                                <br>a) Blade angles: $\beta_1 \approx 29.06^\circ$, $\beta_2 \approx 12.18^\circ$.
+                                <br>b) Blade Efficiency $\eta_b = \frac{2 U (V_{w1}-V_{w2})}{V_1^2} = \frac{2 \times 310.85 \times (600.35 - 0)}{(621.69)^2} = \frac{373204.5}{386500} \approx 0.9656 \text{ or } 96.56\%$.
+                                (Note: $U/V_1 = 0.5$. For $V_{w2}=0$, $\eta_{b,max}$ occurs if $U/V_1 = \cos\alpha_1/2 = \cos 15^\circ / 2 \approx 0.9659/2 \approx 0.483$. Since $0.5$ is close to optimal, efficiency is high).
+                                <br>c) Power Developed $P = \dot{m} U (V_{w1}-V_{w2}) = 20 \times 310.85 \times (600.35 - 0) \approx 3732045 \text{ W} = 3732.05 \text{ kW}$.
+                                <br>d) Axial Thrust $F_a = \dot{m} (V_{f1}-V_{f2}) = 20 \times (160.90 - 67.10) = 20 \times 93.80 = 1876 \text{ N}$.
+                            </li>
+                        </ol>
+                        <p class="final-answer">
+                        a) $\beta_1 \approx 29.06^\circ$, $\beta_2 \approx 12.18^\circ$ <br>
+                        b) Blade Efficiency $\eta_b \approx 96.56\%$ <br>
+                        c) Power Developed $P \approx 3732.05 \text{ kW}$ <br>
+                        d) Axial Thrust $F_a \approx 1876 \text{ N}$
+                        </p>
+                    </div>
+                </details>
+            </div>
+             <div class="pyq-item">
+                <details>
+                    <summary><strong>Numerical 4: Reaction Turbine Analysis</strong></summary>
+                    <div class="pyq-answer solution-step">
+                        <p><strong>Problem:</strong> A reaction turbine uses 9000 kg/hr of steam. Blades are 20 mm high. Discharge angle of both fixed and moving blades is 20° (i.e., $\alpha_1 = \beta_2 = 20^\circ$). Steam leaves fixed blades at 0.32 N/mm² (3.2 bar) with dryness $x=0.95$ and velocity $V_1 = 120 \text{ m/s}$. Ratio of axial velocity to blade velocity $V_f/U = 0.7$ at entry and $0.76$ at exit from moving blades. Tip leakage = 6%. Determine: i) Speed of turbine (RPM), ii) Power developed.</p>
+                        <strong>Given Data:</strong>
+                        <ul>
+                            <li>$\dot{m}_{total} = 9000 \text{ kg/hr} = 9000/3600 = 2.5 \text{ kg/s}$</li>
+                            <li>Tip leakage = 6% $\implies$ Actual mass flow over blades $\dot{m} = 2.5 \times (1-0.06) = 2.5 \times 0.94 = 2.35 \text{ kg/s}$.</li>
+                            <li>Blade height $h_b = 20 \text{ mm} = 0.02 \text{ m}$.</li>
+                            <li>Fixed blade exit angle $\alpha_1 = 20^\circ$. Moving blade exit angle $\beta_2 = 20^\circ$. (Suggests symmetrical blading for 50% reaction).</li>
+                            <li>Steam leaves fixed blades at $P_1=3.2 \text{ bar}$, $x_1=0.95$, $V_1=120 \text{ m/s}$.</li>
+                            <li>At moving blade entry: $V_{f1}/U = 0.7$.</li>
+                            <li>At moving blade exit: $V_{f2}/U = 0.76$.</li>
+                        </ul>
+                        <strong>Solution Steps:</strong>
+                        <ol>
+                            <li>From $V_1$ and $\alpha_1$:
+                                <br>$V_{f1} = V_1 \sin\alpha_1 = 120 \sin 20^\circ \approx 120 \times 0.3420 \approx 41.04 \text{ m/s}$.
+                                <br>$V_{w1} = V_1 \cos\alpha_1 = 120 \cos 20^\circ \approx 120 \times 0.9397 \approx 112.76 \text{ m/s}$.
+                            </li>
+                            <li>Blade speed $U$:
+                                <br>$V_{f1}/U = 0.7 \implies U = V_{f1}/0.7 = 41.04 / 0.7 \approx 58.63 \text{ m/s}$.
+                            </li>
+                            <li>For 50% reaction turbine with symmetrical blading ($\alpha_1=\beta_2$, $\beta_1=\alpha_2$, $V_1=V_{r2}$, $V_2=V_{r1}$):
+                                <br>Work done $W = U(2V_1 \cos\alpha_1 - U)$ per kg.
+                                <br>$W = 58.63 \times (2 \times 120 \cos 20^\circ - 58.63) = 58.63 \times (2 \times 112.76 - 58.63)$
+                                <br>$W = 58.63 \times (225.52 - 58.63) = 58.63 \times 166.89 \approx 9784.8 \text{ J/kg} = 9.7848 \text{ kJ/kg}$.
+                            </li>
+                            <li>ii) Power Developed $P = \dot{m} W = 2.35 \text{ kg/s} \times 9.7848 \text{ kJ/kg} \approx 22.99 \text{ kW}$.</li>
+                            <li>To find RPM, we need mean blade diameter $D_m$.
+                                <br>Mass flow rate through blades: $\dot{m} = \rho_1 (\pi D_m h_b) V_{f1}$.
+                                <br>We need $\rho_1$. At $P_1=3.2 \text{ bar}$, $x_1=0.95$:
+                                <br>From steam tables at 3.2 bar: $v_f \approx 0.001076 \text{ m}^3/\text{kg}$, $v_g \approx 0.5596 \text{ m}^3/\text{kg}$.
+                                <br>$v_1 = v_f + x_1(v_g - v_f) = 0.001076 + 0.95(0.5596 - 0.001076) \approx 0.001076 + 0.95 \times 0.558524 \approx 0.001076 + 0.53059 \approx 0.53167 \text{ m}^3/\text{kg}$.
+                                <br>$\rho_1 = 1/v_1 \approx 1/0.53167 \approx 1.8808 \text{ kg/m}^3$.
+                                <br>$2.35 = 1.8808 \times (\pi D_m \times 0.02) \times 41.04$.
+                                <br>$2.35 = D_m \times (1.8808 \times \pi \times 0.02 \times 41.04) \approx D_m \times 4.838$.
+                                <br>$D_m = 2.35 / 4.838 \approx 0.4857 \text{ m}$.
+                            </li>
+                            <li>i) Speed of turbine $N$: $U = \frac{\pi D_m N}{60} \implies N = \frac{60 U}{\pi D_m} = \frac{60 \times 58.63}{\pi \times 0.4857} \approx \frac{3517.8}{1.5259} \approx 2305.4 \text{ rpm}$.
+                                <br>Check $V_{f2}/U = 0.76 \implies V_{f2} = 0.76 \times U = 0.76 \times 58.63 \approx 44.56 \text{ m/s}$. This information can be used to find $\beta_1, \alpha_2$ if needed, but not directly for power or RPM with the 50% reaction work formula.
+                            </li>
+                        </ol>
+                        <p class="final-answer">
+                        i) Speed of turbine $\approx 2305.4 \text{ rpm}$ <br>
+                        ii) Power developed $\approx 22.99 \text{ kW}$
+                        </p>
+                        <p><em>Note: Calculations for reaction turbines can be complex. The assumption of 50% reaction symmetrical blading simplifies work done. If $V_{f2}/U$ was critical, it would imply solving full outlet triangles.</em></p>
+                    </div>
+                </details>
+            </div>
+
         </section>
 
         <section class="mcq">
