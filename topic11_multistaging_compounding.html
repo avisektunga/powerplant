@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>11. Multi-Staging & Compounding in Steam Turbines</title>
+    <title>11. Taming the Beast: Multi-Staging & Compounding Turbines!</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- RECOMMENDED: Add MathJax for proper LaTeX rendering -->
     <script type="text/javascript" async
@@ -30,7 +30,7 @@
             flex-wrap: wrap;
             justify-content: space-around;
             align-items: flex-start;
-            margin-top: 1em;
+            margin-top: 1em; margin-bottom: 1em; /* Added bottom margin */
         }
         .diagram-container figure {
             margin: 10px;
@@ -41,19 +41,29 @@
             max-width: 100%;
             height: auto;
             border: 1px solid #ddd;
-            padding: 5px;
+            padding: 5px; background-color: #fff; /* Added white background */
         }
         .diagram-container figcaption {
             font-size: 0.9em;
             margin-top: 5px;
             color: #555;
         }
+        .question-box {
+            border: 1px dashed #0779e4; padding: 10px; margin: 15px 0;
+            background-color: #e7f3fe; border-radius: 5px;
+        }
+        .question-box p { margin-bottom: 5px; }
+        .example-box {
+            border: 1px solid #28a745; padding: 10px; margin: 15px 0;
+            background-color: #e6ffed; border-radius: 5px;
+        }
+        .example-box strong { color: #155724; }
     </style>
 </head>
 <body>
     <header>
         <a href="index.html" class="home-link">Engineering Learning Hub</a>
-        <h1>11. Multi-Staging & Compounding in Steam Turbines</h1>
+        <h1>11. Taming the Beast: Multi-Staging & Compounding Turbines!</h1>
     </header>
     <nav class="topic-nav">
         <a href="topic10_velocity_diagrams.html">« Prev: Velocity Diagrams</a>
@@ -61,61 +71,68 @@
     </nav>
     <main>
         <section>
-            <h2>Need for Multi-Staging and Compounding</h2>
-            <p>If the entire pressure drop from boiler pressure to condenser pressure were to occur in a single turbine stage (like a simple De Laval impulse turbine), the steam velocity leaving the nozzles would be extremely high (often supersonic and > 1000 m/s).</p>
-            <p>For maximum efficiency in a single impulse stage, the optimum blade speed ($U$) is about half the steam jet velocity ($U \approx V_1/2$ for $\alpha_1 \approx 0$, more accurately $U = (V_1 \cos \alpha_1)/2$). This would necessitate impractically high rotor speeds, leading to:</p>
+            <h2>Why One "Kick" Isn't Enough: The Need for Multi-Staging & Compounding</h2>
+            <p>Imagine trying to stop a speeding bullet with a single, tiny paddle. Not very effective, right? If we try to extract all the energy from high-pressure boiler steam in just one go (a single turbine stage, like a simple De Laval turbine), we run into some serious problems:</p>
             <ul>
-                <li>Excessive centrifugal stresses in the rotor and blades, potentially causing structural failure.</li>
-                <li>The need for very large reduction gearing if driving standard speed generators (e.g., 3000 or 3600 RPM).</li>
-                <li>Very high frictional losses at such high speeds.</li>
-                <li>If blade speed is kept low relative to such high steam jet velocity, the efficiency would be very poor, and a large amount of kinetic energy would be lost in the exhaust steam (high "leaving loss").</li>
+                <li>The steam coming out of the nozzle would be like a **supersonic hurricane** (often over 1000 m/s)!</li>
+                <li>To catch this super-fast steam efficiently, the turbine blades would have to spin at **insanely high speeds** (think $U \approx V_1/2$). We're talking speeds that could tear the rotor apart due to massive centrifugal forces!</li>
+                <li>Even if the rotor could handle it, you'd need a giant gearbox to slow it down for a generator.</li>
+                <li>And if the blades spin too slowly compared to the steam jet? Most of that precious kinetic energy in the steam just zips out the exhaust – a huge waste (high "leaving loss")!</li>
             </ul>
             <div class="diagram-container">
                  <figure>
-                    <img src="images/single.png" alt="Problem with Single Stage High Pressure Drop">
-                    <figcaption>Challenge: High steam velocity from single-stage expansion leads to impractical rotor speeds or high leaving losses.</figcaption>
+                    <img src="images/single.png" alt="Problem with Single Stage High Pressure Drop"> <!-- Ensure this image exists -->
+                    <figcaption>The Single-Stage Challenge: Super-fast steam vs. Practical rotor speeds.</figcaption>
                 </figure>
             </div>
-            <p>To overcome these issues and to efficiently utilize a large enthalpy (pressure) drop, **multi-staging** and **compounding** techniques are employed.</p>
+            <div class="question-box">
+                <p><strong>Self-Question:</strong> So, if a single big "kick" from the steam is too much, what's the solution?</p>
+                <p><em>Answer: We break it down into many smaller, manageable "kicks"! That's where multi-staging and compounding come in.</em></p>
+            </div>
+            <p>To tame this energy beast and use it efficiently, engineers use two main strategies:</p>
             <ul>
-                <li><strong>Multi-staging:</strong> The overall pressure/enthalpy drop is divided among several stages in series. Each stage handles a smaller portion of the total expansion. This results in lower steam velocities and manageable blade speeds in each stage, leading to higher overall efficiency. Both impulse and reaction turbines are typically multi-staged for power generation.</li>
-                <li><strong>Compounding (specifically for Impulse Turbines):</strong> These are methods to reduce the high rotor speed of impulse turbines while utilizing a large enthalpy drop in a more controlled manner, primarily by reducing the steam velocity before it leaves the casing or by absorbing its kinetic energy in steps.</li>
+                <li><strong>Multi-staging:</strong> Think of it as a series of "mini-turbines" one after another on the same shaft. The total pressure drop (and energy extraction) is divided among these stages. Each stage handles a smaller bit of expansion, so steam and blade speeds are much more reasonable. This is used for both impulse and reaction turbines.</li>
+                <li><strong>Compounding (especially for Impulse Turbines):</strong> These are clever tricks to reduce the high rotor speed of impulse turbines when a lot of energy is released in the nozzles. It's about absorbing that high steam velocity in a more controlled way.</li>
             </ul>
         </section>
 
         <section class="questions">
-            <h3>Previous Year Questions & Key Concepts:</h3>
+            <h3>Unpacking the Strategies: Multi-Staging & Compounding Explained</h3>
             <div class="pyq-item">
                 <details>
-                    <summary><strong>(Similar to 2025 PYQ) Discuss need and types of multistaging in steam turbines.</strong></summary>
+                    <summary><strong>Why Go Multi-Stage? The Perks of Breaking it Down!</strong> (Similar to 2025 PYQ)</summary>
                     <div class="pyq-answer">
-                        <h4>Need for Multi-Staging:</h4>
-                        <p>As discussed in the introduction, the primary needs for multi-staging are:</p>
+                        <h4>The Need for Multi-Staging: More Stages, More Gains!</h4>
+                        <p>Using multiple stages is like building a long, gentle ramp instead of a single, steep cliff. It allows for:</p>
                         <ol>
-                            <li><strong>To Manage Rotor Speeds:</strong> By dividing the total enthalpy drop into smaller drops per stage, the steam velocity leaving the nozzles (or fixed blades) of each stage is kept at a moderate level. This allows the rotor to operate at practical and safe speeds (e.g., $U \approx V_1/2$ for impulse stages can be achieved without excessive RPM).</li>
-                            <li><strong>To Improve Thermal Efficiency:</strong>
+                            <li><strong>Sane Rotor Speeds:</strong> By dividing the total energy drop, each stage only deals with a fraction. This means lower steam velocities out of each set of nozzles, allowing the turbine blades to spin at practical, safe speeds while still being efficient (remember $U \approx V_1/2$ for good impulse efficiency?).</li>
+                            <li><strong>Higher Overall Efficiency:</strong>
                                 <ul>
-                                    <li>Operating blades at or near their optimum blade speed ratio ($U/V_1$) for each stage maximizes energy extraction from the steam in that stage.</li>
-                                    <li>It reduces the kinetic energy of the steam leaving the final stage (known as "leaving loss" or "exhaust loss"), which is a direct loss of available energy.</li>
-                                    <li>It reduces frictional losses associated with excessively high steam velocities.</li>
+                                    <li>Each stage can operate closer to its optimal blade speed ratio, squeezing out more energy.</li>
+                                    <li>Less energy is wasted as "leaving loss" (the kinetic energy of steam exiting the *last* stage is much lower).</li>
+                                    <li>Friction losses from super-high steam speeds are reduced.</li>
                                 </ul>
                             </li>
-                            <li><strong>To Reduce Centrifugal Stresses:</strong> Lower rotor speeds lead to lower centrifugal forces on the blades and rotor disc, allowing for more robust and reliable designs.</li>
-                            <li><strong>To Accommodate Large Volume Flow of Steam:</strong> In the lower pressure stages, the specific volume of steam increases significantly. Multi-staging allows for progressively larger blade heights and flow areas to accommodate this volumetric expansion efficiently.</li>
+                            <li><strong>Less Stress on Parts:</strong> Slower speeds mean lower centrifugal forces on blades and the rotor – happy, long-lasting components!</li>
+                            <li><strong>Handling Big Steam Volumes:</strong> As steam expands, its volume balloons! Multi-staging lets designers make later stages with taller blades and wider passages to handle this "puffed-up" steam smoothly.</li>
                         </ol>
+                        <div class="example-box">
+                            <strong>Analogy: A Hydroelectric Dam with Multiple Turbines</strong>
+                            <br>Instead of one giant water wheel trying to handle all the water pressure from a tall dam, they often use a series of smaller turbines. Each takes a portion of the pressure drop. Same idea in steam turbines!
+                        </div>
 
-                        <h4>Types of Multi-Staging:</h4>
-                        <p>Multi-staging essentially involves arranging multiple single stages in series on a common shaft. Each stage typically consists of a set of stationary blades (nozzles in impulse, fixed guide blades in reaction) and a row of moving blades. The types of multi-staging are based on the type of individual stages used:</p>
+                        <h4>Types of Multi-Staging: Different Flavors for Different Turbines</h4>
+                        <p>It's like having different types of "mini-turbines" (stages) lined up:</p>
                         <ol>
-                            <li><strong>Multi-Stage Impulse Turbine:</strong> Composed of multiple impulse stages.
+                            <li><strong>Multi-Stage Impulse Turbine:</strong> A series of impulse stages.
                                 <ul>
-                                    <li><strong>Pressure Compounding (Rateau Staging):</strong> The total pressure drop is divided among multiple simple impulse stages. Each stage consists of a set of nozzles and a row of moving blades. Steam expands only in the nozzles of each stage, and pressure remains relatively constant across the moving blades. The kinetic energy gained in the nozzles is absorbed by the moving blades.</li>
-                                    <li><strong>Velocity Compounding (Curtis Staging):</strong> The steam expands in a single set of nozzles from a high initial pressure to a lower pressure, generating very high velocity. This high-velocity steam then passes through multiple rows of moving blades, with rows of fixed guide blades (which only redirect the steam, without significant pressure drop) in between the moving rows. The kinetic energy is absorbed in steps by the successive rows of moving blades. Typically used for the first stage of a high-pressure turbine to quickly reduce steam temperature and velocity.</li>
-                                    <li><strong>Pressure-Velocity Compounding:</strong> A combination where the total pressure drop is divided into stages (pressure compounding), and one or more of these stages might be velocity-compounded.</li>
+                                    <li><strong>Pressure Compounding (Rateau Staging):</strong> We'll talk more about this below! Pressure drops in steps.</li>
+                                    <li><strong>Velocity Compounding (Curtis Staging):</strong> Also detailed below! Velocity is absorbed in steps.</li>
+                                    <li><strong>Pressure-Velocity Compounding:</strong> A mix-and-match of both!</li>
                                 </ul>
                             </li>
-                            <li><strong>Multi-Stage Reaction Turbine (e.g., Parsons Turbine):</strong> Composed of multiple reaction stages. In each stage (a pair of fixed and moving rows), steam expands and drops in pressure across both the fixed blades (acting as nozzles) and the moving blades (also acting as nozzles). The enthalpy drop per stage is generally smaller than in impulse stages, requiring a larger number of stages for the same overall pressure drop.</li>
-                            <li><strong>Multi-Stage Impulse-Reaction Turbine:</strong> Many modern large turbines use impulse staging (often a velocity-compounded Curtis wheel) at the high-pressure inlet where specific volume is small, followed by reaction staging for the intermediate and low-pressure sections where specific volume is large and reaction blading offers higher efficiency.</li>
+                            <li><strong>Multi-Stage Reaction Turbine (e.g., Parsons Turbine):</strong> A series of reaction stages. Steam expands a bit in the fixed blades, then a bit more in the moving blades, then repeat! Usually needs more stages than an impulse turbine for the same total pressure drop.</li>
+                            <li><strong>Multi-Stage Impulse-Reaction Turbine:</strong> The popular hybrid! Often starts with a tough impulse stage (like a Curtis wheel) to handle the initial high-pressure punch, then switches to more efficient reaction stages for the rest.</li>
                         </ol>
                     </div>
                 </details>
@@ -123,76 +140,82 @@
 
             <div class="pyq-item">
                 <details>
-                    <summary><strong>2018: What is compounding? Explain velocity and pressure compounding.</strong></summary>
+                    <summary><strong>What's Compounding? Tricks for Taming Impulse Turbines!</strong> (2018 PYQ)</summary>
                     <div class="pyq-answer">
-                        <h4>Compounding in Steam Turbines</h4>
-                        <p>Compounding is a method used primarily in impulse steam turbines to reduce the high rotor speeds that would result from expanding steam in a single stage from boiler pressure to condenser pressure. It involves utilizing the steam's enthalpy drop (and the resulting high velocity) in multiple steps or stages on a single rotor or multiple rotors, allowing for more practical and efficient turbine designs.</p>
-                        <p>The main objective of compounding is to allow the turbine to run at a lower (more practical) rotational speed while maintaining good efficiency by ensuring that the blade speed is appropriately matched to the steam speed in each section where energy is extracted.</p>
+                        <h4>Compounding: The Art of Reducing Impulse Turbine Speed</h4>
+                        <p>Compounding is a set of special techniques used mainly with **impulse turbines** to bring their potentially super-high rotor speeds down to earth, without sacrificing too much efficiency. It’s all about cleverly managing that high-velocity steam jet produced by the nozzles.</p>
+                        <div class="question-box">
+                            <p><strong>Self-Question:</strong> Why is compounding mostly for impulse turbines?</p>
+                            <p><em>Answer: Because in impulse turbines, all (or most) of the pressure drop happens in one go in the nozzles, creating a very high-speed steam jet ($V_1$). Reaction turbines inherently divide the pressure drop over many fixed and moving blades, so their steam velocities per stage are naturally lower.</em></p>
+                        </div>
 
-                        <h4>1. Velocity Compounding (Curtis Staging)</h4>
+                        <h4>1. Velocity Compounding (Curtis Staging): The "Multi-Hit" Approach</h4>
+                        <p>Imagine one powerful jet of steam ($V_1$) from the nozzles, and you want to absorb its energy without spinning your wheel too fast.</p>
                         <ul>
-                            <li><strong>Principle:</strong> The total velocity generated by steam expansion in one set of nozzles is absorbed in multiple steps by passing the steam through several rows of moving blades.</li>
-                            <li><strong>Arrangement:</strong> A velocity-compounded stage consists of:
+                            <li><strong>The Setup:</strong>
                                 <ol>
-                                    <li>One set of stationary nozzles where the steam expands from a high pressure to a lower pressure, acquiring very high velocity.</li>
-                                    <li>A row of moving blades where a portion of this high kinetic energy is absorbed.</li>
-                                    <li>A row of fixed guide blades (reversing blades) that redirect the steam (without significant pressure or velocity drop, ideally) to the next row of moving blades.</li>
-                                    <li>Another row of moving blades where more kinetic energy is absorbed.</li>
+                                    <li>Steam blasts out of **one set of nozzles** at super high speed.</li>
+                                    <li>It hits a **first row of moving blades (MB1)**, giving up some of its kinetic energy.</li>
+                                    <li>Then, it passes through a row of **fixed guide blades (FB)**. These don't change the steam's speed or pressure much; they just *redirect* the steam to hit the next set of moving blades at the right angle.
+                                        <div class="example-box"><strong>Think:</strong> The fixed blades are like cushion bumpers in a pinball machine, guiding the ball (steam) for the next shot.</div>
+                                    </li>
+                                    <li>The redirected steam hits a **second row of moving blades (MB2)** on the same wheel, giving up more energy.</li>
+                                    <li>This can even go on for a third row!</li>
                                 </ol>
-                                This can continue for two or three rows of moving blades (with intervening fixed guide blades). All moving blades are mounted on the same rotor/shaft.
                             </li>
-                            <li><strong>Pressure & Velocity Changes:</strong>
+                            <li><strong>Pressure & Speed Check:</strong>
                                 <ul>
-                                    <li>Pressure drops significantly only in the nozzles. It remains nearly constant across all moving and fixed guide blades.</li>
-                                    <li>Absolute steam velocity is very high after the nozzles and decreases progressively as it passes through each row of moving blades. The fixed guide blades primarily change the direction of steam flow.</li>
+                                    <li><strong>Pressure:</strong> Drops hugely in the nozzles, then stays almost constant through all the moving and fixed blades.</li>
+                                    <li><strong>Velocity:</strong> Sky-high after nozzles, then drops in chunks across each row of *moving* blades.</li>
                                 </ul>
                             </li>
-                            <li><strong>Advantages:</strong> Allows for a large pressure drop (and thus high steam velocity generation) in a single nozzle set while keeping the rotor speed relatively low because the velocity is absorbed in stages. Results in a shorter turbine for a given pressure drop compared to pressure compounding.</li>
-                            <li><strong>Disadvantages:</strong> Efficiency of later rows of moving blades is lower due to higher frictional losses as the steam has already passed through previous rows. Overall stage efficiency is generally lower than pressure compounding for many stages.</li>
-                            <li><strong>Application:</strong> Commonly used for the first (governing) stage of high-pressure turbines to quickly reduce steam temperature and velocity, or in small, simple turbines.</li>
+                            <li><strong>Pros:</strong> Big pressure drop in one nozzle set, so fewer nozzle sets needed. Turbine can be shorter.</li>
+                            <li><strong>Cons:</strong> Later rows of moving blades are less efficient due to friction losses from steam already passing earlier rows.</li>
+                            <li><strong>Where it shines:</strong> Often the first stage of big HP turbines to quickly drop steam temperature & pressure, or in small, simple turbines.</li>
                         </ul>
                         <div class="diagram-container">
                              <figure>
-                                <img src="images/Velocity.png" alt="Velocity Compounding (Curtis Stage)">
-                                <figcaption>Velocity Compounding (Curtis Stage): N-Nozzle, MB-Moving Blade, FB-Fixed Blade. Pressure and Velocity profiles shown.</figcaption>
+                                <img src="images/Velocity.png" alt="Velocity Compounding (Curtis Stage)"> <!-- Your image path -->
+                                <figcaption>Velocity Compounding: One big speed boost, then multiple "hits" on moving blades (MB) via fixed blades (FB).</figcaption>
                             </figure>
                         </div>
 
-                        <h4>2. Pressure Compounding (Rateau Staging)</h4>
+                        <h4>2. Pressure Compounding (Rateau Staging): The "Many Small Sprints" Approach</h4>
+                        <p>Instead of one giant velocity boost, let's have a series of smaller speed-ups and energy extractions.</p>
                         <ul>
-                            <li><strong>Principle:</strong> The total pressure drop of the steam is divided into a series of smaller pressure drops across multiple simple impulse stages. Each stage consists of one set of nozzles and one row of moving blades.</li>
-                            <li><strong>Arrangement:</strong>
+                            <li><strong>The Setup:</strong> It's like having several simple impulse turbines in a row on the same shaft.
                                 <ol>
-                                    <li>A set of nozzles where a fraction of the total pressure drop occurs, and steam velocity increases.</li>
-                                    <li>A row of moving blades where the kinetic energy from the preceding nozzles is absorbed, and work is done. Steam velocity decreases.</li>
-                                    <li>This is followed by another set of nozzles and another row of moving blades, and so on.</li>
+                                    <li>Steam passes through a **set of nozzles (N1)**, pressure drops a bit, speed increases.</li>
+                                    <li>This steam hits a **row of moving blades (MB1)**, work is done, speed drops.</li>
+                                    <li>Then, it enters *another* **set of nozzles (N2)**, pressure drops again, speed increases again.</li>
+                                    <li>Hits **another row of moving blades (MB2)**... and so on.</li>
                                 </ol>
-                                All moving blade rows are mounted on the same shaft. The stages are separated by diaphragms which hold the nozzles.
+                                Diaphragms with nozzles separate these stages.
                             </li>
-                            <li><strong>Pressure & Velocity Changes:</strong>
+                            <li><strong>Pressure & Speed Check:</strong>
                                 <ul>
-                                    <li>Pressure drops in steps across each set of nozzles. It remains nearly constant across each row of moving blades.</li>
-                                    <li>Velocity increases in each set of nozzles and decreases as it passes over the subsequent row of moving blades. The velocity entering each nozzle set (after leaving previous moving blades) is relatively low.</li>
+                                    <li><strong>Pressure:</strong> Drops in steps, across each set of nozzles. Stays constant across moving blades within each stage.</li>
+                                    <li><strong>Velocity:</strong> Increases in each nozzle set, then decreases in the following moving blades. Steam enters each nozzle set with relatively low velocity.</li>
                                 </ul>
                             </li>
-                            <li><strong>Advantages:</strong> Each stage operates with a more moderate steam velocity, allowing the blade speed to be better matched for good efficiency. The overall efficiency can be higher than velocity compounding if many stages are used.</li>
-                            <li><strong>Disadvantages:</strong> Requires a larger number of stages (and thus a longer turbine) for the same overall pressure drop compared to a velocity-compounded stage.</li>
-                            <li><strong>Application:</strong> Widely used in multi-stage impulse turbines.</li>
+                            <li><strong>Pros:</strong> Each stage deals with more moderate steam speeds, so blade speeds can be well-matched for good efficiency throughout. Generally more efficient overall than velocity compounding if many stages are used.</li>
+                            <li><strong>Cons:</strong> Needs more stages (so a longer turbine) for the same total pressure drop.</li>
+                            <li><strong>Where it shines:</strong> Very common in multi-stage impulse turbines.</li>
                         </ul>
                         <div class="diagram-container">
                              <figure>
-                                <img src="images/pressure.png" alt="Pressure Compounding (Rateau Staging)">
-                                <figcaption>Pressure Compounding (Rateau Staging): Pressure drops in nozzles (N) of each stage, velocity increases in N and decreases in moving blades (MB).</figcaption>
+                                <img src="images/pressure.png" alt="Pressure Compounding (Rateau Staging)"> <!-- Your image path -->
+                                <figcaption>Pressure Compounding: Pressure drops in steps across nozzle sets (N), velocity is generated and absorbed in each N-MB pair.</figcaption>
                             </figure>
                         </div>
 
-                        <h4>3. Pressure-Velocity Compounding</h4>
-                        <p>This method combines the features of both pressure and velocity compounding. The total pressure drop is divided into several stages (pressure compounding). Each of these stages is then velocity-compounded (i.e., has one set of nozzles and multiple rows of moving blades with fixed guide blades in between).</p>
-                        <p>This approach can achieve a good compromise, allowing for a significant pressure drop per pressure-compounded stage while using velocity compounding within that stage to manage blade speeds. It can result in a turbine that is more compact than a purely pressure-compounded one for a very large overall pressure drop.</p>
+                        <h4>3. Pressure-Velocity Compounding: The Hybrid!</h4>
+                        <p>This is a mix-and-match strategy! The total pressure drop is divided into several "pressure stages" (like Rateau). But then, *each* of these pressure stages is itself "velocity-compounded" (like Curtis, with one nozzle set and multiple moving blade rows).</p>
+                        <p>It's a way to get a good compromise – handle big pressure drops per major stage while still managing rotor speed within that stage. Can make for a more compact turbine than pure pressure compounding for very large overall pressure drops.</p>
                         <div class="diagram-container">
                              <figure>
-                                <img src="images/pv.jpg" alt="Pressure-Velocity Compounding">
-                                <figcaption>Pressure-Velocity Compounding: Combines elements of both pressure and velocity stages.</figcaption>
+                                <img src="images/pv.jpg" alt="Pressure-Velocity Compounding"> <!-- Your image path -->
+                                <figcaption>Pressure-Velocity Compounding: Like having mini-Curtis stages within larger Rateau-like stages.</figcaption>
                             </figure>
                         </div>
                     </div>
@@ -201,75 +224,73 @@
         </section>
 
         <section class="mcq">
-            <h3>MCQ:</h3>
+            <h3>MCQ Challenge: Staging & Compounding Smarts!</h3>
             <div class="mcq-item">
-                <p><strong>1. The primary reason for multi-staging in steam turbines is to:</strong></p>
+                <p><strong>1. If a steam turbine has one set of nozzles followed by two rows of moving blades with a row of fixed guide blades in between, this is an example of:</strong></p>
                 <ul class="mcq-options">
-                    <li>a) Increase the steam inlet pressure.</li>
-                    <li>b) Reduce the exhaust steam temperature to absolute zero.</li>
-                    <li>c) Operate the turbine at manageable rotor speeds and improve efficiency.</li>
-                    <li>d) Simplify the turbine construction.</li>
+                    <li>a) Pressure compounding (Rateau)</li>
+                    <li>b) Velocity compounding (Curtis)</li>
+                    <li>c) 50% Reaction staging (Parsons)</li>
+                    <li>d) A single De Laval stage</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Velocity compounding (Curtis)</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>2. The main reason engineers use "compounding" in impulse turbines is to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Increase the steam's exit pressure.</li>
+                    <li>b) Allow the turbine to run at a more practical (lower) rotor speed for a given large pressure drop.</li>
+                    <li>c) Ensure all steam expansion happens only in the moving blades.</li>
+                    <li>d) Eliminate the need for nozzles.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Allow the turbine to run at a more practical (lower) rotor speed for a given large pressure drop.</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>3. In a pressure-compounded impulse turbine (Rateau staging), where does the steam pressure primarily drop?</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Only in the first row of moving blades.</li>
+                    <li>b) Across each row of moving blades.</li>
+                    <li>c) Across each set of nozzles between stages.</li>
+                    <li>d) Only in the last stage of the turbine.</li>
                 </ul>
                 <button class="reveal-answer" data-answer="c">Reveal Answer</button>
-                <p class="answer" style="display:none;"><strong>Answer: c) Operate the turbine at manageable rotor speeds and improve efficiency.</strong></p>
+                <p class="answer" style="display:none;"><strong>Answer: c) Across each set of nozzles between stages.</strong></p>
             </div>
-
-            <div class="mcq-item">
-                <p><strong>2. In velocity compounding (Curtis stage), steam pressure drops significantly only in the:</strong></p>
+             <div class="mcq-item">
+                <p><strong>4. Which of these is NOT a primary reason for multi-staging steam turbines?</strong></p>
                 <ul class="mcq-options">
-                    <li>a) First row of moving blades</li>
-                    <li>b) Fixed guide blades</li>
-                    <li>c) Nozzles</li>
-                    <li>d) All rows of moving blades</li>
+                    <li>a) To reduce the overall length of the turbine.</li>
+                    <li>b) To improve overall thermal efficiency.</li>
+                    <li>c) To operate at safe and practical rotor speeds.</li>
+                    <li>d) To reduce leaving losses.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="a">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: a) To reduce the overall length of the turbine.</strong> (Multi-staging, especially pressure compounding, often makes turbines longer, not shorter, but it's done for other benefits.)</p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>5. In a velocity-compounded stage (Curtis), the fixed guide blades between rows of moving blades primarily serve to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Further expand the steam and increase its velocity.</li>
+                    <li>b) Absorb a significant portion of the steam's kinetic energy.</li>
+                    <li>c) Redirect the steam flow to the next row of moving blades at an appropriate angle.</li>
+                    <li>d) Reduce the steam pressure.</li>
                 </ul>
                 <button class="reveal-answer" data-answer="c">Reveal Answer</button>
-                <p class="answer" style="display:none;"><strong>Answer: c) Nozzles</strong></p>
+                <p class="answer" style="display:none;"><strong>Answer: c) Redirect the steam flow to the next row of moving blades at an appropriate angle.</strong></p>
             </div>
-
+             <!-- Existing MCQs 1-6 are mostly covered or can be adapted -->
             <div class="mcq-item">
-                <p><strong>3. Pressure compounding (Rateau staging) involves:</strong></p>
+                <p><strong>6. A multi-stage turbine that uses impulse type stages for the high-pressure section and reaction type stages for the low-pressure section is known as:</strong></p>
                 <ul class="mcq-options">
-                    <li>a) One set of nozzles and multiple rows of moving blades.</li>
-                    <li>b) Multiple sets of nozzles, each followed by one row of moving blades.</li>
-                    <li>c) Steam expanding in both fixed and moving blades.</li>
-                    <li>d) A single stage handling the entire pressure drop.</li>
+                    <li>a) Pure Impulse Turbine</li>
+                    <li>b) Pure Reaction Turbine</li>
+                    <li>c) Impulse-Reaction Turbine</li>
+                    <li>d) Tandem Compound Turbine (this refers to casing arrangement, not stage type)</li>
                 </ul>
-                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
-                <p class="answer" style="display:none;"><strong>Answer: b) Multiple sets of nozzles, each followed by one row of moving blades.</strong></p>
-            </div>
-
-            <div class="mcq-item">
-                <p><strong>4. Which type of compounding is characterized by having fixed guide blades between rows of moving blades?</strong></p>
-                <ul class="mcq-options">
-                    <li>a) Pressure compounding</li>
-                    <li>b) Velocity compounding</li>
-                    <li>c) Reaction staging</li>
-                    <li>d) Reheat staging</li>
-                </ul>
-                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
-                <p class="answer" style="display:none;"><strong>Answer: b) Velocity compounding</strong></p>
-            </div>
-            <div class="mcq-item">
-                <p><strong>5. If a large enthalpy drop is handled in a single impulse stage, it leads to:</strong></p>
-                <ul class="mcq-options">
-                    <li>a) Very low steam exit velocity from nozzles.</li>
-                    <li>b) Very high steam exit velocity from nozzles and potentially impractical rotor speeds.</li>
-                    <li>c) Increased pressure across moving blades.</li>
-                    <li>d) Reduced thermal efficiency.</li>
-                </ul>
-                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
-                <p class="answer" style="display:none;"><strong>Answer: b) Very high steam exit velocity from nozzles and potentially impractical rotor speeds.</strong></p>
-            </div>
-            <div class="mcq-item">
-                <p><strong>6. The main purpose of fixed guide blades in a velocity-compounded impulse stage is to:</strong></p>
-                <ul class="mcq-options">
-                    <li>a) Expand the steam further to increase its velocity.</li>
-                    <li>b) Redirect the steam flow to the next row of moving blades.</li>
-                    <li>c) Reduce the pressure of the steam.</li>
-                    <li>d) Absorb kinetic energy from the steam.</li>
-                </ul>
-                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
-                <p class="answer" style="display:none;"><strong>Answer: b) Redirect the steam flow to the next row of moving blades.</strong></p>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) Impulse-Reaction Turbine</strong></p>
             </div>
 
         </section>
