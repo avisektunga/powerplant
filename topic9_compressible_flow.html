@@ -24,36 +24,45 @@
             border: 1px solid #ddd; border-radius: 5px;
             font-family: 'Courier New', Courier, monospace;
             line-height: 1.8; overflow-x: auto;
+            font-size: 0.9em;
         }
         .diagram-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
             align-items: flex-start;
-            margin-top: 1em;
+            margin-top: 1em; margin-bottom: 1em;
         }
         .diagram-container figure {
             margin: 10px;
             text-align: center;
-            max-width: 400px; /* Adjust as needed */
+            max-width: 400px;
         }
         .diagram-container img {
             max-width: 100%;
             height: auto;
             border: 1px solid #ddd;
-            padding: 5px;
+            padding: 5px; background-color: #fff;
         }
         .diagram-container figcaption {
             font-size: 0.9em;
             margin-top: 5px;
             color: #555;
         }
-        .derivation-step {
-            margin-bottom: 0.8em;
+        .derivation-step, .solution-step {
+            margin-bottom: 1em;
         }
-        .derivation-step strong {
-            color: #333;
+        .derivation-step strong, .solution-step strong {
+            color: #333; display: block; margin-bottom: 0.3em;
         }
+        .question-box { /* For self-questions */
+            border: 1px dashed #0779e4;
+            padding: 10px; margin: 15px 0;
+            background-color: #e7f3fe;
+            border-radius: 5px;
+        }
+        .question-box p { margin-bottom: 5px; }
+        .final-answer { font-weight: bold; color: #006400; }
     </style>
 </head>
 <body>
@@ -67,193 +76,295 @@
     </nav>
     <main>
         <section>
-            <h2>Introduction to Compressible Flow</h2>
-            <p>Compressible flow is a branch of fluid mechanics where the fluid density changes significantly due to changes in pressure and temperature. This is typical for gases flowing at high velocities, such as steam in turbine nozzles or air in jet engines.</p>
-            <p>Key concepts in compressible flow include:</p>
+            <h2>What is Compressible Flow? And Why Nozzles?</h2>
+            <p>Imagine trying to squeeze air into a bicycle tire – it gets harder as more air goes in, right? That's because air is **compressible**; its density changes with pressure. When fluids (especially gases like steam or air) move at high speeds, these density changes become super important. This is the realm of compressible flow.</p>
+            <div class="question-box">
+                <p><strong>Self-Question:</strong> Why don't we usually worry about water being compressible in everyday taps?</p>
+                <p><em>Answer: Liquids like water are much less compressible than gases. Their density hardly changes with normal pressure variations. We only consider compressibility for gases at high speeds or large pressure changes.</em></p>
+            </div>
+            <p>Now, what's a **nozzle**? Think of it as a specially shaped pipe designed to do one main thing: speed up the fluid passing through it! By accelerating the fluid, we convert its internal thermal energy (or pressure energy) into kinetic energy (energy of motion). This high-speed jet is exactly what we need to spin the blades of a steam turbine.</p>
+
+            <p><strong>Key Concepts Revisited:</strong></p>
             <ul>
-                <li><strong>Mach Number (M):</strong> The ratio of the local flow velocity (V) to the local speed of sound (a). $M = V/a$.
+                <li><strong>Mach Number (M):</strong> $M = V/a$. It's like asking, "How fast is the fluid moving compared to how fast sound travels in it right now?"
                     <ul>
-                        <li>$M < 1$: Subsonic flow</li>
-                        <li>$M = 1$: Sonic flow (choked flow)</li>
-                        <li>$M > 1$: Supersonic flow</li>
+                        <li>$M < 1$: Subsonic (slower than sound)</li>
+                        <li>$M = 1$: Sonic (at the speed of sound - a special state!)</li>
+                        <li>$M > 1$: Supersonic (faster than sound)</li>
                     </ul>
                 </li>
-                <li><strong>Speed of Sound (a):</strong> For an ideal gas, $a = \sqrt{\gamma R T}$, where $\gamma$ is the specific heat ratio, R is the specific gas constant, and T is the absolute temperature. For steam, properties are typically obtained from steam tables.</li>
-                <li><strong>Stagnation Properties:</strong> Properties the fluid would attain if brought to rest isentropically (e.g., stagnation temperature $T_0$, stagnation pressure $P_0$).</li>
+                <li><strong>Speed of Sound (a):</strong> $a = \sqrt{\gamma R T}$ for ideal gases. It changes with temperature!</li>
+                <li><strong>Stagnation Properties ($P_0, T_0, h_0$):</strong> Imagine stopping the fast-moving fluid smoothly and without losing heat. The pressure, temperature, and enthalpy it would reach are its stagnation properties. In an adiabatic nozzle, stagnation enthalpy ($h_0$) and stagnation temperature ($T_0$ for ideal gas) remain constant!</li>
             </ul>
         </section>
 
-        <section class="questions">
-            <h3>Previous Year Questions & Key Concepts:</h3>
-            <div class="pyq-item">
-                <details>
-                    <summary><strong>2018: Derive the continuity equation for compressible fluid flow.</strong></summary>
-                    <div class="pyq-answer">
-                        <h4>Derivation of the Continuity Equation for Compressible Fluid Flow</h4>
-                        <p>The continuity equation is an expression of the principle of conservation of mass.</p>
-                        <p>Consider a fixed control volume (CV) in space through which fluid is flowing.
-                            <!-- Placeholder for control volume diagram -->
-                            <img src="images/control_volume_flow.png" alt="Control Volume for Flow Analysis" class="diagram" style="max-width:300px; margin:auto; display:block;">
-                        </p>
-                        <p>The principle of mass conservation states:</p>
-                        <div class="formula-block">
-                            $\left( \text{Rate of mass accumulation within CV} \right) = \left( \text{Rate of mass inflow into CV} \right) - \left( \text{Rate of mass outflow from CV} \right)$
-                        </div>
-                        <p>Let:</p>
-                        <ul>
-                            <li>$\rho$ = density of the fluid</li>
-                            <li>$dV$ = an elemental volume within the CV</li>
-                            <li>$d\vec{A}$ = an elemental area on the control surface (CS), with vector normal pointing outwards</li>
-                            <li>$\vec{V}$ = velocity vector of the fluid</li>
-                        </ul>
-                        <p>The mass within the control volume is $m_{CV} = \int_{CV} \rho \, dV$.</p>
-                        <p>The rate of mass accumulation within the CV is $\frac{\partial}{\partial t} \int_{CV} \rho \, dV$.</p>
-                        <p>The net rate of mass outflow across the control surface (CS) is $\int_{CS} \rho (\vec{V} \cdot d\vec{A})$.
-                        (Note: $\vec{V} \cdot d\vec{A}$ is positive for outflow and negative for inflow).</p>
-                        <p>So, the conservation of mass can be written as:</p>
-                        <div class="formula-block">
-                            $\frac{\partial}{\partial t} \int_{CV} \rho \, dV + \int_{CS} \rho (\vec{V} \cdot d\vec{A}) = 0$
-                        </div>
-                        <p>This is the integral form of the continuity equation.</p>
-                        <p>Using the divergence theorem (Gauss's theorem), $\int_{CS} (\rho \vec{V}) \cdot d\vec{A} = \int_{CV} \nabla \cdot (\rho \vec{V}) \, dV$.</p>
-                        <p>Substituting this into the integral form:</p>
-                        <div class="formula-block">
-                            $\int_{CV} \left( \frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \vec{V}) \right) \, dV = 0$
-                        </div>
-                        <p>Since this must hold for any arbitrary control volume, the integrand itself must be zero. This gives the differential form of the continuity equation (also known as the general continuity equation):</p>
-                        <div class="formula-block">
-                            $\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \vec{V}) = 0$
-                        </div>
-                        <p>Expanding the divergence term: $\nabla \cdot (\rho \vec{V}) = \vec{V} \cdot \nabla \rho + \rho (\nabla \cdot \vec{V})$.</p>
-                        <p>So, $\frac{\partial \rho}{\partial t} + \vec{V} \cdot \nabla \rho + \rho (\nabla \cdot \vec{V}) = 0$.</p>
-                        <p>The first two terms represent the material derivative (or substantial derivative) of density: $\frac{D\rho}{Dt} = \frac{\partial \rho}{\partial t} + \vec{V} \cdot \nabla \rho$.</p>
-                        <p>Thus, the continuity equation can also be written as:</p>
-                        <div class="formula-block">
-                            $\frac{D\rho}{Dt} + \rho (\nabla \cdot \vec{V}) = 0$
-                        </div>
-
-                        <p><strong>For Steady Flow:</strong> $\frac{\partial \rho}{\partial t} = 0$. The equation becomes:</p>
-                        <div class="formula-block">
-                            $\nabla \cdot (\rho \vec{V}) = 0$
-                        </div>
-
-                        <p><strong>For Steady, One-Dimensional Flow:</strong>
-                        Consider flow through a duct of varying cross-sectional area A.
-                        <br>Mass flow rate $\dot{m} = \rho A V$.
-                        <br>For steady flow, the mass flow rate is constant: $\dot{m} = \text{constant}$.
-                        <br>So, $d(\rho A V) = 0$.
-                        <br>Applying product rule: $A V d\rho + \rho V dA + \rho A dV = 0$.
-                        <br>Dividing by $\rho A V$:
-                        </p>
-                        <div class="formula-block">
-                           $\frac{d\rho}{\rho} + \frac{dA}{A} + \frac{dV}{V} = 0$
-                        </div>
-                        <p>This is the differential form of the continuity equation for steady, 1-D compressible flow.
-                        If integrated, it simply means $\rho A V = \text{constant}$ at any two sections 1 and 2:
-                        $\rho_1 A_1 V_1 = \rho_2 A_2 V_2$.
-                        </p>
+        <section>
+            <h2>Types of Nozzles & Their Purpose</h2>
+            <p>Not all nozzles are shaped the same. Their design depends on whether we want to go from slow to fast (subsonic to supersonic) or just make subsonic flow faster.</p>
+            <ol>
+                <li><strong>Convergent Nozzle:</strong>
+                    <div class="diagram-container">
+                         <figure><img src="images/convergent_nozzle.png" alt="Convergent Nozzle"><figcaption>Convergent Nozzle</figcaption></figure>
                     </div>
-                </details>
-            </div>
+                    <p>Its cross-sectional area decreases along the flow direction.
+                    <br><strong>Function:</strong> Excellent for accelerating subsonic flow ($M<1$).
+                    <br><strong>Limitation:</strong> Can only accelerate flow up to sonic velocity ($M=1$) at its exit (the narrowest point, also called the throat if it were part of a C-D nozzle). It cannot produce supersonic flow by itself.</p>
+                </li>
+                <li><strong>Divergent Nozzle (Supersonic Nozzle):</strong>
+                    <p>Its cross-sectional area increases along the flow direction.
+                    <br><strong>Function:</strong> Used to further accelerate already supersonic flow ($M>1$) to even higher supersonic speeds.
+                    <br><em>(Often part of a Convergent-Divergent nozzle)</em></p>
+                </li>
+                <li><strong>Convergent-Divergent (C-D) Nozzle / De Laval Nozzle:</strong>
+                     <div class="diagram-container">
+                         <figure><img src="images/convergent_divergent_nozzle.png" alt="Convergent-Divergent Nozzle"><figcaption>Convergent-Divergent (De Laval) Nozzle</figcaption></figure>
+                    </div>
+                    <p>This is the superstar for achieving supersonic speeds! It has a converging section, followed by a narrowest point called the **throat**, and then a diverging section.
+                    <br><strong>Function:</strong>
+                        <ul>
+                            <li>Converging part: Accelerates subsonic inlet flow towards sonic speed.</li>
+                            <li>Throat: If conditions are right, flow becomes sonic ($M=1$) here.</li>
+                            <li>Diverging part: Accelerates the (now sonic or already supersonic) flow to higher supersonic speeds ($M>1$).</li>
+                        </ul>
+                    </p>
+                     <div class="question-box">
+                        <p><strong>Self-Question:</strong> Why does a diverging section speed up supersonic flow but slow down subsonic flow (acting as a diffuser)?</p>
+                        <p><em>Answer: It's all thanks to the Area-Velocity Relationship! $\frac{dA}{A} = \frac{dV}{V} (M^2 - 1)$.
+                        <br>For $M<1$, $(M^2-1)$ is negative. So, if $dA>0$ (diverging), then $dV$ must be negative (flow slows down).
+                        <br>For $M>1$, $(M^2-1)$ is positive. So, if $dA>0$ (diverging), then $dV$ must be positive (flow speeds up!). Magic!</em></p>
+                    </div>
+                </li>
+            </ol>
+        </section>
 
+        <section>
+            <h2>Isentropic Flow Through Nozzles - The Ideal Scenario</h2>
+            <p>Let's imagine the perfect nozzle flow: **isentropic**. This means it's reversible (no friction) and adiabatic (no heat exchange with surroundings). Entropy ($s$) stays constant. This is our benchmark!</p>
             <div class="pyq-item">
                 <details>
                     <summary><strong>(Similar to 2025 PYQ) Explain isentropic flow through a nozzle and its characteristics.</strong></summary>
                     <div class="pyq-answer">
-                        <h4>Isentropic Flow Through a Nozzle</h4>
-                        <p>Isentropic flow is a type of fluid flow that is both **adiabatic** (no heat transfer to or from the fluid) and **reversible** (no frictional losses or other irreversibilities). For such a flow, the entropy of the fluid remains constant ($s = \text{constant}$).</p>
-                        <p>A nozzle is a duct of varying cross-sectional area designed to accelerate a fluid. The primary purpose of a nozzle in steam turbines or jet engines is to convert the thermal energy (enthalpy) of the fluid into kinetic energy.</p>
-
-                        <p><strong>Governing Equations for Isentropic Flow:</strong></p>
+                        <h4>Isentropic Flow Through a Nozzle Explained</h4>
+                        <p>Isentropic flow is the ideal, frictionless, adiabatic flow where entropy remains constant. In a nozzle, this means the maximum possible kinetic energy is achieved for a given pressure drop.</p>
+                        <p><strong>Key Governing Equations (recap):</strong></p>
                         <ul>
-                            <li><strong>Continuity Equation (steady, 1D):</strong> $\rho A V = \text{constant}$ or $\frac{d\rho}{\rho} + \frac{dA}{A} + \frac{dV}{V} = 0$</li>
-                            <li><strong>Energy Equation (Steady Flow Energy Equation - SFEE, adiabatic, no work):</strong>
-                                <br>$h_1 + \frac{V_1^2}{2} = h_2 + \frac{V_2^2}{2} = h_0 = \text{constant}$ (Stagnation enthalpy $h_0$ is constant).
-                                <br>For an ideal gas, $C_p T_1 + \frac{V_1^2}{2} = C_p T_2 + \frac{V_2^2}{2} = C_p T_0$.
-                            </li>
-                            <li><strong>Isentropic Relations (for an ideal gas):</strong>
-                                <div class="formula-block">
-                                    $\frac{P}{\rho^\gamma} = \text{constant}$ <br>
-                                    $\frac{T}{P^{(\gamma-1)/\gamma}} = \text{constant}$ <br>
-                                    $\frac{T}{\rho^{\gamma-1}} = \text{constant}$
-                                </div>
-                                Where $\gamma$ is the specific heat ratio ($C_p/C_v$). For steam, these relations are approximated or steam tables are used directly for entropy.
-                            </li>
+                            <li>Continuity: $\rho A V = \text{constant}$</li>
+                            <li>Energy (SFEE): $h + \frac{V^2}{2} = h_0 = \text{constant}$</li>
+                            <li>Isentropic Relations: $P/\rho^\gamma = \text{const}$, etc. (for ideal gas) or $s=\text{const}$ (general, use steam tables).</li>
+                            <li>Area-Velocity Relation: $\frac{dA}{A} = \frac{dV}{V} (M^2 - 1)$</li>
                         </ul>
-
-                        <p><strong>Area-Velocity Relationship (Hugoniot Equation):</strong>
-                        <br>Combining continuity, momentum (or Euler's equation $dP = -\rho V dV$), and the definition of speed of sound ($a^2 = dP/d\rho$ for isentropic flow), we get the crucial area-velocity relationship for 1D isentropic flow:
-                        </p>
-                        <div class="formula-block">
-                            $\frac{dA}{A} = \frac{dV}{V} (M^2 - 1)$
-                        </div>
-                        <p>This equation dictates the nozzle shape required for accelerating or decelerating flow:</p>
-                        <ul>
-                            <li><strong>Subsonic Flow ($M < 1$):</strong> $(M^2 - 1)$ is negative.
-                                <ul>
-                                    <li>To accelerate flow ($dV > 0$), area must decrease ($dA < 0$) → **Convergent Nozzle**.</li>
-                                    <li>To decelerate flow ($dV < 0$), area must increase ($dA > 0$) → **Divergent Diffuser**.</li>
-                                </ul>
-                            </li>
-                            <li><strong>Supersonic Flow ($M > 1$):</strong> $(M^2 - 1)$ is positive.
-                                <ul>
-                                    <li>To accelerate flow ($dV > 0$), area must increase ($dA > 0$) → **Divergent Nozzle**.</li>
-                                    <li>To decelerate flow ($dV < 0$), area must decrease ($dA < 0$) → **Convergent Diffuser**.</li>
-                                </ul>
-                            </li>
-                            <li><strong>Sonic Flow ($M = 1$):</strong> $(M^2 - 1) = 0$. This implies $dA/A = 0$, meaning the area must be at a minimum (throat) or maximum. For continuous acceleration from subsonic to supersonic, $M=1$ occurs at the point of minimum area, called the **throat**.</li>
-                        </ul>
-
-                        <h4>Characteristics of Isentropic Flow in Nozzles:</h4>
-                        <div class="diagram-container">
-                             <figure>
-                                <img src="images/convergent_nozzle.png" alt="Convergent Nozzle Flow">
-                                <figcaption>Convergent Nozzle: Accelerates subsonic flow.</figcaption>
-                            </figure>
-                             <figure>
-                                <img src="images/convergent_divergent_nozzle.png" alt="Convergent-Divergent Nozzle Flow">
-                                <figcaption>Convergent-Divergent (De Laval) Nozzle: Can accelerate flow to supersonic speeds.</figcaption>
-                            </figure>
-                        </div>
-
+                        <h4>Characteristics of Isentropic Nozzle Flow:</h4>
                         <ol>
-                            <li><strong>Convergent Nozzle:</strong>
+                            <li><strong>Energy Conversion:</strong> Enthalpy (internal + flow energy) is smoothly converted into kinetic energy. Pressure and temperature drop as velocity increases.</li>
+                            <li><strong>Choked Flow & Critical Pressure Ratio:</strong>
                                 <ul>
-                                    <li>If the back pressure ($P_b$) is gradually lowered from the inlet stagnation pressure ($P_0$), the mass flow rate increases and the exit velocity increases.</li>
-                                    <li>The maximum velocity at the exit of a convergent nozzle is sonic ($M=1$), which occurs when $P_b / P_0 \le P^* / P_0$ (critical pressure ratio). $P^*$ is the critical pressure.</li>
-                                    <li>Once $M=1$ is reached at the exit (throat), the nozzle is said to be **choked**. Further reduction in back pressure will not increase the mass flow rate or the conditions upstream of the exit. The flow adjusts downstream of the exit via expansion waves.</li>
+                                    <li>As back pressure ($P_b$) at the nozzle exit is lowered, mass flow rate ($\dot{m}$) increases, up to a maximum value.</li>
+                                    <li>This maximum $\dot{m}$ occurs when velocity at the throat (narrowest section, or exit for convergent nozzle) reaches sonic speed ($M=1$). This condition is called **choked flow**.</li>
+                                    <li>The pressure at the throat when $M=1$ is called the **critical pressure ($P^*$**). The ratio $P^*/P_0$ (where $P_0$ is inlet stagnation pressure) is the **critical pressure ratio**.
+                                        <div class="formula-block">
+                                        For an ideal gas: $\frac{P^*}{P_0} = \left( \frac{2}{\gamma + 1} \right)^{\gamma / (\gamma - 1)}$
+                                        </div>
+                                        (Approx. 0.528 for air, $\gamma=1.4$; Approx. 0.546 for superheated steam, $\gamma \approx 1.3$)
+                                    </li>
+                                    <li>Once choked, further lowering $P_b$ (below $P^*$) does *not* increase $\dot{m}$ or change conditions upstream of the throat.</li>
                                 </ul>
                             </li>
-                            <li><strong>Convergent-Divergent (De Laval) Nozzle:</strong>
-                                <ul>
-                                    <li>Designed to accelerate flow from subsonic at the inlet to sonic at the throat ($M=1$), and then to supersonic ($M>1$) in the divergent section.</li>
-                                    <li>**Choking:** Similar to a convergent nozzle, the flow chokes at the throat ($M=1$) when the pressure ratio across the nozzle reaches the critical value. The mass flow rate becomes maximum and constant for further reductions in back pressure.</li>
-                                    <li>**Operation based on Back Pressure ($P_b$):**
-                                        <ul>
-                                            <li>If $P_b$ is high (slightly below $P_0$): Flow is subsonic throughout, nozzle acts as a Venturi.</li>
-                                            <li>If $P_b$ is lowered to $P^*$: Sonic flow at throat, subsonic in divergent part (diffuser action).</li>
-                                            <li>If $P_b$ is lowered further (below design pressure for supersonic exit): Over-expansion occurs, leading to oblique shock waves inside or at the exit of the divergent section if $P_b$ is higher than the design exit pressure for full supersonic expansion. If $P_b$ is lower than design exit pressure, expansion waves form at exit.</li>
-                                            <li>If $P_b$ matches the design exit pressure for full supersonic expansion: Smooth supersonic flow in the divergent section.</li>
-                                            <li>If $P_b$ is very low: Under-expansion may occur if the nozzle isn't long enough, resulting in further expansion outside the nozzle.</li>
-                                        </ul>
-                                    </li>
-                                    <li>During acceleration, pressure (P) and temperature (T) decrease, while velocity (V) and Mach number (M) increase. Density ($\rho$) also decreases.</li>
-                                </ul>
-                                 <div class="diagram-container">
+                            <li><strong>Operation of C-D Nozzle based on Back Pressure ($P_b$):</strong>
+                                <div class="diagram-container">
                                      <figure>
                                         <img src="images/pressure_velocity_mach_nozzle.png" alt="Properties variation in C-D Nozzle">
-                                        <figcaption>Variation of P, V, M, T along a C-D Nozzle (for supersonic exit design).</figcaption>
+                                        <figcaption>Variation of P, V, M, T along a C-D Nozzle for different back pressures.</figcaption>
                                     </figure>
                                 </div>
-                            </li>
-                            <li><strong>Critical Pressure Ratio ($P^*/P_0$):</strong> The ratio of throat pressure to inlet stagnation pressure when $M=1$ at the throat. For an ideal gas:
-                                <div class="formula-block">
-                                $\frac{P^*}{P_0} = \left( \frac{2}{\gamma + 1} \right)^{\gamma / (\gamma - 1)}$
+                                <ul>
+                                    <li><strong>$P_b / P_0 > P_{design,subsonic}$ (high $P_b$):</strong> Flow is subsonic throughout. Nozzle acts as a venturi (accelerates then decelerates).</li>
+                                    <li><strong>$P_b / P_0 = P_{throat}^* / P_0$:</strong> $M=1$ at throat, then flow decelerates subsonically in divergent part (nozzle acts as subsonic diffuser after throat). Choked.</li>
+                                    <li><strong>$P_{design,supersonic} < P_b / P_0 < P_{throat}^* / P_0$:</strong> $M=1$ at throat, flow accelerates to supersonic in divergent part, but a **normal shock wave** occurs inside the divergent section. Across the shock, flow becomes subsonic and pressure rises suddenly. Highly irreversible.</li>
+                                    <li><strong>$P_b / P_0 = P_{design,supersonic}$:</strong> Smooth isentropic acceleration to design supersonic Mach number at exit. This is the **design condition**.</li>
+                                    <li><strong>$P_b / P_0 < P_{design,supersonic}$ (very low $P_b$):</strong> Flow is over-expanded. Supersonic flow exits, then adjusts to $P_b$ via expansion waves outside the nozzle.</li>
+                                </ul>
+                                <div class="diagram-container">
+                                     <figure><img src="images/shock_wave_nozzle.png" alt="Shock wave in nozzle"><figcaption>Normal Shock in Divergent Section</figcaption></figure>
                                 </div>
-                                For air ($\gamma = 1.4$), $P^*/P_0 \approx 0.528$. For superheated steam ($\gamma \approx 1.3$), $P^*/P_0 \approx 0.546$.
+                            </li>
+                            <li><strong>Nozzle Efficiency ($\eta_N$):</strong> For real nozzles, friction causes losses.
+                                <div class="formula-block">
+                                $\eta_N = \frac{\text{Actual KE at exit}}{\text{Ideal (Isentropic) KE at exit for same pressure drop}} = \frac{V_{2a}^2 / 2}{(V_{2s}^2 / 2) \text{ for same } P_0, P_{exit}}$
+                                <br>Or based on enthalpy: $\eta_N = \frac{h_0 - h_{2a}}{h_0 - h_{2s}}$ (where $h_{2a}$ is actual exit enthalpy, $h_{2s}$ is isentropic exit enthalpy).
+                                </div>
+                                For isentropic flow, $\eta_N = 100\%$.
                             </li>
                         </ol>
-                        <p>Isentropic nozzle efficiency is defined as the ratio of actual kinetic energy at the exit to the ideal (isentropic) kinetic energy at the exit for the same pressure drop. For ideal isentropic flow, this efficiency is 100% by definition, but in real nozzles, friction reduces it.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section>
+            <h2>Beyond Ideal: Supersaturated Flow & Nozzle Efficiencies</h2>
+             <div class="pyq-item">
+                <details>
+                    <summary><strong>Explain supersaturated expansion in case of flow through nozzle and discuss briefly, the factors causing it. Represent the phenomenon on h-s diagram and state the effects of supersaturation.</strong></summary>
+                    <div class="pyq-answer">
+                        <h4>Supersaturated Expansion (Metastable Flow) in Nozzles</h4>
+                        <p>Imagine steam expanding rapidly in a nozzle. As it crosses the saturated vapor line on an h-s diagram, it *should* start condensing, forming tiny water droplets. But what if it expands *so fast* that it doesn't have time to condense properly at the equilibrium saturation point?</p>
+                        <p>This is **supersaturated flow** (or metastable flow). The steam remains as a vapor even though its temperature has dropped below the saturation temperature corresponding to its pressure. It's like a "supercooled vapor" – existing in a state where it thermodynamically shouldn't!</p>
+                        <div class="question-box">
+                            <p><strong>Self-Question:</strong> Is supersaturated steam "drier" than it should be?</p>
+                            <p><em>Answer: In a way, yes! It hasn't formed the liquid droplets it would have if it were in equilibrium. It's still behaving like a superheated vapor, just in a region where it "should" be wet.</em></p>
+                        </div>
+
+                        <p><strong>Representation on h-s Diagram (Mollier Chart):</strong></p>
+                        <div class="diagram-container">
+                             <figure>
+                                <img src="images/supersaturated_flow_hs_diagram.png" alt="Supersaturated Flow on h-s Diagram">
+                                <figcaption>Supersaturated Expansion on h-s Diagram. Point 2 is equilibrium, 2' is actual supersaturated state, 2'' is state after reversion.</figcaption>
+                            </figure>
+                        </div>
+                        <ul>
+                            <li>The expansion line (e.g., 1-2' on the diagram) continues smoothly past the saturation line (1-2) as if the steam were still superheated or dry.</li>
+                            <li>This metastable state persists until a point where condensation suddenly occurs (reversion point), often around the **Wilson Line** (empirically found, typically around 3-5% moisture if equilibrium existed).</li>
+                            <li>At reversion, the latent heat released during the sudden condensation causes a slight temperature and entropy increase, bringing the steam state closer to equilibrium (point 2'').</li>
+                        </ul>
+
+                        <p><strong>Factors Causing Supersaturation:</strong></p>
+                        <ol>
+                            <li><strong>High Rate of Expansion:</strong> This is the primary cause. If steam expands very rapidly (high velocity, steep pressure gradient, as in a nozzle), the molecules don't have enough time to aggregate and form stable condensation nuclei (tiny droplets). The condensation process has a time lag.</li>
+                            <li><strong>Absence of Nuclei:</strong> Condensation prefers to start on existing nuclei (like dust particles or ions). If the steam is very pure and free of such nuclei, the onset of condensation is delayed.</li>
+                            <li><strong>Low Pressure:</strong> At lower pressures, the number of molecular collisions is less frequent, further hindering the formation of condensation nuclei.</li>
+                        </ol>
+
+                        <p><strong>Effects of Supersaturation:</strong></p>
+                        <ul>
+                            <li><strong>Increased Mass Flow Rate:</strong> Because the steam remains as a vapor (higher specific volume than a wet mixture at equilibrium for the same pressure), and behaves like superheated steam with a specific heat ratio $\gamma \approx 1.3$ (instead of $\gamma \approx 1.135$ for wet steam), the density is lower than equilibrium wet steam. For a given throat area and upstream conditions, this results in a slightly higher mass flow rate through the nozzle (typically 1-5% increase) than predicted by equilibrium calculations. This is because $V_{throat} = \sqrt{\gamma P v}$, and with higher specific volume $v$ (as vapor) for supersaturated flow, $V_{throat}$ and $\dot{m}$ can be higher for a given pressure.</li>
+                            <li><strong>Reduced Enthalpy Drop (Undercooling Loss):</strong> The actual enthalpy drop to the reversion point (1-2') is less than the isentropic enthalpy drop to the equilibrium saturation pressure (1-2). This difference represents a loss, known as undercooling loss, reducing nozzle efficiency.</li>
+                            <li><strong>Shift in Dryness Fraction:</strong> After reversion, the steam is wetter than if it had expanded in equilibrium to the same pressure.</li>
+                            <li><strong>Erosion Potential:</strong> The sudden formation of relatively larger droplets at the reversion point can potentially lead to erosion of turbine blades if this point occurs within or near the blading.</li>
+                            <li><strong>Nozzle Design Considerations:</strong> Nozzle calculations for steam often need to account for supersaturation effects for accurate mass flow and exit condition predictions, especially in HP turbine stages.</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="questions"> <!-- Renamed to "Numerical Problems & Solutions" -->
+            <h3>Numerical Problems & Solutions</h3>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>Numerical 1: Heat Drop & Final State in Nozzle (Non-Isentropic)</strong></summary>
+                    <div class="pyq-answer solution-step">
+                        <p><strong>Problem:</strong> Dry steam at 10 bar & 100 m/s enters a nozzle & leaves it with velocity of 300 m/s at 5 bar. For 16 kg/s of steam mass flow rate, determine heat drop in nozzle & final state of steam leaving nozzle, assuming heat loss to surroundings as 10 kJ/kg.</p>
+                        <strong>Given Data:</strong>
+                        <ul>
+                            <li>Inlet: $P_1 = 10 \text{ bar}$, Dry saturated steam ($x_1=1$), $V_1 = 100 \text{ m/s}$</li>
+                            <li>Outlet: $P_2 = 5 \text{ bar}$, $V_2 = 300 \text{ m/s}$</li>
+                            <li>Mass flow rate $\dot{m} = 16 \text{ kg/s}$</li>
+                            <li>Heat loss $Q_{loss} = -10 \text{ kJ/kg}$ (negative as it's loss from system)</li>
+                        </ul>
+                        <strong>Solution Steps:</strong>
+                        <ol>
+                            <li><strong>Inlet Enthalpy ($h_1$):</strong>
+                                <p>At $P_1 = 10 \text{ bar}$, dry saturated steam ($x_1=1$):
+                                <br>From steam tables, $h_1 = h_{g @ 10 \text{ bar}} \approx 2776.2 \text{ kJ/kg}$.
+                                <br>(Also, $s_1 = s_{g @ 10 \text{ bar}} \approx 6.5828 \text{ kJ/kgK}$ for later comparison if needed).
+                                </p>
+                            </li>
+                            <li><strong>Apply Steady Flow Energy Equation (SFEE) between inlet (1) and outlet (2):</strong>
+                                <div class="formula-block">
+                                $h_1 + \frac{V_1^2}{2000} + Q = h_2 + \frac{V_2^2}{2000} + W$
+                                </div>
+                                <p>For a nozzle, Work done $W=0$. $Q = Q_{loss} = -10 \text{ kJ/kg}$.
+                                <br>$2776.2 + \frac{(100)^2}{2000} + (-10) = h_2 + \frac{(300)^2}{2000}$
+                                <br>$2776.2 + \frac{10000}{2000} - 10 = h_2 + \frac{90000}{2000}$
+                                <br>$2776.2 + 5 - 10 = h_2 + 45$
+                                <br>$2771.2 = h_2 + 45$
+                                <br>$h_2 = 2771.2 - 45 = 2726.2 \text{ kJ/kg}$.
+                                </p>
+                            </li>
+                            <li><strong>Heat Drop in Nozzle ($\Delta h$):</strong>
+                                <p>This usually refers to the drop in static enthalpy $(h_1 - h_2)$.
+                                <br>$\Delta h = h_1 - h_2 = 2776.2 - 2726.2 = \strong{50 \text{ kJ/kg}}$.
+                                <br><em>(Note: Sometimes "heat drop" can refer to the isentropic enthalpy drop, but here it's interpreted as actual static enthalpy change or available energy converted.) The question likely means the actual enthalpy drop $(h_1-h_2)$. The energy converted to KE is $(h_1-h_2)+Q_{loss} = V_2^2/2000 - V_1^2/2000 = 40 kJ/kg$. So $h_1-h_2 = 40 - Q_{loss} = 40 - (-10) = 50 kJ/kg$. This matches.)</em>
+                                </p>
+                            </li>
+                            <li><strong>Final State of Steam ($x_2$ or $T_{sup2}$):</strong>
+                                <p>At outlet: $P_2 = 5 \text{ bar}$, $h_2 = 2726.2 \text{ kJ/kg}$.
+                                <br>From steam tables at $P_2 = 5 \text{ bar}$:
+                                <br>$h_{f @ 5 \text{ bar}} \approx 640.1 \text{ kJ/kg}$
+                                <br>$h_{g @ 5 \text{ bar}} \approx 2747.5 \text{ kJ/kg}$
+                                <br>Since $h_f < h_2 < h_g$ ($640.1 < 2726.2 < 2747.5$), the steam is wet.
+                                <br>$h_2 = h_{f @ 5 \text{ bar}} + x_2 \cdot h_{fg @ 5 \text{ bar}}$
+                                <br>$h_{fg @ 5 \text{ bar}} = h_g - h_f = 2747.5 - 640.1 = 2107.4 \text{ kJ/kg}$.
+                                <br>$2726.2 = 640.1 + x_2 \cdot (2107.4)$
+                                <br>$x_2 \cdot (2107.4) = 2726.2 - 640.1 = 2086.1$
+                                <br>$x_2 = \frac{2086.1}{2107.4} \approx 0.9899$.
+                                </p>
+                            </li>
+                        </ol>
+                        <p class="final-answer">
+                        Heat drop in nozzle ($h_1 - h_2$) = $50 \text{ kJ/kg}$.<br>
+                        Final state of steam: Wet steam at 5 bar with dryness fraction $x_2 \approx 0.99$.
+                        </p>
+                    </div>
+                </details>
+            </div>
+            <div class="pyq-item">
+                <details>
+                    <summary><strong>Numerical 2: C-D Nozzle Discharge Velocity (Isentropic)</strong></summary>
+                    <div class="pyq-answer solution-step">
+                        <p><strong>Problem:</strong> A convergent divergent adiabatic steam nozzle is supplied with steam at 10 bar and 250°C. The discharge pressure is 1.2 bar. Assuming that the nozzle efficiency is 100% (i.e., isentropic flow) and initial velocity of steam is 50 m/s. Find the discharge velocity.</p>
+                        <strong>Given Data:</strong>
+                        <ul>
+                            <li>Inlet (1): $P_1 = 10 \text{ bar}$, $T_1 = 250^\circ\text{C}$, $V_1 = 50 \text{ m/s}$</li>
+                            <li>Outlet (2): $P_2 = 1.2 \text{ bar}$</li>
+                            <li>Nozzle efficiency $\eta_N = 100\%$ (Isentropic flow, $s_2 = s_1$)</li>
+                            <li>Adiabatic flow ($Q=0$)</li>
+                        </ul>
+                        <strong>Solution Steps:</strong>
+                        <ol>
+                            <li><strong>Inlet Enthalpy ($h_1$) and Entropy ($s_1$):</strong>
+                                <p>At $P_1 = 10 \text{ bar}$, $T_1 = 250^\circ\text{C}$ (Superheated steam, since $T_{sat @ 10 bar} \approx 179.9^\circ\text{C}$).
+                                <br>From superheated steam tables:
+                                <br>$h_1 \approx 2943.1 \text{ kJ/kg}$
+                                <br>$s_1 \approx 6.9263 \text{ kJ/kgK}$
+                                </p>
+                            </li>
+                            <li><strong>Outlet Enthalpy ($h_{2s}$) for Isentropic Expansion:</strong>
+                                <p>Since flow is isentropic, $s_2 = s_1 \approx 6.9263 \text{ kJ/kgK}$.
+                                <br>At $P_2 = 1.2 \text{ bar}$:
+                                <br>From saturated steam tables at $P_2 = 1.2 \text{ bar}$:
+                                <br>$s_{f @ 1.2 \text{ bar}} \approx 1.3606 \text{ kJ/kgK}$
+                                <br>$s_{g @ 1.2 \text{ bar}} \approx 7.2976 \text{ kJ/kgK}$
+                                <br>Since $s_f < s_2 < s_g$, the steam at outlet is wet.
+                                <br>Dryness fraction $x_2$: $s_2 = s_{f @ 1.2 \text{ bar}} + x_2 \cdot s_{fg @ 1.2 \text{ bar}}$
+                                <br>$s_{fg @ 1.2 \text{ bar}} = s_g - s_f = 7.2976 - 1.3606 = 5.937 \text{ kJ/kgK}$.
+                                <br>$6.9263 = 1.3606 + x_2 \cdot (5.937)$
+                                <br>$x_2 \cdot (5.937) = 6.9263 - 1.3606 = 5.5657$
+                                <br>$x_2 = \frac{5.5657}{5.937} \approx 0.9375$.
+                                </p>
+                                <p>Now find $h_{2s}$ (isentropic outlet enthalpy):
+                                <br>$h_{f @ 1.2 \text{ bar}} \approx 439.4 \text{ kJ/kg}$
+                                <br>$h_{fg @ 1.2 \text{ bar}} \approx 2244.1 \text{ kJ/kg}$ (Note: $h_g - h_f$)
+                                <br>$h_{2s} = h_{f @ 1.2 \text{ bar}} + x_2 \cdot h_{fg @ 1.2 \text{ bar}}$
+                                <br>$h_{2s} = 439.4 + 0.9375 \times 2244.1 = 439.4 + 2103.84 \approx 2543.24 \text{ kJ/kg}$.
+                                </p>
+                            </li>
+                            <li><strong>Apply SFEE to find Discharge Velocity ($V_2$):</strong>
+                                <div class="formula-block">
+                                $h_1 + \frac{V_1^2}{2000} = h_{2s} + \frac{V_2^2}{2000}$ (since adiabatic, $Q=0$, and no work, $W=0$)
+                                </div>
+                                <p>
+                                $2943.1 + \frac{(50)^2}{2000} = 2543.24 + \frac{V_2^2}{2000}$
+                                <br>$2943.1 + \frac{2500}{2000} = 2543.24 + \frac{V_2^2}{2000}$
+                                <br>$2943.1 + 1.25 = 2543.24 + \frac{V_2^2}{2000}$
+                                <br>$2944.35 = 2543.24 + \frac{V_2^2}{2000}$
+                                <br>$\frac{V_2^2}{2000} = 2944.35 - 2543.24 = 401.11$
+                                <br>$V_2^2 = 401.11 \times 2000 = 802220$
+                                <br>$V_2 = \sqrt{802220} \approx 895.67 \text{ m/s}$.
+                                </p>
+                            </li>
+                        </ol>
+                        <p class="final-answer">Discharge velocity $V_2 \approx 895.67 \text{ m/s}$.</p>
                     </div>
                 </details>
             </div>
@@ -261,6 +372,7 @@
 
         <section class="mcq">
             <h3>MCQ:</h3>
+            <!-- Existing MCQs 1-7 remain here -->
             <div class="mcq-item">
                 <p><strong>1. The continuity equation for steady, one-dimensional compressible flow states that:</strong></p>
                 <ul class="mcq-options">
@@ -272,7 +384,6 @@
                 <button class="reveal-answer" data-answer="b">Reveal Answer</button>
                 <p class="answer" style="display:none;"><strong>Answer: b) $\rho A V = \text{constant}$</strong></p>
             </div>
-
             <div class="mcq-item">
                 <p><strong>2. For subsonic compressible flow ($M < 1$) through a nozzle, to increase the velocity, the area must:</strong></p>
                 <ul class="mcq-options">
@@ -284,7 +395,6 @@
                 <button class="reveal-answer" data-answer="b">Reveal Answer</button>
                 <p class="answer" style="display:none;"><strong>Answer: b) Decrease (convergent)</strong></p>
             </div>
-
             <div class="mcq-item">
                 <p><strong>3. In a convergent-divergent (De Laval) nozzle, sonic velocity ($M=1$) is typically achieved at the:</strong></p>
                 <ul class="mcq-options">
@@ -296,7 +406,6 @@
                 <button class="reveal-answer" data-answer="c">Reveal Answer</button>
                 <p class="answer" style="display:none;"><strong>Answer: c) Throat (minimum area)</strong></p>
             </div>
-
             <div class="mcq-item">
                 <p><strong>4. If a convergent nozzle is "choked," it means:</strong></p>
                 <ul class="mcq-options">
@@ -308,7 +417,6 @@
                 <button class="reveal-answer" data-answer="b">Reveal Answer</button>
                 <p class="answer" style="display:none;"><strong>Answer: b) The mass flow rate is maximum for the given inlet conditions and cannot be increased by further lowering back pressure.</strong></p>
             </div>
-
             <div class="mcq-item">
                 <p><strong>5. For supersonic compressible flow ($M > 1$) through a nozzle, to further increase the velocity, the area must:</strong></p>
                 <ul class="mcq-options">
@@ -342,7 +450,40 @@
                 <button class="reveal-answer" data-answer="c">Reveal Answer</button>
                 <p class="answer" style="display:none;"><strong>Answer: c) The specific heat ratio ($\gamma$) of the fluid.</strong></p>
             </div>
-
+            <!-- Additional MCQs -->
+            <div class="mcq-item">
+                <p><strong>8. Supersaturated flow in a steam nozzle occurs because:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) The steam is heated above its saturation temperature.</li>
+                    <li>b) Condensation is delayed due to rapid expansion.</li>
+                    <li>c) The nozzle has a very rough surface finish.</li>
+                    <li>d) The steam contains a high percentage of non-condensable gases.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Condensation is delayed due to rapid expansion.</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>9. The Wilson line on an h-s diagram represents:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) The path of isentropic compression.</li>
+                    <li>b) The limit of stable superheating.</li>
+                    <li>c) The locus of points where rapid condensation begins in supersaturated expansion.</li>
+                    <li>d) The critical pressure line.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) The locus of points where rapid condensation begins in supersaturated expansion.</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>10. Nozzle efficiency primarily accounts for losses due to:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) Heat transfer to the surroundings.</li>
+                    <li>b) Friction within the nozzle.</li>
+                    <li>c) Incomplete combustion upstream of the nozzle.</li>
+                    <li>d) Changes in potential energy.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="b">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: b) Friction within the nozzle.</strong></p>
+            </div>
         </section>
     </main>
     <footer>
