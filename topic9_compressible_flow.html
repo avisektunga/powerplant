@@ -111,7 +111,7 @@
                     <br><strong>Function:</strong> Excellent for accelerating subsonic flow ($M<1$).
                     <br><strong>Limitation:</strong> Can only accelerate flow up to sonic velocity ($M=1$) at its exit (the narrowest point, also called the throat if it were part of a C-D nozzle). It cannot produce supersonic flow by itself.</p>
                 </li>
-                <li><strong>Divergent Nozzle (Supersonic Nozzle):</strong>
+                <li><strong>Convergent Divergent Nozzle (Supersonic Nozzle/ De Laval Nozzle):</strong>
                     <p>Its cross-sectional area increases along the flow direction.
                     <br><strong>Function:</strong> Used to further accelerate already supersonic flow ($M>1$) to even higher supersonic speeds.
                     <br><em>(Often part of a Convergent-Divergent nozzle)</em></p>
@@ -170,8 +170,8 @@
                             <li><strong>Operation of C-D Nozzle based on Back Pressure ($P_b$):</strong>
                                 <div class="diagram-container">
                                      <figure>
-                                        <img src="images/pressure_velocity_mach_nozzle.png" alt="Properties variation in C-D Nozzle">
-                                        <figcaption>Variation of P, V, M, T along a C-D Nozzle for different back pressures.</figcaption>
+                                        <img src="images/CD-Nozzle.png" alt="Properties variation in C-D Nozzle">
+                                        <figcaption>Variation of P, V, Ma along a C-D Nozzle for different back pressures.</figcaption>
                                     </figure>
                                 </div>
                                 <ul>
@@ -182,7 +182,7 @@
                                     <li><strong>$P_b / P_0 < P_{design,supersonic}$ (very low $P_b$):</strong> Flow is over-expanded. Supersonic flow exits, then adjusts to $P_b$ via expansion waves outside the nozzle.</li>
                                 </ul>
                                 <div class="diagram-container">
-                                     <figure><img src="images/shock_wave_nozzle.png" alt="Shock wave in nozzle"><figcaption>Normal Shock in Divergent Section</figcaption></figure>
+                                     <figure><img src="images/Normal-shock-in-divergent-part-of-Laval-nozzle-G-Settles-Please-note-the-forks-due-to.png" alt="Shock wave in nozzle"><figcaption>Normal Shock in Divergent Section</figcaption></figure>
                                 </div>
                             </li>
                             <li><strong>Nozzle Efficiency ($\eta_N$):</strong> For real nozzles, friction causes losses.
@@ -215,12 +215,12 @@
                         <p><strong>Representation on h-s Diagram (Mollier Chart):</strong></p>
                         <div class="diagram-container">
                              <figure>
-                                <img src="images/supersaturated_flow_hs_diagram.png" alt="Supersaturated Flow on h-s Diagram">
-                                <figcaption>Supersaturated Expansion on h-s Diagram. Point 2 is equilibrium, 2' is actual supersaturated state, 2'' is state after reversion.</figcaption>
+                                <img src="images/supersaturated.png" alt="Supersaturated Flow on h-s Diagram">
+                                <figcaption>Supersaturated Expansion on h-s Diagram. Point B is equilibrium, 1 is actual supersaturated state.</figcaption>
                             </figure>
                         </div>
                         <ul>
-                            <li>The expansion line (e.g., 1-2' on the diagram) continues smoothly past the saturation line (1-2) as if the steam were still superheated or dry.</li>
+                            <li>The expansion line (e.g., B-1 on the diagram) continues smoothly past the saturation line as if the steam were still superheated or dry.</li>
                             <li>This metastable state persists until a point where condensation suddenly occurs (reversion point), often around the **Wilson Line** (empirically found, typically around 3-5% moisture if equilibrium existed).</li>
                             <li>At reversion, the latent heat released during the sudden condensation causes a slight temperature and entropy increase, bringing the steam state closer to equilibrium (point 2'').</li>
                         </ul>
