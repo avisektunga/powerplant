@@ -131,9 +131,9 @@
                 <br>If you throw a ball straight out from a moving train ($V_{r1}$), someone standing on the ground ($V_1$) sees the ball moving forward with the train's speed ($U$) *plus* the speed you threw it at. Velocity triangles help sort out these combined motions!
             </div>
             <p><strong>The Golden Rule for Work (Euler's Turbine Equation):</strong>
-            <br>Work Done per kg of steam = (Blade Speed $U$) $\times$ (Change in Whirl Velocity $\Delta V_w$).
-            <br>Power Developed = (Mass flow rate of steam $\dot{m}$) $\times$ (Work Done per kg).
-            <br>And Blade Efficiency is basically: (Work the blades got) / (Energy the steam jet had).</p>
+            <br>Work Done per kg of steam $W = U(V_{w1} \pm V_{w2})$. The sign depends on the direction of $V_{w2}$. More generally, $W = U \Delta V_w$.
+            <br>Power Developed $P = \dot{m} W$, where $\dot{m}$ is the mass flow rate of steam.</p>
+            <p>Blade (Diagram) Efficiency $\eta_b = \frac{\text{Work Done on Blades}}{\text{Energy Supplied to Blades}}$.</p>
         </section>
 
         <section>
@@ -141,7 +141,7 @@
             <p>Remember impulse turbines? Steam gets its speed boost in the nozzles *before* hitting the blades. Ideally, pressure doesn't change as steam glides over the moving blades. The blades are often symmetrical (bucket-shaped, so $\beta_1 \approx \beta_2$).</p>
             <div class="diagram-container">
                  <figure style="max-width: 500px;">
-                    <img src="images/impulse-velocity-combined.png" alt="Combined Velocity Diagram for Impulse Turbine"> <!-- Use your verified image -->
+                    <img src="images/impulse-velocity-combined.png" alt="Combined Velocity Diagram for Impulse Turbine"> <!-- Your image path -->
                     <figcaption>Combined Velocity Diagram: Steam's Entry & Exit Dance with an Impulse Blade</figcaption>
                 </figure>
             </div>
@@ -172,7 +172,7 @@
                 <p>This usually happens when the steam leaves the blades going straight axially ($V_{w2}=0$), meaning no whirl energy is wasted!</p>
                  <div class="diagram-container">
                      <figure>
-                        <img src="images/Comparison+of+efficiency+variation+in+impulse+and+reaction+turbine.jpg" alt="Blade Efficiency vs Blade Speed Ratio for Impulse Turbine"> <!-- Use your verified image -->
+                        <img src="images/Comparison+of+efficiency+variation+in+impulse+and+reaction+turbine.jpg" alt="Blade Efficiency vs Blade Speed Ratio for Impulse Turbine"> <!-- Your image path -->
                         <figcaption>How Blade Efficiency changes with Blade Speed Ratio ($\rho = U/V_1$)</figcaption>
                     </figure>
                 </div>
@@ -184,7 +184,7 @@
             <p>Reaction turbines are different. Steam expands (pressure drops, speed increases) in *both* the fixed guide blades *and* the moving blades. The moving blades are shaped like little airplane wings (aerofoils) or nozzles. A classic is the 50% reaction (Parsons) turbine, where the energy drop is split evenly, and the velocity diagrams look quite symmetrical.</p>
             <div class="diagram-container">
                  <figure style="max-width: 500px;">
-                    <img src="images/reaction-velocity.png" alt="Combined Velocity Diagram for 50% Reaction Turbine"> <!-- Use your verified image -->
+                    <img src="images/reaction-velocity.png" alt="Combined Velocity Diagram for 50% Reaction Turbine"> <!-- Your image path -->
                     <figcaption>Combined Velocity Diagram for a 50% Reaction Turbine Stage (Symmetrical)</figcaption>
                 </figure>
             </div>
@@ -199,10 +199,6 @@
                 Work Done, $W = U(2V_1 \cos\alpha_1 - U)$
                 </div>
                 <p>Energy input to the stage for efficiency calculation is the total enthalpy drop in the stage ($\Delta h_{stage}$). For 50% reaction, this is $\Delta h_{stage} = 2UV_1\cos\alpha_1 - U^2$ (under ideal conditions).</p>
-                <div class="formula-block">
-                Blade Efficiency, $\eta_b = \frac{W}{\Delta h_{stage}} = \frac{U(2V_1 \cos\alpha_1 - U)}{2UV_1\cos\alpha_1 - U^2}$
-                <br><em>(This ideally simplifies to 100% for frictionless flow if the denominator is correctly defined as the total energy made available in the stage for work production.)</em>
-                </div>
                 <p><strong>The Sweet Spot for Speed (Optimum Blade Speed Ratio $\rho = U/V_1$ for Max Efficiency):</strong>
                 <br>For these ideal 50% reaction blades, the best blade speed is:</p>
                 <div class="formula-block">
@@ -212,7 +208,47 @@
                 <div class="formula-block">
                 $\eta_{b,max} = \frac{2\cos^2\alpha_1}{1+\cos^2\alpha_1}$
                 </div>
-                <p>Notice the optimum speed ratio is different from the impulse turbine! This means reaction turbines often spin "faster" relative to the steam jet speed $V_1$ for best performance, or require more stages for the same overall pressure drop if blade speeds are similar.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>The Unseen Force: Understanding Axial Thrust</h2>
+            <p>As steam zips through the turbine, it doesn't just push the blades around; it also pushes along the direction of the shaft! This force along the axis of the rotor is called **Axial Thrust ($F_a$)**. Too much of it, and you could damage the turbine's bearings or even push the rotor out of place!</p>
+            <div class="question-box">
+                <p><strong>Self-Question:</strong> What causes this axial push?</p>
+                <p><em>Answer: Two main things! 1) Change in the steam's axial momentum (Newton's law again!). 2) Pressure differences across the rotor discs and blade surfaces in certain turbine types.</em></p>
+            </div>
+            <div class="derivation-step">
+                <strong>General Formula for Axial Thrust (per stage):</strong>
+                <p>The axial thrust due to change in momentum of steam is given by:</p>
+                <div class="formula-block">
+                $F_a (\text{momentum}) = \dot{m} (V_{f1} - V_{f2})$
+                </div>
+                <p>Where $\dot{m}$ is the mass flow rate of steam, $V_{f1}$ is the axial component of velocity at inlet to moving blades, and $V_{f2}$ is the axial component of velocity at outlet from moving blades.</p>
+                <p>Additionally, in reaction turbines, there's a pressure force component due to the pressure difference across the moving blades acting on the annular area of the blades.</p>
+                <div class="formula-block">
+                $F_a (\text{pressure}) = A_b (P_1' - P_2')$
+                </div>
+                <p>Where $A_b$ is the annular area of the blades, and $P_1'$ and $P_2'$ are static pressures at inlet and outlet of moving blades.</p>
+                <p>Total Axial Thrust $F_a = F_a (\text{momentum}) + F_a (\text{pressure})$.</p>
+
+                <strong>Axial Thrust in Impulse Turbines:</strong>
+                <ul>
+                    <li>Ideally, in a pure impulse turbine, the pressure across the moving blades is constant ($P_1' = P_2'$). So, the axial thrust due to pressure difference is zero.</li>
+                    <li>The axial thrust is primarily due to the change in the axial component of steam velocity: $F_a = \dot{m} (V_{f1} - V_{f2})$.</li>
+                    <li>For symmetrical blades where $\beta_1 = \beta_2$ and if $k=1$ (no friction, so $V_{r1}=V_{r2}$), then $V_{f1} = V_{r1}\sin\beta_1$ and $V_{f2} = V_{r2}\sin\beta_2 = V_{r1}\sin\beta_1$. So, ideally $V_{f1}=V_{f2}$ and axial thrust would be zero.</li>
+                    <li>In practice, due to friction ($k<1$, so $V_{r2} < V_{r1}$), $V_{f2}$ will be less than $V_{f1}$ (if $\beta_1 = \beta_2$), resulting in a small positive axial thrust ($F_a = \dot{m} V_{r1} \sin\beta_1 (1-k)$).</li>
+                </ul>
+                <div class="example-box"><strong>Impulse Turbine Thrust:</strong> Usually quite small, as the main job is to change whirl, not axial speed that much.</div>
+
+                <strong>Axial Thrust in Reaction Turbines:</strong>
+                <ul>
+                    <li>In reaction turbines, there is a significant pressure drop across the moving blades ($P_1' > P_2'$). This creates a substantial axial force due to pressure.</li>
+                    <li>The change in axial momentum ($V_{f1} - V_{f2}$) also contributes. In many designs (like 50% reaction with symmetrical blading), $V_{f1}$ is often designed to be equal to $V_{f2}$ to keep the steam path consistent, so the momentum component can be small.</li>
+                    <li>Therefore, the axial thrust in reaction turbines is primarily due to the pressure difference and is generally much larger than in impulse turbines.</li>
+                    <li>This necessitates balancing arrangements like "dummy pistons" or double-flow designs to counteract this large axial thrust.</li>
+                </ul>
+                 <div class="example-box"><strong>Reaction Turbine Thrust:</strong> Can be very large! Like a rocket, the pressure drop across the moving nozzle-like blades pushes the rotor forward. Needs careful balancing!</div>
             </div>
         </section>
 
@@ -253,7 +289,6 @@
                     <summary><strong>Numerical 1: Impulse Turbine Power Calculation</strong></summary>
                     <div class="pyq-answer solution-step">
                         <p><strong>Problem:</strong> Steam enters the turbine at 300 m/s when the nozzle angle is 20°. The diameter of turbine is 100cm and it rotates at 3000 rev/min. The blades are equiangular. If the friction loss is 35% of kinetic energy corresponding to relative velocity at inlet, find the power developed by the turbine. The axial thrust is 150 N.</p>
-                        <!-- ... (Full solution from previous version) ... -->
                         <strong>Given Data:</strong> $V_1 = 300 \text{ m/s}$, $\alpha_1 = 20^\circ$, $D = 1 \text{ m}$, $N = 3000 \text{ rpm}$, $\beta_1 = \beta_2$. Friction loss $\implies k \approx 0.806$. $F_a = 150 \text{ N}$.
                         <p><strong>Solution Outline:</strong></p>
                         <ol>
@@ -273,7 +308,6 @@
                     <summary><strong>Numerical 2: Impulse Turbine Analysis</strong></summary>
                     <div class="pyq-answer solution-step">
                         <p><strong>Problem:</strong> Impulse turbine: $D=1.05\text{m}$, $N=3000\text{rpm}$, $\alpha_1=18^\circ$, $U/V_1=0.42$, $V_{r2}/V_{r1}=0.84$, $\beta_2=\beta_1-3^\circ$, $\dot{m}=10\text{kg/s}$. Find Thrusts, Power, $\eta_b$.</p>
-                        <!-- ... (Full solution from previous version) ... -->
                         <p><strong>Solution Outline:</strong></p>
                         <ol>
                             <li>$U \approx 164.93 \text{ m/s}$. $V_1 \approx 392.69 \text{ m/s}$.</li>
@@ -295,7 +329,6 @@
                     <summary><strong>Numerical 3: Impulse Turbine Blade Angles & Power</strong></summary>
                     <div class="pyq-answer solution-step">
                         <p><strong>Problem:</strong> Impulse: $\Delta h_s = 200 \text{ kJ/kg}$, $\eta_N=96\%$, $\alpha_1=15^\circ$, $k_b=0.96$, $U/V_1=0.5$, $\dot{m}=20\text{kg/s}$, $V_0=50 \text{ m/s}$. Find $\beta_1, \beta_2$ (smooth entry, axial exit), $\eta_b$, $P$, $F_a$.</p>
-                        <!-- ... (Full solution from previous version) ... -->
                         <p><strong>Solution Outline:</strong></p>
                         <ol>
                             <li>$\Delta h_{actual,N} = 192 \text{ kJ/kg}$. $V_1 \approx 621.69 \text{ m/s}$. $U \approx 310.85 \text{ m/s}$.</li>
@@ -316,7 +349,6 @@
                     <summary><strong>Numerical 4: Reaction Turbine Analysis</strong></summary>
                     <div class="pyq-answer solution-step">
                         <p><strong>Problem:</strong> Reaction turbine: $\dot{m}_{total}=9000\text{kg/hr}$, $h_b=20\text{mm}$, $\alpha_1=\beta_2=20^\circ$. Steam ex-fixed blades: $P_1=3.2\text{bar}, x_1=0.95, V_1=120\text{m/s}$. $V_{f1}/U=0.7$, $V_{f2}/U=0.76$. Tip leakage=6%. Find RPM, Power.</p>
-                        <!-- ... (Full solution from previous version) ... -->
                          <p><strong>Solution Outline:</strong></p>
                         <ol>
                             <li>$\dot{m}_{actual} = 2.35 \text{ kg/s}$.</li>
@@ -338,7 +370,7 @@
 
         <section class="mcq">
             <h3>MCQ Speed Challenge: Test Your Triangle Smarts!</h3>
-            <!-- MCQs 1-6 from previous version are good -->
+            <!-- MCQs 1-6 are good -->
             <div class="mcq-item">
                 <p><strong>1. If you're on a moving turbine blade and steam seems to hit you from a certain angle, that's its:</strong></p>
                 <ul class="mcq-options">
@@ -384,7 +416,7 @@
                 <p class="answer" style="display:none;"><strong>Answer: b) The velocity of whirl at exit ($V_{w2}$) is zero.</strong> (This is desirable for maximizing work in impulse stages!)</p>
             </div>
             <div class="mcq-item">
-                <p><strong>5. The blade velocity coefficient 'k' is less than 1 ($k<1$) because of:</strong></p>
+                <p><strong>5. The blade velocity coefficient 'k' ($V_{r2} = k \cdot V_{r1}$) accounts for:</strong></p>
                 <ul class="mcq-options">
                     <li>a) Steam expanding in the moving blades.</li>
                     <li>b) The high speed of the rotor.</li>
@@ -404,6 +436,28 @@
                 </ul>
                 <button class="reveal-answer" data-answer="b">Reveal Answer</button>
                 <p class="answer" style="display:none;"><strong>Answer: b) Kinetic energy of steam leaving the nozzles ($V_1^2/2$).</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>7. Axial thrust in a reaction turbine is primarily caused by:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) High blade velocity $U$.</li>
+                    <li>b) The change in axial momentum only.</li>
+                    <li>c) The pressure drop occurring across the moving blades.</li>
+                    <li>d) Friction losses in the blade passages.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) The pressure drop occurring across the moving blades.</strong></p>
+            </div>
+            <div class="mcq-item">
+                <p><strong>8. For an ideal impulse turbine with symmetrical blades ($\beta_1=\beta_2$) and no friction ($k=1$), if the axial thrust is zero, it implies:</strong></p>
+                <ul class="mcq-options">
+                    <li>a) $V_{f1} = 0$</li>
+                    <li>b) $V_{f2} = 0$</li>
+                    <li>c) $V_{f1} = V_{f2}$</li>
+                    <li>d) The blade angles must be $90^\circ$.</li>
+                </ul>
+                <button class="reveal-answer" data-answer="c">Reveal Answer</button>
+                <p class="answer" style="display:none;"><strong>Answer: c) $V_{f1} = V_{f2}$</strong> (Since $F_a = \dot{m}(V_{f1}-V_{f2})$ and for symmetrical frictionless blades $V_{f1}=V_{r1}\sin\beta_1$ and $V_{f2}=V_{r2}\sin\beta_2=V_{r1}\sin\beta_1$)</p>
             </div>
         </section>
     </main>
